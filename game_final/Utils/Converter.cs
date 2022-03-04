@@ -6,8 +6,14 @@ namespace game_final.Utils
 {
     class Converter
     {
-        public static double RadiansToDegrees(double radians) {
-            return radians * 180 / Math.PI;
+
+        public static float DegressToRadians(double degrees) {
+            return (float) (degrees * Math.PI / 180);
+        }
+
+        public static float DegressToRadians(float degrees)
+        {
+            return (float)(degrees * Math.PI / 180);
         }
     }
 }
