@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Input;
 
 using System;
 using game_final.Utils;
+using System.Diagnostics;
 
 namespace game_final
 {
@@ -12,10 +13,10 @@ namespace game_final
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
-        private Sprite _rectangle;
+        private MouseState _previousMouseState;
 
-        private const int WIDTH = 800;
-        private const int HEIGHT = 800;
+        private int _mouseX;
+        private int _mouseY;
 
         public Game1()
         {
@@ -27,8 +28,8 @@ namespace game_final
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            _graphics.PreferredBackBufferWidth = WIDTH;
-            _graphics.PreferredBackBufferHeight = HEIGHT;
+            _graphics.PreferredBackBufferWidth = Settings.WINDOW_WIDTH;
+            _graphics.PreferredBackBufferHeight = Settings.WINDOW_WIDTH;
             _graphics.ApplyChanges();
 
             base.Initialize();
@@ -38,11 +39,9 @@ namespace game_final
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            Assets.Initialize(Content, _spriteBatch, _graphics.GraphicsDevice);
+
             // TODO: use this.Content to load your game content here
-            _rectangle = new Sprites.Rectangle(_graphics.GraphicsDevice, 50, 50);
-            Vector2 center =_rectangle.Center;
-            _rectangle.SetPosition(WIDTH / 2 - center.X, HEIGHT - center.Y);
-            _rectangle.SetColor(Color.Red);
         }
 
         protected override void Update(GameTime gameTime)
@@ -52,11 +51,48 @@ namespace game_final
 
             // TODO: Add your update logic here
 
-            MouseState mouse = Mouse.GetState();
-            int mouseX = mouse.X;
-            int mouseY = mouse.Y;
+            MouseState mouseState = Mouse.GetState();
+            _mouseX = mouseState.X;
+            _mouseY = mouseState.Y;
 
-            _rectangle.Rotation = (float) Math.Atan2(mouseY - HEIGHT, mouseX - WIDTH / 2);
+            _previousMouseState = mouseState;
+
+            float rotation = (float)Math.Atan2(_mouseY - (Assets.Shooter.Y + Assets.Shooter.Width / 2), _mouseX - (Assets.Shooter.X + Assets.Shooter.Height / 2)) + Converter.DegressToRadians(180);
+
+            float rotationDegrees = Converter.RadiansToDegrees(rotation);
+
+            if (rotationDegrees < 10 || rotationDegrees > 170)
+            {
+                if (rotationDegrees <= 270 && rotationDegrees > 90)
+                {
+                    rotationDegrees = 170;
+                }
+                else if (rotationDegrees > 270 || rotationDegrees >= 0)
+                {
+                    rotationDegrees = 10;
+                }
+            }
+
+            rotation = Converter.DegressToRadians(rotationDegrees);
+            Assets.Shooter.Rotation = rotation;
+
+            Vector2 unit = new Vector2((float)Math.Cos(rotation), (float)Math.Sin(rotation));
+
+            int touchX = rotation < Math.PI / 2 ? 0 : rotation > Math.PI / 2 ? 800 : 0;
+
+            if (rotation > Math.PI / 2) rotation = (float)(Math.PI - rotation);
+
+            int touchY = (int)((Settings.WINDOW_HEIGHT - 50) - (Settings.WINDOW_WIDTH / 2 * Math.Tan(rotation)));
+
+            int diffX = Settings.WINDOW_WIDTH / 2;
+            int diffY = touchY - (Settings.WINDOW_HEIGHT - Assets.Shooter.Height);
+
+            int length = (int)Math.Ceiling(Math.Sqrt(diffX * diffX + diffY * diffY));
+
+            Assets.Shooter.GuideLength = length;
+            Assets.Shooter.SetReflectPoint(touchX, touchY);
+
+            Assets.Shooter.Update();
 
             base.Update(gameTime);
         }
@@ -67,8 +103,8 @@ namespace game_final
 
             _spriteBatch.Begin();
 
-            _spriteBatch.Draw(_rectangle.Instance, _rectangle.Position, null, Color.White, _rectangle.Rotation, _rectangle.Center, 1f, SpriteEffects.None, 0f);
-            
+            Assets.Shooter.Draw();
+
             _spriteBatch.End();
             // TODO: Add your drawing code here
 

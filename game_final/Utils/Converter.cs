@@ -15,5 +15,14 @@ namespace game_final.Utils
         {
             return (float)(degrees * Math.PI / 180);
         }
+
+        public static float RadiansToDegrees(float radians) {
+            return (float)(radians * 180 / Math.PI);
+        }
+
+        public static float RadiansToDegrees(double radians)
+        {
+            return (float)(radians * 180 / Math.PI);
+        }
     }
 }
