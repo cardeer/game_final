@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 using game_final.Utils;
 
@@ -31,8 +32,39 @@ namespace game_final.Sprites
             _body.SetPosition(_width / 2, _height / 2);
         }
 
-        public void Update()
+        public void Update(MouseState mouseState, MouseState previousMouseState)
         {
+            int mouseX = mouseState.X;
+            int mouseY = mouseState.Y;
+
+            float rotation = (float)Math.Atan2(mouseY - (Assets.Shooter.Y + Assets.Shooter.Width / 2), mouseX - (Assets.Shooter.X + Assets.Shooter.Height / 2)) + Converter.DegressToRadians(180);
+            float rotationDegrees = Converter.RadiansToDegrees(rotation);
+
+            if (mouseX < Settings.WINDOW_WIDTH / 2 && (rotationDegrees < 10 || rotationDegrees > 270))
+            {
+                rotation = Converter.DegressToRadians(10);
+            }
+            else if (mouseX > Settings.WINDOW_WIDTH / 2 && rotationDegrees > 170)
+            {
+                rotation = Converter.DegressToRadians(170);
+            }
+
+            Rotation = rotation;
+
+            int reflectX = rotation < Math.PI / 2 ? 0 : rotation > Math.PI / 2 ? 800 : 0;
+
+            if (rotation > Math.PI / 2) rotation = (float)(Math.PI - rotation);
+
+            int reflectY = (int)((Settings.WINDOW_HEIGHT) - (Settings.WINDOW_WIDTH / 2 * Math.Tan(rotation)));
+
+            int diffX = Settings.WINDOW_WIDTH / 2;
+            int diffY = reflectY - (Settings.WINDOW_HEIGHT - Assets.Shooter.Height);
+
+            int length = (int)Math.Ceiling(Math.Sqrt(diffX * diffX + diffY * diffY));
+
+            GuideLength = length;
+            SetReflectPoint(reflectX, reflectY);
+
             if (GuideLength > Settings.MAX_GUIDE_LENGTH || GuideLength <= 0) GuideLength = Settings.MAX_GUIDE_LENGTH;
 
             _guide = new Shapes.Line(_graphics, _width / 2, _height / 2, _width / 2, 0, 5, GuideLength);

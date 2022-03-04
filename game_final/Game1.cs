@@ -57,42 +57,7 @@ namespace game_final
 
             _previousMouseState = mouseState;
 
-            float rotation = (float)Math.Atan2(_mouseY - (Assets.Shooter.Y + Assets.Shooter.Width / 2), _mouseX - (Assets.Shooter.X + Assets.Shooter.Height / 2)) + Converter.DegressToRadians(180);
-
-            float rotationDegrees = Converter.RadiansToDegrees(rotation);
-
-            if (rotationDegrees < 10 || rotationDegrees > 170)
-            {
-                if (rotationDegrees <= 270 && rotationDegrees > 90)
-                {
-                    rotationDegrees = 170;
-                }
-                else if (rotationDegrees > 270 || rotationDegrees >= 0)
-                {
-                    rotationDegrees = 10;
-                }
-            }
-
-            rotation = Converter.DegressToRadians(rotationDegrees);
-            Assets.Shooter.Rotation = rotation;
-
-            Vector2 unit = new Vector2((float)Math.Cos(rotation), (float)Math.Sin(rotation));
-
-            int touchX = rotation < Math.PI / 2 ? 0 : rotation > Math.PI / 2 ? 800 : 0;
-
-            if (rotation > Math.PI / 2) rotation = (float)(Math.PI - rotation);
-
-            int touchY = (int)((Settings.WINDOW_HEIGHT - 50) - (Settings.WINDOW_WIDTH / 2 * Math.Tan(rotation)));
-
-            int diffX = Settings.WINDOW_WIDTH / 2;
-            int diffY = touchY - (Settings.WINDOW_HEIGHT - Assets.Shooter.Height);
-
-            int length = (int)Math.Ceiling(Math.Sqrt(diffX * diffX + diffY * diffY));
-
-            Assets.Shooter.GuideLength = length;
-            Assets.Shooter.SetReflectPoint(touchX, touchY);
-
-            Assets.Shooter.Update();
+            Assets.Shooter.Update(mouseState, _previousMouseState);
 
             base.Update(gameTime);
         }
