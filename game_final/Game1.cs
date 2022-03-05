@@ -29,7 +29,7 @@ namespace game_final
         {
             // TODO: Add your initialization logic here
             _graphics.PreferredBackBufferWidth = Settings.WINDOW_WIDTH;
-            _graphics.PreferredBackBufferHeight = Settings.WINDOW_WIDTH;
+            _graphics.PreferredBackBufferHeight = Settings.WINDOW_HEIGHT;
             _graphics.ApplyChanges();
 
             base.Initialize();
@@ -68,6 +68,7 @@ namespace game_final
 
             _spriteBatch.Begin();
 
+            Assets.PlayingScene.Draw();
             Assets.Shooter.Draw();
 
             _spriteBatch.End();

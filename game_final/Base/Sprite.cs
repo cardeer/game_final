@@ -10,12 +10,12 @@ namespace game_final.Base
     class Sprite : Object
     {
         public Vector2 Origin;
-
         public Texture2D Instance;
+
         protected Color[] _colorArray;
         protected Color _color;
 
-        protected void Initialize(GraphicsDevice graphics, int width, int height)
+        protected Sprite(GraphicsDevice graphics, int width, int height)
         {
             Position = new Vector2(0, 0);
             Origin = new Vector2(0, 0);
@@ -28,7 +28,8 @@ namespace game_final.Base
             _colorArray = new Color[width * height];
         }
 
-        public Color Color {
+        public Color Color
+        {
             get { return _color; }
         }
 
@@ -44,9 +45,15 @@ namespace game_final.Base
             Instance.SetData(_colorArray);
         }
 
-        public void SetOrigin(float x, float y) {
+        public void SetOrigin(float x, float y)
+        {
             Origin.X = x;
             Origin.Y = y;
+        }
+
+        public void Destroy()
+        {
+            Instance.Dispose();
         }
     }
 }

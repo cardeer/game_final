@@ -23,7 +23,7 @@ namespace game_final.Sprites
         {
             ReflectPoint = new Vector2(0, 0);
 
-            SetPosition(Settings.WINDOW_WIDTH / 2 - _width / 2, Settings.WINDOW_HEIGHT - _height);
+            SetPosition(Constants.REFLECT_CENTER_X - _width / 2, Settings.WINDOW_HEIGHT - _height);
 
             _graphics = graphics;
 
@@ -52,13 +52,13 @@ namespace game_final.Sprites
 
             Rotation = rotation;
 
-            int reflectX = rotation < Math.PI / 2 ? 0 : rotation > Math.PI / 2 ? 800 : 0;
+            int reflectX = rotation < Math.PI / 2 ? Constants.REFLECT_LEFT : rotation > Math.PI / 2 ? Constants.REFLECT_RIGHT : Constants.REFLECT_CENTER_X;
 
             if (rotation > Math.PI / 2) rotation = (float)(Math.PI - rotation);
 
-            int reflectY = (int)((Settings.WINDOW_HEIGHT - Assets.Shooter.Height / 2) - (Settings.WINDOW_WIDTH / 2 * Math.Tan(rotation)));
+            int reflectY = (int)((Settings.WINDOW_HEIGHT - Assets.Shooter.Height / 2) - (Constants.PLAY_HALF_WIDTH * Math.Tan(rotation)));
 
-            int diffX = Settings.WINDOW_WIDTH / 2;
+            int diffX = Constants.PLAY_HALF_WIDTH;
             int diffY = reflectY - (Settings.WINDOW_HEIGHT - Assets.Shooter.Height / 2);
 
             int length = (int)Math.Ceiling(Math.Sqrt(diffX * diffX + diffY * diffY));
@@ -73,18 +73,19 @@ namespace game_final.Sprites
             _guide.SetOrigin(5 / 2, _guide.Height);
             _guide.SetPosition(_width / 2, _height / 2);
 
+            if (_reflectGuide != null) {
+                _reflectGuide.Destroy();
+                _reflectGuide = null;
+            }
+
             if (GuideLength < Settings.MAX_GUIDE_LENGTH)
             {
                 int pointY = -(int)(400 * Math.Tan(Rotation));
-                _reflectGuide = new Shapes.Line(_graphics, 0, 0, Settings.WINDOW_WIDTH / 2, pointY, 5, Settings.MAX_GUIDE_LENGTH - GuideLength);
+                _reflectGuide = new Shapes.Line(_graphics, 0, 0, Constants.REFLECT_CENTER_X, pointY, 5, Settings.MAX_GUIDE_LENGTH - GuideLength);
                 _reflectGuide.SetColor(Color.Black);
                 _reflectGuide.SetOrigin(2, 0);
                 _reflectGuide.SetPosition(ReflectPoint.X, ReflectPoint.Y);
                 _reflectGuide.Rotation += Converter.DegressToRadians(ReflectPoint.X < 400 ? -90 : 90);
-            }
-            else
-            {
-                _reflectGuide = null;
             }
         }
 

@@ -14,6 +14,7 @@ namespace game_final
         private static GraphicsDevice s_graphics;
 
         public static Sprites.Shooter Shooter;
+        public static Scenes.Playing PlayingScene;
 
         /// <summary>
         /// Load all assets
@@ -32,6 +33,7 @@ namespace game_final
         private static void loadAll()
         {
             Shooter = new Sprites.Shooter(s_spriteBatch, s_graphics);
+            PlayingScene = new Scenes.Playing(s_spriteBatch, s_graphics);
         }
     }
 }
