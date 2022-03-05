@@ -29,22 +29,22 @@ namespace game_final
             s_graphics = graphics;
 
             loadTextures();
+            loadSounds();
             createSprites();
         }
 
         private static void loadTextures() {
             AssetTypes.Texture.LightBlueBall = s_content.Load<Texture2D>("Balls/light_blue");
         }
+        private static void loadSounds()
+        {
+            AssetTypes.Sound.MusicSound = s_content.Load<Song>("Sounds/gurenge");
+        }
 
         private static void createSprites()
         {
             Shooter = new Sprites.Shooter(s_spriteBatch, s_graphics);
             PlayingScene = new Scenes.Playing(s_spriteBatch, s_graphics);
-        }
-
-        private static void loadSounds()
-        {
-            AssetTypes.Sound.MusicSound = s_content.Load<Song>("Sounds/LiSA - 紅蓮華");
         }
     }
 }
