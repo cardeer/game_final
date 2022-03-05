@@ -112,10 +112,10 @@ namespace game_final.Sprites
             {
                 float relativeRotation = (float)(Rotation > Math.PI / 2 ? Math.PI - Rotation : Rotation);
 
-                float unitX = (float)Math.Cos(relativeRotation);
+                float unitX = (float)(Rotation > Math.PI / 2 ? Math.Cos(relativeRotation) : -Math.Cos(relativeRotation));
                 float unitY = (float)Math.Sin(relativeRotation);
-                int pointX = Rotation > Math.PI / 2 ? (int)(reflectX + unitX * Settings.WINDOW_WIDTH) : -(int)(reflectX + unitX * Settings.WINDOW_WIDTH);
-                int pointY = (int)(reflectY + unitY * Settings.WINDOW_HEIGHT);
+                int pointX = (int)(reflectX + unitX * int.MaxValue) ;
+                int pointY = (int)(reflectY + unitY * int.MaxValue);
 
                 _reflectGuide = new Shapes.Line(_graphics, reflectX, reflectY, pointX, pointY, 5, Settings.MAX_GUIDE_LENGTH - GuideLength);
                 _reflectGuide.SetColor(Color.Black);
