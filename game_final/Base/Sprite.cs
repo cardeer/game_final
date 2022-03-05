@@ -14,7 +14,7 @@ namespace game_final.Base
         public float Scale = 1f;
 
         protected Color[] _colorArray;
-        protected Color _color;
+        protected Color _color = Color.Transparent;
 
         public bool isDestroyed = false;
 
@@ -28,7 +28,7 @@ namespace game_final.Base
 
             Instance = new Texture2D(graphics, width, height);
 
-            _colorArray = new Color[width * height];
+            _colorArray = new Color[Instance.Width * Instance.Height];
         }
 
         protected Sprite(Texture2D texture, int size)
@@ -43,12 +43,16 @@ namespace game_final.Base
             _width = size;
             _height = (int)(texture.Height * Scale);
 
-            _colorArray = new Color[_width * _height];
+            _colorArray = new Color[Instance.Width * Instance.Height];
         }
 
         public Color Color
         {
             get { return _color; }
+        }
+
+        public Color DrawColor {
+            get { return _color != Color.Transparent ? _color : Color.White; }
         }
 
         public void SetColor(Color color)

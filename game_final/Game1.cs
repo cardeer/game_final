@@ -60,7 +60,6 @@ namespace game_final
 
             _previousMouseState = mouseState;
 
-
             base.Update(gameTime);
         }
 

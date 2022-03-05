@@ -23,6 +23,7 @@ namespace game_final.Sprites
 
         public Ball(Environments.Ball.BallType type, int x, int y) : base(Utils.Ball.GetBallTexture(type), Settings.BALL_SIZE)
         {
+            Type = type;
             _snapped = true;
 
             SetOrigin(Instance.Width / 2, Instance.Height / 2);
@@ -40,7 +41,8 @@ namespace game_final.Sprites
                 _unit.X = -_unit.X;
             }
 
-            if (Y - Height / 2 <= 0) {
+            if (Y - Height / 2 <= 0)
+            {
                 _snapped = true;
                 Utils.Shooting.GetSnappedPosition(this);
                 Destroy();

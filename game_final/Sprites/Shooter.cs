@@ -78,18 +78,6 @@ namespace game_final.Sprites
             if (isClicked)
             {
                 Environments.GameData.ShotBalls.Add(new Sprites.Ball(Environments.Ball.BallType.LIGHT_BLUE, (int)(X + Width / 2), (int)(Y + Height / 2), -_unitVector));
-
-                int[,] template = Environments.GameData.BallsTemplate;
-                string result = "";
-                for (int i = 0; i < Settings.TEMPLATE_ROW_BALLS; i++)
-                {
-                    for (int j = 0; j < Settings.TEMPLATE_COL_BALLS; j++)
-                    {
-                        result += template[i, j] + ", ";
-                    }
-                    result += "\n";
-                }
-                Debug.WriteLine(result);
             }
 
             int reflectX = _rotation < Math.PI / 2 ? Constants.REFLECT_LEFT : _rotation > Math.PI / 2 ? Constants.REFLECT_RIGHT : Constants.REFLECT_CENTER_X;
@@ -148,7 +136,7 @@ namespace game_final.Sprites
 
             foreach (Sprites.Ball ball in Environments.GameData.ShotBalls)
             {
-                _spriteBatch.Draw(ball.Instance, ball.Position, null, Color.White, ball.Rotation, ball.Origin, ball.Scale, SpriteEffects.None, 0f);
+                _spriteBatch.Draw(ball.Instance, ball.Position, null, ball.DrawColor, ball.Rotation, ball.Origin, ball.Scale, SpriteEffects.None, 0f);
             }
         }
 

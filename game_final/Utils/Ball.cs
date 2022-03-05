@@ -12,7 +12,7 @@ namespace game_final.Utils
             switch (ballType)
             {
                 case Environments.Ball.BallType.LIGHT_BLUE:
-                    return Textures.LightBlueBall;
+                    return AssetTypes.Textures.LightBlueBall;
                 default:
                     return null;
             }

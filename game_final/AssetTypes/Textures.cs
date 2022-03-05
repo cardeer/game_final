@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 
-namespace game_final
+namespace game_final.AssetTypes
 {
     static class Textures
     {

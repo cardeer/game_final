@@ -15,9 +15,9 @@ namespace game_final
         public const int PLAYING_UI_RIGHT_WIDTH = BALL_SIZE / 2;
 
         public const int BALL_SIZE = 50;
-        public const int BALL_SPEED = 5;
+        public const int BALL_SPEED = 10;
 
-        public const int TEMPLATE_COL_BALLS = 10;
+        public const int TEMPLATE_COL_BALLS = 20;
         public const int TEMPLATE_ROW_BALLS = 15;
     }
 }
