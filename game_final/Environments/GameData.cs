@@ -38,8 +38,8 @@ namespace game_final.Environments
         {
             int newX = x * 2;
             if (y % 2 == 1 && newX % 2 == 0) {
-                Debug.WriteLine("expected odd, got even");
-                Debug.WriteLine($"{y} {newX}");
+                //Debug.WriteLine("expected odd, got even");
+                //Debug.WriteLine($"{y} {newX}");
 
                 newX -= 1;
 
