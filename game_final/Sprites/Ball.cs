@@ -8,15 +8,16 @@ namespace game_final.Sprites
     class Ball : Base.Sprite
     {
         public Environments.Ball.BallType Type;
+        public Vector2 SnapPoint;
+        public Vector2 Unit;
 
-        private Vector2 _unit;
         private bool _snapped = false;
 
         public Ball(Environments.Ball.BallType type, int x, int y, Vector2 unit) : base(Utils.Ball.GetBallTexture(type), Settings.BALL_SIZE)
         {
             Type = type;
 
-            _unit = unit;
+            Unit = unit;
             SetOrigin(Instance.Width / 2, Instance.Height / 2);
             SetPosition(x + unit.X * Width, y + unit.Y * Height);
         }
@@ -32,20 +33,34 @@ namespace game_final.Sprites
 
         public void Update()
         {
-            if (_snapped) return;
+            if (_snapped)
+            {
+                Destroy();
+                return;
+            }
 
-            SetPosition(X + _unit.X * Settings.BALL_SPEED, Y + _unit.Y * Settings.BALL_SPEED);
+            SetPosition(X + Unit.X * Settings.BALL_SPEED, Y + Unit.Y * Settings.BALL_SPEED);
 
             if (X <= Constants.REFLECT_LEFT || X >= Constants.REFLECT_RIGHT)
             {
-                _unit.X = -_unit.X;
+                Unit.X = -Unit.X;
             }
 
-            if (Y - Height / 2 <= 0)
+            SnapPoint = Utils.Ball.GetSnappedPosition(this);
+            int snapX = (int)SnapPoint.X, snapY = (int)SnapPoint.Y;
+
+            int[,] template = Environments.GameData.BallsTemplate;
+
+            if (snapY <= 0)
+            {
+                snapY = 0;
+                _snapped = true;
+                Environments.GameData.SetBallTemplate(snapX, snapY, Utils.Ball.BallCode(Type));
+            }
+            else if (Utils.Ball.ShouldSnap(this))
             {
                 _snapped = true;
-                Utils.Shooting.GetSnappedPosition(this);
-                Destroy();
+                Environments.GameData.SetBallTemplate(snapX, snapY, Utils.Ball.BallCode(Type));
             }
         }
     }

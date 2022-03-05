@@ -75,9 +75,25 @@ namespace game_final.Sprites
             updateUnitVector();
 
             bool isClicked = mouseState.LeftButton != previousMouseState.LeftButton && mouseState.LeftButton == ButtonState.Pressed;
-            if (isClicked)
+            if (isClicked && Environments.GameData.CanShoot)
             {
+                Environments.GameData.CanShoot = false;
                 Environments.GameData.ShotBalls.Add(new Sprites.Ball(Environments.Ball.BallType.LIGHT_BLUE, (int)(X + Width / 2), (int)(Y + Height / 2), -_unitVector));
+            }
+
+            bool isRightClicked = mouseState.RightButton != previousMouseState.RightButton && mouseState.RightButton == ButtonState.Pressed;
+            string result = "";
+            if (isRightClicked)
+            {
+                for (int i = 0; i < Settings.TEMPLATE_ROW_BALLS; i++)
+                {
+                    for (int j = 0; j < Settings.TEMPLATE_COL_BALLS; j++)
+                    {
+                        result += Environments.GameData.BallsTemplate[i, j] + ", ";
+                    }
+                    result += "\n";
+                }
+                Debug.WriteLine(result);
             }
 
             int reflectX = _rotation < Math.PI / 2 ? Constants.REFLECT_LEFT : _rotation > Math.PI / 2 ? Constants.REFLECT_RIGHT : Constants.REFLECT_CENTER_X;
@@ -113,7 +129,7 @@ namespace game_final.Sprites
 
                 float unitX = (float)(Rotation > Math.PI / 2 ? Math.Cos(relativeRotation) : -Math.Cos(relativeRotation));
                 float unitY = (float)Math.Sin(relativeRotation);
-                int pointX = (int)(reflectX + unitX * int.MaxValue) ;
+                int pointX = (int)(reflectX + unitX * int.MaxValue);
                 int pointY = (int)(reflectY + unitY * int.MaxValue);
 
                 _reflectGuide = new Shapes.Line(_graphics, reflectX, reflectY, pointX, pointY, 5, Settings.MAX_GUIDE_LENGTH - GuideLength);
