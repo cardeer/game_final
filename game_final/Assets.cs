@@ -32,7 +32,7 @@ namespace game_final
         }
 
         private static void loadTextures() {
-            AssetTypes.Textures.LightBlueBall = s_content.Load<Texture2D>("Balls/light_blue");
+            AssetTypes.Texture.LightBlueBall = s_content.Load<Texture2D>("Balls/light_blue");
         }
 
         private static void createSprites()

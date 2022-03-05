@@ -2,7 +2,7 @@
 
 namespace game_final.AssetTypes
 {
-    static class Textures
+    static class Texture
     {
         public static Texture2D LightBlueBall;
     }
