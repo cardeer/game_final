@@ -41,11 +41,11 @@ namespace game_final.Sprites
             float rotation = (float)Math.Atan2(mouseY - (Assets.Shooter.Y + Assets.Shooter.Width / 2), mouseX - (Assets.Shooter.X + Assets.Shooter.Height / 2)) + Converter.DegressToRadians(180);
             float rotationDegrees = Converter.RadiansToDegrees(rotation);
 
-            if (mouseX < Settings.WINDOW_WIDTH / 2 && (rotationDegrees < 10 || rotationDegrees > 270))
+            if (mouseX < Constants.REFLECT_CENTER_X && (rotationDegrees < 10 || rotationDegrees > 270))
             {
                 rotation = Converter.DegressToRadians(10);
             }
-            else if (mouseX > Settings.WINDOW_WIDTH / 2 && rotationDegrees > 170)
+            else if (mouseX > Constants.REFLECT_CENTER_X && rotationDegrees > 170)
             {
                 rotation = Converter.DegressToRadians(170);
             }
