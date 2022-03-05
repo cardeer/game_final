@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 
 using System;
 using game_final.Utils;
@@ -43,6 +44,8 @@ namespace game_final
 
             // TODO: use this.Content to load your game content here
             Assets.Initialize(Content, _spriteBatch, _graphics.GraphicsDevice);
+            MediaPlayer.Play(AssetTypes.Sound.MusicSound);
+            
         }
 
         protected override void Update(GameTime gameTime)
@@ -71,6 +74,7 @@ namespace game_final
 
             Assets.PlayingScene.Draw();
             Assets.Shooter.Draw();
+
 
             _spriteBatch.End();
             // TODO: Add your drawing code here

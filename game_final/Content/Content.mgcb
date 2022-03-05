@@ -25,3 +25,9 @@
 /processorParam:TextureFormat=Color
 /build:Balls/light_blue.png
 
+#begin Sounds/LiSA - 紅蓮華.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Sounds/LiSA - 紅蓮華.mp3
+

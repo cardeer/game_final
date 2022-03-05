@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Media;
 
 namespace game_final
 {
@@ -39,6 +40,11 @@ namespace game_final
         {
             Shooter = new Sprites.Shooter(s_spriteBatch, s_graphics);
             PlayingScene = new Scenes.Playing(s_spriteBatch, s_graphics);
+        }
+
+        private static void loadSounds()
+        {
+            AssetTypes.Sound.MusicSound = s_content.Load<Song>("Sounds/LiSA - 紅蓮華");
         }
     }
 }
