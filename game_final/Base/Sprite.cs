@@ -16,6 +16,7 @@ namespace game_final.Base
         protected Color[] _colorArray;
         protected Color _color;
 
+        public bool isDestroyed = false;
 
         protected Sprite(GraphicsDevice graphics, int width, int height)
         {
@@ -70,7 +71,7 @@ namespace game_final.Base
 
         public void Destroy()
         {
-            Instance.Dispose();
+            isDestroyed = true;
         }
     }
 }

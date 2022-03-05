@@ -32,6 +32,8 @@ namespace game_final
             _graphics.PreferredBackBufferHeight = Settings.WINDOW_HEIGHT;
             _graphics.ApplyChanges();
 
+            Environments.GameData.Initialize();
+
             base.Initialize();
         }
 
@@ -39,9 +41,8 @@ namespace game_final
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            Assets.Initialize(Content, _spriteBatch, _graphics.GraphicsDevice);
-
             // TODO: use this.Content to load your game content here
+            Assets.Initialize(Content, _spriteBatch, _graphics.GraphicsDevice);
         }
 
         protected override void Update(GameTime gameTime)

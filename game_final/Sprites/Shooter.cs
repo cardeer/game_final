@@ -23,8 +23,6 @@ namespace game_final.Sprites
         private float _rotation = 0f;
         private Vector2 _unitVector;
 
-        private List<Sprites.Ball> _balls;
-
         public Shooter(SpriteBatch spriteBatch, GraphicsDevice graphics) : base(spriteBatch, 50, 50)
         {
             ReflectPoint = new Vector2(0, 0);
@@ -39,7 +37,6 @@ namespace game_final.Sprites
             _body.SetPosition(_width / 2, _height / 2);
 
             _unitVector = new Vector2((float)Math.Cos(_rotation), (float)Math.Sin(_rotation));
-            _balls = new List<Sprites.Ball>();
         }
 
         private void updateUnitVector()
@@ -50,7 +47,9 @@ namespace game_final.Sprites
 
         public void Update(MouseState mouseState, MouseState previousMouseState)
         {
-            foreach (Sprites.Ball ball in _balls)
+            Environments.GameData.ShotBalls.RemoveAll(b => b.isDestroyed);
+
+            foreach (Sprites.Ball ball in Environments.GameData.ShotBalls)
             {
                 ball.Update();
             }
@@ -78,7 +77,19 @@ namespace game_final.Sprites
             bool isClicked = mouseState.LeftButton != previousMouseState.LeftButton && mouseState.LeftButton == ButtonState.Pressed;
             if (isClicked)
             {
-                _balls.Add(new Sprites.Ball(Textures.LightBlueBall, 50, (int)(X + Width / 2), (int)(Y + Height / 2), -_unitVector));
+                Environments.GameData.ShotBalls.Add(new Sprites.Ball(Environments.Ball.BallType.LIGHT_BLUE, (int)(X + Width / 2), (int)(Y + Height / 2), -_unitVector));
+
+                int[,] template = Environments.GameData.BallsTemplate;
+                string result = "";
+                for (int i = 0; i < Settings.TEMPLATE_ROW_BALLS; i++)
+                {
+                    for (int j = 0; j < Settings.TEMPLATE_COL_BALLS; j++)
+                    {
+                        result += template[i, j] + ", ";
+                    }
+                    result += "\n";
+                }
+                Debug.WriteLine(result);
             }
 
             int reflectX = _rotation < Math.PI / 2 ? Constants.REFLECT_LEFT : _rotation > Math.PI / 2 ? Constants.REFLECT_RIGHT : Constants.REFLECT_CENTER_X;
@@ -135,7 +146,7 @@ namespace game_final.Sprites
                 _spriteBatch.Draw(_reflectGuide.Instance, _reflectGuide.Position, null, _reflectGuide.Color, _reflectGuide.Rotation, _reflectGuide.Origin, 1f, SpriteEffects.None, 0f);
             }
 
-            foreach (Sprites.Ball ball in _balls)
+            foreach (Sprites.Ball ball in Environments.GameData.ShotBalls)
             {
                 _spriteBatch.Draw(ball.Instance, ball.Position, null, Color.White, ball.Rotation, ball.Origin, ball.Scale, SpriteEffects.None, 0f);
             }
