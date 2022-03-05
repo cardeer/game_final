@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
+using System.Diagnostics;
 using game_final.Utils;
 
 namespace game_final.Sprites
@@ -55,10 +56,10 @@ namespace game_final.Sprites
 
             if (rotation > Math.PI / 2) rotation = (float)(Math.PI - rotation);
 
-            int reflectY = (int)((Settings.WINDOW_HEIGHT) - (Settings.WINDOW_WIDTH / 2 * Math.Tan(rotation)));
+            int reflectY = (int)((Settings.WINDOW_HEIGHT - Assets.Shooter.Height / 2) - (Settings.WINDOW_WIDTH / 2 * Math.Tan(rotation)));
 
             int diffX = Settings.WINDOW_WIDTH / 2;
-            int diffY = reflectY - (Settings.WINDOW_HEIGHT - Assets.Shooter.Height);
+            int diffY = reflectY - (Settings.WINDOW_HEIGHT - Assets.Shooter.Height / 2);
 
             int length = (int)Math.Ceiling(Math.Sqrt(diffX * diffX + diffY * diffY));
 
@@ -72,13 +73,19 @@ namespace game_final.Sprites
             _guide.SetOrigin(5 / 2, _guide.Height);
             _guide.SetPosition(_width / 2, _height / 2);
 
-            int pointX = 400;
-            int pointY = -(int)(400 * Math.Tan(Rotation));
-            _reflectGuide = new Shapes.Line(_graphics, 0, 0, pointX, pointY, 5, 200);
-            _reflectGuide.SetColor(Color.Black);
-            _reflectGuide.SetOrigin(2, 0);
-            _reflectGuide.SetPosition(ReflectPoint.X, ReflectPoint.Y);
-            _reflectGuide.Rotation += Converter.DegressToRadians(ReflectPoint.X < 400 ? -90 : 90);
+            if (GuideLength < Settings.MAX_GUIDE_LENGTH)
+            {
+                int pointY = -(int)(400 * Math.Tan(Rotation));
+                _reflectGuide = new Shapes.Line(_graphics, 0, 0, Settings.WINDOW_WIDTH / 2, pointY, 5, Settings.MAX_GUIDE_LENGTH - GuideLength);
+                _reflectGuide.SetColor(Color.Black);
+                _reflectGuide.SetOrigin(2, 0);
+                _reflectGuide.SetPosition(ReflectPoint.X, ReflectPoint.Y);
+                _reflectGuide.Rotation += Converter.DegressToRadians(ReflectPoint.X < 400 ? -90 : 90);
+            }
+            else
+            {
+                _reflectGuide = null;
+            }
         }
 
         public void Draw()
@@ -86,7 +93,10 @@ namespace game_final.Sprites
             DrawSprite(_body);
             DrawSprite(_guide);
 
-            _spriteBatch.Draw(_reflectGuide.Instance, _reflectGuide.Position, null, _reflectGuide.Color, _reflectGuide.Rotation, _reflectGuide.Origin, 1f, SpriteEffects.None, 0f);
+            if (_reflectGuide != null)
+            {
+                _spriteBatch.Draw(_reflectGuide.Instance, _reflectGuide.Position, null, _reflectGuide.Color, _reflectGuide.Rotation, _reflectGuide.Origin, 1f, SpriteEffects.None, 0f);
+            }
         }
 
         public void SetReflectPoint(int x, int y)
