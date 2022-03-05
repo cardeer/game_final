@@ -9,7 +9,7 @@ namespace game_final.Scenes
 
         public Playing(SpriteBatch spriteBatch, GraphicsDevice graphics) : base(spriteBatch)
         {
-            _rightVerticalLine = new Shapes.Line(graphics, Constants.REFLECT_RIGHT, 0, Constants.REFLECT_RIGHT, Settings.WINDOW_HEIGHT, 5, Settings.WINDOW_HEIGHT);
+            _rightVerticalLine = new Shapes.Line(graphics, Constants.REFLECT_RIGHT + Settings.BALL_SIZE / 2, 0, Constants.REFLECT_RIGHT + Settings.BALL_SIZE / 2, Settings.WINDOW_HEIGHT, 5, Settings.WINDOW_HEIGHT);
             _rightVerticalLine.SetColor(Color.Black);
             _rightVerticalLine.SetOrigin(2, 0);
         }

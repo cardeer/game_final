@@ -55,9 +55,10 @@ namespace game_final
             _mouseX = mouseState.X;
             _mouseY = mouseState.Y;
 
+            Assets.Shooter.Update(mouseState, _previousMouseState);
+
             _previousMouseState = mouseState;
 
-            Assets.Shooter.Update(mouseState, _previousMouseState);
 
             base.Update(gameTime);
         }

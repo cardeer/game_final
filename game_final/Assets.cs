@@ -27,10 +27,15 @@ namespace game_final
             s_spriteBatch = spriteBatch;
             s_graphics = graphics;
 
-            loadAll();
+            loadTextures();
+            createSprites();
         }
 
-        private static void loadAll()
+        private static void loadTextures() {
+            Textures.LightBlueBall = s_content.Load<Texture2D>("Balls/light_blue");
+        }
+
+        private static void createSprites()
         {
             Shooter = new Sprites.Shooter(s_spriteBatch, s_graphics);
             PlayingScene = new Scenes.Playing(s_spriteBatch, s_graphics);

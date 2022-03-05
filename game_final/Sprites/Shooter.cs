@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -19,6 +20,11 @@ namespace game_final.Sprites
         private Shapes.Line _guide;
         private Shapes.Line _reflectGuide;
 
+        private float _rotation = 0f;
+        private Vector2 _unitVector;
+
+        private List<Sprites.Ball> _balls;
+
         public Shooter(SpriteBatch spriteBatch, GraphicsDevice graphics) : base(spriteBatch, 50, 50)
         {
             ReflectPoint = new Vector2(0, 0);
@@ -31,32 +37,55 @@ namespace game_final.Sprites
             _body.SetColor(Color.Red);
             _body.SetOrigin(_width / 2, _height / 2);
             _body.SetPosition(_width / 2, _height / 2);
+
+            _unitVector = new Vector2((float)Math.Cos(_rotation), (float)Math.Sin(_rotation));
+            _balls = new List<Sprites.Ball>();
+        }
+
+        private void updateUnitVector()
+        {
+            _unitVector.X = (float)Math.Cos(_rotation);
+            _unitVector.Y = (float)Math.Sin(_rotation);
         }
 
         public void Update(MouseState mouseState, MouseState previousMouseState)
         {
+            foreach (Sprites.Ball ball in _balls)
+            {
+                ball.Update();
+            }
+
             int mouseX = mouseState.X;
             int mouseY = mouseState.Y;
 
-            float rotation = (float)Math.Atan2(mouseY - (Assets.Shooter.Y + Assets.Shooter.Width / 2), mouseX - (Assets.Shooter.X + Assets.Shooter.Height / 2)) + Converter.DegressToRadians(180);
-            float rotationDegrees = Converter.RadiansToDegrees(rotation);
+            _rotation = (float)Math.Atan2(mouseY - (Assets.Shooter.Y + Assets.Shooter.Width / 2), mouseX - (Assets.Shooter.X + Assets.Shooter.Height / 2)) + Converter.DegressToRadians(180);
+
+            float rotationDegrees = Converter.RadiansToDegrees(_rotation);
 
             if (mouseX < Constants.REFLECT_CENTER_X && (rotationDegrees < 10 || rotationDegrees > 270))
             {
-                rotation = Converter.DegressToRadians(10);
+                _rotation = Converter.DegressToRadians(10);
             }
             else if (mouseX > Constants.REFLECT_CENTER_X && rotationDegrees > 170)
             {
-                rotation = Converter.DegressToRadians(170);
+                _rotation = Converter.DegressToRadians(170);
             }
 
-            Rotation = rotation;
+            Rotation = _rotation;
 
-            int reflectX = rotation < Math.PI / 2 ? Constants.REFLECT_LEFT : rotation > Math.PI / 2 ? Constants.REFLECT_RIGHT : Constants.REFLECT_CENTER_X;
+            updateUnitVector();
 
-            if (rotation > Math.PI / 2) rotation = (float)(Math.PI - rotation);
+            bool isClicked = mouseState.LeftButton != previousMouseState.LeftButton && mouseState.LeftButton == ButtonState.Pressed;
+            if (isClicked)
+            {
+                _balls.Add(new Sprites.Ball(Textures.LightBlueBall, 50, (int)(X + Width / 2), (int)(Y + Height / 2), -_unitVector));
+            }
 
-            int reflectY = (int)((Settings.WINDOW_HEIGHT - Assets.Shooter.Height / 2) - (Constants.PLAY_HALF_WIDTH * Math.Tan(rotation)));
+            int reflectX = _rotation < Math.PI / 2 ? Constants.REFLECT_LEFT : _rotation > Math.PI / 2 ? Constants.REFLECT_RIGHT : Constants.REFLECT_CENTER_X;
+
+            if (_rotation > Math.PI / 2) _rotation = (float)(Math.PI - _rotation);
+
+            int reflectY = (int)((Settings.WINDOW_HEIGHT - Assets.Shooter.Height / 2) - (Constants.PLAY_HALF_WIDTH * Math.Tan(_rotation)));
 
             int diffX = Constants.PLAY_HALF_WIDTH;
             int diffY = reflectY - (Settings.WINDOW_HEIGHT - Assets.Shooter.Height / 2);
@@ -73,19 +102,26 @@ namespace game_final.Sprites
             _guide.SetOrigin(5 / 2, _guide.Height);
             _guide.SetPosition(_width / 2, _height / 2);
 
-            if (_reflectGuide != null) {
+            if (_reflectGuide != null)
+            {
                 _reflectGuide.Destroy();
                 _reflectGuide = null;
             }
 
             if (GuideLength < Settings.MAX_GUIDE_LENGTH)
             {
-                int pointY = -(int)(400 * Math.Tan(Rotation));
-                _reflectGuide = new Shapes.Line(_graphics, 0, 0, Constants.REFLECT_CENTER_X, pointY, 5, Settings.MAX_GUIDE_LENGTH - GuideLength);
+                float relativeRotation = (float)(Rotation > Math.PI / 2 ? Math.PI - Rotation : Rotation);
+
+                float unitX = (float)Math.Cos(relativeRotation);
+                float unitY = (float)Math.Sin(relativeRotation);
+                int pointX = Rotation > Math.PI / 2 ? (int)(reflectX + unitX * Settings.WINDOW_WIDTH) : -(int)(reflectX + unitX * Settings.WINDOW_WIDTH);
+                int pointY = (int)(reflectY + unitY * Settings.WINDOW_HEIGHT);
+
+                _reflectGuide = new Shapes.Line(_graphics, reflectX, reflectY, pointX, pointY, 5, Settings.MAX_GUIDE_LENGTH - GuideLength);
                 _reflectGuide.SetColor(Color.Black);
                 _reflectGuide.SetOrigin(2, 0);
                 _reflectGuide.SetPosition(ReflectPoint.X, ReflectPoint.Y);
-                _reflectGuide.Rotation += Converter.DegressToRadians(ReflectPoint.X < 400 ? -90 : 90);
+                _reflectGuide.Rotation += Converter.DegressToRadians(90);
             }
         }
 
@@ -97,6 +133,11 @@ namespace game_final.Sprites
             if (_reflectGuide != null)
             {
                 _spriteBatch.Draw(_reflectGuide.Instance, _reflectGuide.Position, null, _reflectGuide.Color, _reflectGuide.Rotation, _reflectGuide.Origin, 1f, SpriteEffects.None, 0f);
+            }
+
+            foreach (Sprites.Ball ball in _balls)
+            {
+                _spriteBatch.Draw(ball.Instance, ball.Position, null, Color.White, ball.Rotation, ball.Origin, ball.Scale, SpriteEffects.None, 0f);
             }
         }
 
