@@ -5,9 +5,6 @@ using Microsoft.Xna.Framework.Media;
 
 namespace game_final
 {
-    /// <summary>
-    /// Store all asset references
-    /// </summary>
     static class Assets
     {
         private static ContentManager s_content;
@@ -17,11 +14,7 @@ namespace game_final
         public static Sprites.Shooter Shooter;
         public static Scenes.Playing PlayingScene;
 
-        /// <summary>
-        /// Load all assets
-        /// </summary>
-        /// <param name="content"></param>
-        /// <param name="graphics"></param>
+
         public static void Initialize(ContentManager content, SpriteBatch spriteBatch, GraphicsDevice graphics)
         {
             s_content = content;
@@ -34,7 +27,14 @@ namespace game_final
         }
 
         private static void loadTextures() {
+            AssetTypes.Texture.BlueBall = s_content.Load<Texture2D>("Balls/blue");
+            AssetTypes.Texture.BrownBall = s_content.Load<Texture2D>("Balls/brown");
+            AssetTypes.Texture.GreenBall = s_content.Load<Texture2D>("Balls/green");
+            AssetTypes.Texture.GreyBall = s_content.Load<Texture2D>("Balls/grey");
             AssetTypes.Texture.LightBlueBall = s_content.Load<Texture2D>("Balls/light_blue");
+            AssetTypes.Texture.PurpleBall = s_content.Load<Texture2D>("Balls/purple");
+            AssetTypes.Texture.RedBall = s_content.Load<Texture2D>("Balls/red");
+            AssetTypes.Texture.YellowBall = s_content.Load<Texture2D>("Balls/yellow");
         }
         private static void loadSounds()
         {

@@ -78,7 +78,7 @@ namespace game_final.Sprites
             if (isClicked && Environments.GameData.CanShoot)
             {
                 Environments.GameData.CanShoot = false;
-                Environments.GameData.ShotBalls.Add(new Sprites.Ball(Types.BallType.LIGHT_BLUE, (int)(X + Width / 2), (int)(Y + Height / 2), -_unitVector));
+                Environments.GameData.ShotBalls.Add(new Sprites.Ball(Types.BallType.RED, (int)(X + Width / 2), (int)(Y + Height / 2), -_unitVector));
             }
 
             bool isRightClicked = mouseState.RightButton != previousMouseState.RightButton && mouseState.RightButton == ButtonState.Pressed;

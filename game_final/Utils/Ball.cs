@@ -10,39 +10,6 @@ namespace game_final.Utils
 {
     static class Ball
     {
-        public static Texture2D GetBallTexture(Types.BallType ballType)
-        {
-            switch (ballType)
-            {
-                case Types.BallType.LIGHT_BLUE:
-                    return AssetTypes.Texture.LightBlueBall;
-                default:
-                    return null;
-            }
-        }
-
-        public static int BallCode(Types.BallType ballType)
-        {
-            switch (ballType)
-            {
-                case Types.BallType.LIGHT_BLUE:
-                    return 1;
-                default:
-                    return -1;
-            }
-        }
-
-        public static Types.BallType BallTypeFromCode(int ballCode)
-        {
-            switch (ballCode)
-            {
-                case 1:
-                    return Types.BallType.LIGHT_BLUE;
-                default:
-                    return Types.BallType.NONE;
-            }
-        }
-
         public static Vector2 GetSnappedPosition(Sprites.Ball ball)
         {
             float relativeX = ball.X - Settings.PLAYING_UI_LEFT_WIDTH;
@@ -114,6 +81,11 @@ namespace game_final.Utils
         private static Vector2 getPosFromIndex(float row, float col)
         {
             return new Vector2(col * Settings.BALL_SIZE, row * Settings.BALL_SIZE);
+        }
+
+        public static Types.BallType RandomBallType()
+        {
+            return Types.BallType.NONE;
         }
     }
 }

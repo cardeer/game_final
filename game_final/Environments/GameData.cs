@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 
 using System.Diagnostics;
+using Microsoft.Xna.Framework;
 
 namespace game_final.Environments
 {
@@ -42,7 +43,7 @@ namespace game_final.Environments
 
             for (int i = 0; i < Settings.TEMPLATE_COL_BALLS; i++)
             {
-                if (BallsTemplate[Settings.TEMPLATE_ROW_BALLS - 1, i] == 1)
+                if (BallsTemplate[Settings.TEMPLATE_ROW_BALLS - 1, i] > 1)
                 {
                     failed = true;
                     break;
@@ -60,7 +61,93 @@ namespace game_final.Environments
                 }
             }
 
+            List<Types.Vector2Int> removePoints = new List<Types.Vector2Int>();
+            removePoints.Add(new Types.Vector2Int(col, row));
+
+            Queue<Types.Vector2Int> queue = new Queue<Types.Vector2Int>();
+            queue.Enqueue(new Types.Vector2Int(col, row));
+
+            while (queue.Count > 0)
+            {
+                Types.Vector2Int currentPoint = queue.Dequeue();
+                int currentRow = currentPoint.Y;
+                int currentCol = currentPoint.X;
+
+                if (currentCol > 1 && BallsTemplate[currentRow, currentCol - 2] == ballTypeCode)
+                {
+                    Types.Vector2Int newPoint = new Types.Vector2Int(currentCol - 2, currentRow);
+                    if (!contains(removePoints, newPoint))
+                    {
+                        removePoints.Add(newPoint);
+                        queue.Enqueue(newPoint);
+                    }
+                }
+
+                if (currentCol < Settings.TEMPLATE_COL_BALLS - 2 && BallsTemplate[currentRow, currentCol + 2] == ballTypeCode)
+                {
+                    Types.Vector2Int newPoint = new Types.Vector2Int(currentCol + 2, currentRow);
+                    if (!contains(removePoints, newPoint))
+                    {
+                        removePoints.Add(newPoint);
+                        queue.Enqueue(newPoint);
+                    }
+                }
+
+                if (currentRow > 0 && currentCol > 0 && BallsTemplate[currentRow - 1, currentCol - 1] == ballTypeCode)
+                {
+                    Types.Vector2Int newPoint = new Types.Vector2Int(currentCol - 1, currentRow - 1);
+                    if (!contains(removePoints, newPoint))
+                    {
+                        removePoints.Add(newPoint);
+                        queue.Enqueue(newPoint);
+                    }
+                }
+
+                if (currentRow > 0 && currentCol < Settings.TEMPLATE_COL_BALLS - 1 && BallsTemplate[currentRow - 1, currentCol + 1] == ballTypeCode)
+                {
+                    Types.Vector2Int newPoint = new Types.Vector2Int(currentCol + 1, currentRow - 1);
+                    if (!contains(removePoints, newPoint))
+                    {
+                        removePoints.Add(newPoint);
+                        queue.Enqueue(newPoint);
+                    }
+                }
+
+                if (currentRow < Settings.TEMPLATE_ROW_BALLS - 1 && currentCol > 0 && BallsTemplate[currentRow + 1, currentCol - 1] == ballTypeCode)
+                {
+                    Types.Vector2Int newPoint = new Types.Vector2Int(currentCol - 1, currentRow + 1);
+                    if (!contains(removePoints, newPoint))
+                    {
+                        removePoints.Add(newPoint);
+                        queue.Enqueue(newPoint);
+                    }
+                }
+
+                if (currentRow < Settings.TEMPLATE_ROW_BALLS - 1 && currentCol < Settings.TEMPLATE_COL_BALLS - 1 && BallsTemplate[currentRow + 1, currentCol + 1] == ballTypeCode)
+                {
+                    Types.Vector2Int newPoint = new Types.Vector2Int(currentCol + 1, currentRow + 1);
+                    if (!contains(removePoints, newPoint))
+                    {
+                        removePoints.Add(newPoint);
+                        queue.Enqueue(newPoint);
+                    }
+                }
+            }
+
+            if (removePoints.Count >= 3)
+            {
+                foreach (Types.Vector2Int point in removePoints)
+                {
+                    BallsTemplate[point.Y, point.X] = 0;
+                }
+            }
+
             CanShoot = true;
+        }
+
+        private static bool contains(List<Types.Vector2Int> list, Types.Vector2Int point)
+        {
+            return list.Exists(p => p.X == point.X && p.Y == point.Y);
         }
     }
 }

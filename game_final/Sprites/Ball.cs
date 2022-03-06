@@ -13,7 +13,7 @@ namespace game_final.Sprites
 
         private bool _snapped = false;
 
-        public Ball(Types.BallType type, int x, int y, Vector2 unit) : base(Utils.Ball.GetBallTexture(type), Settings.BALL_SIZE)
+        public Ball(Types.BallType type, int x, int y, Vector2 unit) : base(Types.Ball.GetBallTexture(type), Settings.BALL_SIZE)
         {
             Type = type;
 
@@ -22,7 +22,7 @@ namespace game_final.Sprites
             SetPosition(x + unit.X * Width, y + unit.Y * Height);
         }
 
-        public Ball(Types.BallType type, int x, int y) : base(Utils.Ball.GetBallTexture(type), Settings.BALL_SIZE)
+        public Ball(Types.BallType type, int x, int y) : base(Types.Ball.GetBallTexture(type), Settings.BALL_SIZE)
         {
             Type = type;
             _snapped = true;
@@ -52,7 +52,7 @@ namespace game_final.Sprites
             if (snap.ShouldSnap)
             {
                 _snapped = true;
-                Environments.GameData.SetBallTemplate(snap.SnapRow, snap.SnapCol, Utils.Ball.BallCode(Type));
+                Environments.GameData.SetBallTemplate(snap.SnapRow, snap.SnapCol, Types.Ball.BallCode(Type));
             }
         }
     }

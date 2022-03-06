@@ -32,7 +32,7 @@ namespace game_final.Scenes
                     if (template[i, j] == 0) continue;
 
                     int code = template[i, j];
-                    Types.BallType type = Utils.Ball.BallTypeFromCode(code);
+                    Types.BallType type = Types.Ball.BallTypeFromCode(code);
 
                     int x = Constants.SNAP_X_PADDING + (j * Settings.BALL_SIZE / 2);
                     int y = Settings.BALL_SIZE / 2 + (i * Settings.BALL_SIZE);
