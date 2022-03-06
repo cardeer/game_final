@@ -189,7 +189,7 @@ namespace game_final.Environments
 
             for (int i = 0; i < Settings.TEMPLATE_COL_BALLS; i++)
             {
-                if (BallsTemplate[Settings.TEMPLATE_ROW_BALLS - 1, i] > 1)
+                if (BallsTemplate[Settings.TEMPLATE_ROW_BALLS - 2, i] > 1)
                 {
                     failed = true;
                     break;

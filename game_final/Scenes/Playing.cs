@@ -31,9 +31,10 @@ namespace game_final.Scenes
             _bottomLine = new Shapes.Line(minX, Settings.WINDOW_HEIGHT - Settings.PLAYING_UI_BOTTOM_HEIGHT, maxX, Settings.WINDOW_HEIGHT - Settings.PLAYING_UI_BOTTOM_HEIGHT, 5, Constants.PLAY_WIDTH_LEFT + Settings.BALL_SIZE);
             _bottomLine.SetColor(new Color(255, 238, 184));
             _bottomLine.SetOrigin(2, 0);
+            _bottomLine.SetPosition(minX, Settings.WINDOW_HEIGHT - Settings.PLAYING_UI_BOTTOM_HEIGHT - 135);
             _bottomLine.Rotation -= (float)(Math.PI / 2);
 
-            _bottomRect = new Shapes.Rectangle(maxX - minX, Settings.PLAYING_UI_BOTTOM_HEIGHT - AssetTypes.Texture.TopWallBorder.Height);
+            _bottomRect = new Shapes.Rectangle(maxX - minX, Settings.PLAYING_UI_BOTTOM_HEIGHT);
             _bottomRect.SetOrigin(0, _bottomRect.Height);
             _bottomRect.SetColor(new Color(255, 238, 184));
             _bottomRect.SetPosition(minX, Settings.WINDOW_HEIGHT - AssetTypes.Texture.TopWallBorder.Height);

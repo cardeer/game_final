@@ -65,13 +65,13 @@ namespace game_final.Sprites
 
             float rotationDegrees = Converter.RadiansToDegrees(_rotation);
 
-            if (mouseX < Constants.REFLECT_CENTER_X && (rotationDegrees < 10 || rotationDegrees > 270))
+            if (mouseX < Constants.REFLECT_CENTER_X && (rotationDegrees < Settings.MIN_SHOOTER_ANGLE || rotationDegrees > 270))
             {
-                _rotation = Converter.DegressToRadians(10);
+                _rotation = Converter.DegressToRadians(Settings.MIN_SHOOTER_ANGLE);
             }
-            else if (mouseX > Constants.REFLECT_CENTER_X && rotationDegrees > 170)
+            else if (mouseX > Constants.REFLECT_CENTER_X && rotationDegrees > 180 - Settings. MIN_SHOOTER_ANGLE)
             {
-                _rotation = Converter.DegressToRadians(170);
+                _rotation = Converter.DegressToRadians(180 - Settings.MIN_SHOOTER_ANGLE);
             }
 
             Rotation = _rotation;
