@@ -30,7 +30,7 @@ namespace game_final.Scenes
 
                 if (_opacity <= -0.3)
                 {
-                    Environments.Global.SetScene(Types.SceneType.IN_GAME);
+                    Environments.Global.SetScene(Types.SceneType.MAIN_MENU);
                 }
             }
         }
