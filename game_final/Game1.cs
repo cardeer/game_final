@@ -28,7 +28,7 @@ namespace game_final
             _graphics.PreferredBackBufferHeight = Settings.WINDOW_HEIGHT;
             _graphics.ApplyChanges();
 
-            Window.Title = "Isekai Bubble Slime";
+            Window.Title = "My Mana Ran Out, I'm Going to Shoot Slimes in a Different World";
 
             base.Initialize();
         }
@@ -46,9 +46,7 @@ namespace game_final
             //MediaPlayer.Play(AssetTypes.Sound.MusicSound);
             //MediaPlayer.Volume = 0.2f;
 
-            //Environments.Global.CurrentScene = new Scenes.Playing();
-            Environments.Global.CurrentScene = new Scenes.MainMenu();
-
+            Environments.Global.CurrentScene = new Scenes.Splash();
         }
 
         protected override void Update(GameTime gameTime)
@@ -64,7 +62,10 @@ namespace game_final
             MouseState mouseState = Mouse.GetState();
             Environments.Global.CurrentMouseState = mouseState;
 
-            Environments.Global.CurrentScene.Update();
+            if (Environments.Global.CurrentScene != null)
+            {
+                Environments.Global.CurrentScene.Update();
+            }
 
             base.Update(gameTime);
         }
@@ -74,7 +75,10 @@ namespace game_final
             GraphicsDevice.Clear(Color.Black);
 
             _spriteBatch.Begin();
-            Environments.Global.CurrentScene.Draw();
+            if (Environments.Global.CurrentScene != null)
+            {
+                Environments.Global.CurrentScene.Draw();
+            }
             _spriteBatch.End();
             // TODO: Add your drawing code here
 

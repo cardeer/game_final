@@ -24,5 +24,20 @@ namespace game_final.Environments
         {
             get { return (float)GameTime.ElapsedGameTime.TotalSeconds; }
         }
+
+        public static void SetScene(Types.SceneType type) {
+            switch (type)
+            {
+                case Types.SceneType.SPLASH:
+                    CurrentScene = new Scenes.Splash();
+                    break;
+                case Types.SceneType.MAIN_MENU:
+                    CurrentScene = new Scenes.MainMenu();
+                    break;
+                case Types.SceneType.IN_GAME:
+                    CurrentScene = new Scenes.Playing();
+                    break;
+            }
+        }
     }
 }

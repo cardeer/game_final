@@ -10,7 +10,6 @@ namespace game_final.Environments
     class GameData
     {
         public static int[,] BallsTemplate;
-        public static List<Sprites.Ball> ShotBalls;
         public static bool CanShoot = true;
         public static int Score = 0;
 
@@ -24,40 +23,20 @@ namespace game_final.Environments
                     BallsTemplate[i, j] = 0;
                 }
             }
-            ShotBalls = new List<Sprites.Ball>();
         }
 
         public static void SetBallTemplate(int row, int col, int ballTypeCode)
         {
             BallsTemplate[row, col] = ballTypeCode;
 
-            bool failed = false;
-
-            for (int i = 0; i < Settings.TEMPLATE_COL_BALLS; i++)
-            {
-                if (BallsTemplate[Settings.TEMPLATE_ROW_BALLS - 1, i] > 1)
-                {
-                    failed = true;
-                    break;
-                }
-            }
-
-            if (failed)
-            {
-                for (int i = 0; i < Settings.TEMPLATE_ROW_BALLS; i++)
-                {
-                    for (int j = 0; j < Settings.TEMPLATE_COL_BALLS; j++)
-                    {
-                        BallsTemplate[i, j] = 0;
-                    }
-                }
-            }
-
             List<Types.Vector2Int> removePoints = new List<Types.Vector2Int>();
             removePoints.Add(new Types.Vector2Int(col, row));
 
             Queue<Types.Vector2Int> queue = new Queue<Types.Vector2Int>();
             queue.Enqueue(new Types.Vector2Int(col, row));
+
+            bool failed = checkFailed();
+            if (failed) return;
 
             while (queue.Count > 0)
             {
@@ -133,8 +112,6 @@ namespace game_final.Environments
                     BallsTemplate[point.Y, point.X] = 0;
                 }
             }
-
-            CanShoot = true;
         }
 
         private static bool contains(List<Types.Vector2Int> list, Types.Vector2Int point)
@@ -146,7 +123,7 @@ namespace game_final.Environments
         {
             for (int i = 0; i < 3; i++)
             {
-                for (int j = 0; j < Settings.TEMPLATE_COL_BALLS; j++)
+                for (int j = 0; j < Settings.TEMPLATE_COL_BALLS - 1; j++)
                 {
                     if (i % 2 == 0 && j % 2 == 0)
                     {
@@ -158,6 +135,79 @@ namespace game_final.Environments
                     }
                 }
             }
+        }
+
+        public static void PushFromTop()
+        {
+            int[,] newTemplate = new int[Settings.TEMPLATE_ROW_BALLS, Settings.TEMPLATE_COL_BALLS];
+
+            for (int i = 0; i < Settings.TEMPLATE_ROW_BALLS; i++)
+            {
+                if (i == 0)
+                {
+                    for (int j = 0; j < Settings.TEMPLATE_COL_BALLS - 1; j++)
+                    {
+                        if (j % 2 == 0)
+                        {
+                            newTemplate[i, j] = Utils.Ball.RandomBallCode();
+                        }
+                    }
+                }
+                else
+                {
+                    if (i % 2 == 0)
+                    {
+                        for (int j = 0; j < Settings.TEMPLATE_COL_BALLS; j++)
+                        {
+                            if (j % 2 == 0 && j < Settings.TEMPLATE_COL_BALLS - 1)
+                            {
+                                newTemplate[i, j] = BallsTemplate[i - 1, j + 1];
+                            }
+                        }
+                    }
+                    else
+                    {
+                        for (int j = 1; j < Settings.TEMPLATE_COL_BALLS; j++)
+                        {
+                            if (j % 2 == 1)
+                            {
+                                newTemplate[i, j] = BallsTemplate[i - 1, j - 1];
+                            }
+                        }
+                    }
+                }
+            }
+
+            BallsTemplate = newTemplate;
+
+            checkFailed();
+        }
+
+        private static bool checkFailed()
+        {
+            bool failed = false;
+
+            for (int i = 0; i < Settings.TEMPLATE_COL_BALLS; i++)
+            {
+                if (BallsTemplate[Settings.TEMPLATE_ROW_BALLS - 1, i] > 1)
+                {
+                    failed = true;
+                    break;
+                }
+            }
+
+            if (failed)
+            {
+                for (int i = 0; i < Settings.TEMPLATE_ROW_BALLS; i++)
+                {
+                    for (int j = 0; j < Settings.TEMPLATE_COL_BALLS; j++)
+                    {
+                        BallsTemplate[i, j] = 0;
+                    }
+                }
+            }
+
+            return failed;
         }
     }
 }

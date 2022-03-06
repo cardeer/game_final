@@ -14,12 +14,18 @@ namespace game_final.Sprites
         public int GuideLength = 1;
         public Vector2 ReflectPoint;
 
-        private Shapes.Rectangle _body;
+        private Base.Sprite _body;
         private Shapes.Line _guide;
+
+        private Shapes.Line _extendGuide;
         private Shapes.Line _reflectGuide;
 
         private float _rotation = 0f;
         private Vector2 _unitVector;
+
+        private Sprites.Ball _shotBall;
+        private Sprites.Ball _currentBall;
+        private Sprites.Ball _nextBall;
 
         public Shooter() : base(50, 50)
         {
@@ -27,12 +33,18 @@ namespace game_final.Sprites
 
             SetPosition(Constants.REFLECT_CENTER_X - _width / 2, Settings.WINDOW_HEIGHT - Settings.SHOOTER_BOTTOM - _height);
 
-            _body = new Shapes.Rectangle(_width, _height);
-            _body.SetColor(Color.Red);
-            _body.SetOrigin(_width / 2, _height / 2);
+            _body = new Base.Sprite(AssetTypes.Texture.Wand, 300);
+            _body.SetOrigin(_body.Instance.Width / 2, _body.Instance.Height / 2);
             _body.SetPosition(_width / 2, _height / 2);
+            _body.Rotation = -(float)Math.PI / 2;
 
             _unitVector = new Vector2((float)Math.Cos(_rotation), (float)Math.Sin(_rotation));
+
+            int code = Utils.Ball.RandomBallCode();
+            _currentBall = new Sprites.Ball(Types.Ball.BallTypeFromCode(code), (int)(X + Width / 2), (int)(Y + Height / 2), false);
+
+            int nextCode = Utils.Ball.RandomBallCode();
+            _nextBall = new Sprites.Ball(Types.Ball.BallTypeFromCode(nextCode), (int)(X + Width + Settings.BALL_SIZE), (int)(Y + Settings.BALL_SIZE / 2), false);
         }
 
         private void updateUnitVector()
@@ -43,13 +55,6 @@ namespace game_final.Sprites
 
         public void Update()
         {
-            Environments.GameData.ShotBalls.RemoveAll(b => b.isDestroyed);
-
-            foreach (Sprites.Ball ball in Environments.GameData.ShotBalls)
-            {
-                ball.Update();
-            }
-
             MouseState mouseState = Environments.Global.CurrentMouseState;
             MouseState previousMouseState = Environments.Global.PreviousMouseState;
 
@@ -70,30 +75,69 @@ namespace game_final.Sprites
             }
 
             Rotation = _rotation;
-
             updateUnitVector();
+
+            if (_currentBall != null)
+            {
+                _currentBall.Rotation = Rotation - (float)Math.PI / 2;
+            }
+            else
+            {
+                if (Math.Abs(_nextBall.X - (X + Width / 2)) > 1)
+                {
+                    _nextBall.X -= (float)Environments.Global.GameTime.ElapsedGameTime.TotalSeconds * Settings.BALL_SIZE * 3;
+                }
+                
+                if (_shotBall == null)
+                {
+                    _currentBall = _nextBall;
+                    _currentBall.SetPosition((int)(X + Width / 2), (int)(Y + Height / 2));
+
+                    int nextCode = Utils.Ball.RandomBallCode();
+                    _nextBall = new Sprites.Ball(Types.Ball.BallTypeFromCode(nextCode), (int)(X + Width + Settings.BALL_SIZE), (int)(Y + Settings.BALL_SIZE / 2), false);
+
+                    Environments.GameData.CanShoot = true;
+                }
+            }
+
+            if (_shotBall != null && _shotBall.isDestroyed)
+            {
+                _shotBall = null;
+            }
+
+            if (_shotBall != null)
+            {
+                _shotBall.Update();
+            }
 
             bool isClicked = mouseState.LeftButton != previousMouseState.LeftButton && mouseState.LeftButton == ButtonState.Pressed;
             if (isClicked && Environments.GameData.CanShoot)
             {
                 Environments.GameData.CanShoot = false;
-                Environments.GameData.ShotBalls.Add(new Sprites.Ball(Types.BallType.RED, (int)(X + Width / 2), (int)(Y + Height / 2), -_unitVector));
+
+                _currentBall.Unit = -_unitVector;
+                _currentBall.SetPosition((int)(X + Width / 2), (int)(Y + Height / 2));
+                _shotBall = _currentBall;
+
+                _currentBall = null;
             }
 
-            bool isRightClicked = mouseState.RightButton != previousMouseState.RightButton && mouseState.RightButton == ButtonState.Pressed;
-            string result = "";
-            if (isRightClicked)
-            {
-                for (int i = 0; i < Settings.TEMPLATE_ROW_BALLS; i++)
-                {
-                    for (int j = 0; j < Settings.TEMPLATE_COL_BALLS; j++)
-                    {
-                        result += Environments.GameData.BallsTemplate[i, j] + ", ";
-                    }
-                    result += "\n";
-                }
-                Debug.WriteLine(result);
-            }
+            //bool isRightClicked = mouseState.RightButton != previousMouseState.RightButton && mouseState.RightButton == ButtonState.Pressed;
+            //if (isRightClicked)
+            //{
+            //    //string result = "";
+            //    //for (int i = 0; i < Settings.TEMPLATE_ROW_BALLS; i++)
+            //    //{
+            //    //    for (int j = 0; j < Settings.TEMPLATE_COL_BALLS; j++)
+            //    //    {
+            //    //        result += Environments.GameData.BallsTemplate[i, j] + ", ";
+            //    //    }
+            //    //    result += "\n";
+            //    //}
+            //    //Debug.WriteLine(result);
+
+            //    Environments.GameData.PushFromTop();
+            //}
 
             int reflectX = _rotation < Math.PI / 2 ? Constants.REFLECT_LEFT : _rotation > Math.PI / 2 ? Constants.REFLECT_RIGHT : Constants.REFLECT_CENTER_X;
 
@@ -111,10 +155,16 @@ namespace game_final.Sprites
 
             if (GuideLength > Settings.MAX_GUIDE_LENGTH || GuideLength <= 0) GuideLength = Settings.MAX_GUIDE_LENGTH;
 
-            _guide = new Shapes.Line(_width / 2, _height / 2, _width / 2, 0, 5, GuideLength);
+            _guide = new Shapes.Line(_width / 2, _height / 2, _width / 2, 0, 5, 200);
             _guide.SetColor(Settings.GUIDE_COLOR);
             _guide.SetOrigin(5 / 2, _guide.Height);
             _guide.SetPosition(_width / 2, _height / 2);
+
+            if (_extendGuide != null)
+            {
+                _extendGuide.Destroy();
+                _extendGuide = null;
+            }
 
             if (_reflectGuide != null)
             {
@@ -131,28 +181,53 @@ namespace game_final.Sprites
                 int pointX = (int)(reflectX + unitX * int.MaxValue);
                 int pointY = (int)(reflectY + unitY * int.MaxValue);
 
-                _reflectGuide = new Shapes.Line(reflectX, reflectY, pointX, pointY, 5, Settings.MAX_GUIDE_LENGTH - GuideLength);
-                _reflectGuide.SetColor(Settings.GUIDE_COLOR);
+                _reflectGuide = new Shapes.Line(reflectX, reflectY, pointX, pointY, 2, 100);
+                _reflectGuide.SetColor(Settings.REFLEFCT_GUIDE_COLOR);
                 _reflectGuide.SetOrigin(2, 0);
                 _reflectGuide.SetPosition(ReflectPoint.X, ReflectPoint.Y);
                 _reflectGuide.Rotation += Converter.DegressToRadians(90);
+
+                int heightFromShooter = (int)(reflectY - (Y + Height / 2.0f));
+                int extendLength = (int)Math.Sqrt(heightFromShooter * heightFromShooter + Constants.PLAY_HALF_X * Constants.PLAY_HALF_X) - 200;
+
+                _extendGuide = new Shapes.Line((int)(X + Width / 2), (int)(Y + Height / 2), reflectX, reflectY, 2, extendLength);
+                _extendGuide.SetColor(Settings.REFLEFCT_GUIDE_COLOR);
+                _extendGuide.SetOrigin(2, 0);
+                _extendGuide.SetPosition(ReflectPoint.X, ReflectPoint.Y);
+                _extendGuide.Rotation += Converter.DegressToRadians(90);
             }
         }
 
         public void Draw()
         {
             DrawSprite(_body);
-            DrawSprite(_guide);
+            
+            if (_guide != null)
+            {
+                DrawSprite(_guide);
+            }
 
             if (_reflectGuide != null)
             {
                 Environments.Global.SpriteBatch.Draw(_reflectGuide.Instance, _reflectGuide.Position, null, _reflectGuide.Color, _reflectGuide.Rotation, _reflectGuide.Origin, 1f, SpriteEffects.None, 0f);
             }
 
-            foreach (Sprites.Ball ball in Environments.GameData.ShotBalls)
+            if (_extendGuide != null)
             {
-                Environments.Global.SpriteBatch.Draw(ball.Instance, ball.Position, null, ball.DrawColor, ball.Rotation, ball.Origin, ball.Scale, SpriteEffects.None, 0f);
+                Environments.Global.SpriteBatch.Draw(_extendGuide.Instance, _extendGuide.Position, null, _extendGuide.Color, _extendGuide.Rotation, _extendGuide.Origin, 1f, SpriteEffects.None, 0f);
             }
+
+            if (_shotBall != null)
+            {
+                Environments.Global.SpriteBatch.Draw(_shotBall.Instance, _shotBall.Position, null, _shotBall.DrawColor, _shotBall.Rotation, _shotBall.Origin, _shotBall.Scale, SpriteEffects.None, 0f);
+            }
+
+            if (_currentBall != null)
+            {
+                Environments.Global.SpriteBatch.Draw(_currentBall.Instance, _currentBall.Position, null, _currentBall.DrawColor, _currentBall.Rotation, _currentBall.Origin, _currentBall.Scale, SpriteEffects.None, 0f);
+            }
+
+            Environments.Global.SpriteBatch.Draw(_nextBall.Instance, _nextBall.Position, null, _nextBall.DrawColor, _nextBall.Rotation, _nextBall.Origin, _nextBall.Scale, SpriteEffects.None, 0f);
         }
 
         public void SetReflectPoint(int x, int y)

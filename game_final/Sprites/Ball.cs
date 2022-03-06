@@ -16,8 +16,8 @@ namespace game_final.Sprites
         public Ball(Types.BallType type, int x, int y, Vector2 unit) : base(Types.Ball.GetBallTexture(type), Settings.BALL_SIZE)
         {
             Type = type;
-
             Unit = unit;
+
             SetOrigin(Instance.Width / 2, Instance.Height / 2);
             SetPosition(x + unit.X * Width, y + unit.Y * Height);
         }
@@ -25,7 +25,18 @@ namespace game_final.Sprites
         public Ball(Types.BallType type, int x, int y) : base(Types.Ball.GetBallTexture(type), Settings.BALL_SIZE)
         {
             Type = type;
+
             _snapped = true;
+
+            SetOrigin(Instance.Width / 2, Instance.Height / 2);
+            SetPosition(x, y);
+        }
+
+        public Ball(Types.BallType type, int x, int y, bool snap = true) : base(Types.Ball.GetBallTexture(type), Settings.BALL_SIZE)
+        {
+            Type = type;
+
+            _snapped = snap;
 
             SetOrigin(Instance.Width / 2, Instance.Height / 2);
             SetPosition(x, y);

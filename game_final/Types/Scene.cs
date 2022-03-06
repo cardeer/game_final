@@ -6,6 +6,7 @@ namespace game_final.Types
 {
     enum SceneType
     {
+        SPLASH,
         MAIN_MENU,
         IN_GAME,
     }
