@@ -6,6 +6,8 @@ namespace game_final.AssetTypes
     {
         public static Texture2D Logo;
 
+        public static Texture2D Wand;
+
         public static Texture2D BlueBall;
         public static Texture2D BrownBall;
         public static Texture2D GreenBall;

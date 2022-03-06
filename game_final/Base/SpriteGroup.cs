@@ -20,10 +20,10 @@ namespace game_final.Base
                 sprite.Instance,
                 new Vector2(Position.X + sprite.X, Position.Y + sprite.Y),
                 null,
-                sprite.Color,
+                sprite.DrawColor,
                 Rotation + sprite.Rotation,
                 sprite.Origin,
-                1f,
+                sprite.Scale,
                 SpriteEffects.None,
                 0f
             );

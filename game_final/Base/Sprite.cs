@@ -18,7 +18,7 @@ namespace game_final.Base
 
         public bool isDestroyed = false;
 
-        protected Sprite(int width, int height)
+        public Sprite(int width, int height)
         {
             Position = new Vector2(0, 0);
             Origin = new Vector2(0, 0);
@@ -31,7 +31,7 @@ namespace game_final.Base
             _colorArray = new Color[Instance.Width * Instance.Height];
         }
 
-        protected Sprite(Texture2D texture, int size)
+        public Sprite(Texture2D texture, int size)
         {
             Position = new Vector2(0, 0);
             Origin = new Vector2(0, 0);

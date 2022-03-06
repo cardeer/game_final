@@ -14,7 +14,7 @@ namespace game_final.Sprites
         public int GuideLength = 1;
         public Vector2 ReflectPoint;
 
-        private Shapes.Rectangle _body;
+        private Base.Sprite _body;
         private Shapes.Line _guide;
 
         private Shapes.Line _extendGuide;
@@ -33,10 +33,10 @@ namespace game_final.Sprites
 
             SetPosition(Constants.REFLECT_CENTER_X - _width / 2, Settings.WINDOW_HEIGHT - Settings.SHOOTER_BOTTOM - _height);
 
-            _body = new Shapes.Rectangle(_width, _height);
-            _body.SetColor(Color.Red);
-            _body.SetOrigin(_width / 2, _height / 2);
+            _body = new Base.Sprite(AssetTypes.Texture.Wand, 300);
+            _body.SetOrigin(_body.Instance.Width / 2, _body.Instance.Height / 2);
             _body.SetPosition(_width / 2, _height / 2);
+            _body.Rotation = -(float)Math.PI / 2;
 
             _unitVector = new Vector2((float)Math.Cos(_rotation), (float)Math.Sin(_rotation));
 
