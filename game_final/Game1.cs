@@ -47,7 +47,7 @@ namespace game_final
             //MediaPlayer.Play(AssetTypes.Sound.MusicSound);
             //MediaPlayer.Volume = 0.2f;
 
-            Environments.Global.CurrentScene = new Scenes.Splash();
+            Environments.Global.SetScene(Types.SceneType.SPLASH);
         }
 
         protected override void Update(GameTime gameTime)
