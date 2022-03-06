@@ -24,7 +24,7 @@ namespace game_final.Scenes
 
         public override void Update()
         {
-            if (Environments.Global.GameTime.TotalGameTime.TotalSeconds > 3)
+            if (Environments.Global.GameTime.TotalGameTime.TotalSeconds > 1.5)
             {
                 _opacity -= (float)Environments.Global.GameTime.ElapsedGameTime.TotalSeconds * 1;
 

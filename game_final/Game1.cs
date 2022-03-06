@@ -28,7 +28,7 @@ namespace game_final
             _graphics.PreferredBackBufferHeight = Settings.WINDOW_HEIGHT;
             _graphics.ApplyChanges();
 
-            Window.Title = "Midterm Game Project";
+            Window.Title = "My Mana Ran Out, I'm Going to Shoot Slimes in a Different World";
 
             base.Initialize();
         }
