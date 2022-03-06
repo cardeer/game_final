@@ -28,8 +28,7 @@ namespace game_final
             _graphics.PreferredBackBufferHeight = Settings.WINDOW_HEIGHT;
             _graphics.ApplyChanges();
 
-            Environments.GameData.Initialize();
-            Environments.GameData.GenerateLevel();
+            Window.Title = "Isekai Bubble Slime";
 
             base.Initialize();
         }

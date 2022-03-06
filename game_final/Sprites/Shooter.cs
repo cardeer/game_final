@@ -49,6 +49,7 @@ namespace game_final.Sprites
             {
                 ball.Update();
             }
+
             MouseState mouseState = Environments.Global.CurrentMouseState;
             MouseState previousMouseState = Environments.Global.PreviousMouseState;
 

@@ -39,7 +39,10 @@ namespace game_final.Sprites
                 return;
             }
 
-            SetPosition(X + Unit.X * Settings.BALL_SPEED, Y + Unit.Y * Settings.BALL_SPEED);
+            float distX = Unit.X * Settings.BALL_SPEED * Environments.Global.Elapsed;
+            float distY = Unit.Y * Settings.BALL_SPEED * Environments.Global.Elapsed;
+
+            SetPosition(X + distX, Y + distY);
             SnapPoint = Utils.Ball.GetSnappedPosition(this);
 
             if (X <= Constants.REFLECT_LEFT || X >= Constants.REFLECT_RIGHT)

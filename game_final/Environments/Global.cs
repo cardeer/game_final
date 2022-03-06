@@ -19,5 +19,10 @@ namespace game_final.Environments
 
         public static SpriteBatch SpriteBatch;
         public static GraphicsDevice Graphics;
+
+        public static float Elapsed
+        {
+            get { return (float)GameTime.ElapsedGameTime.TotalSeconds; }
+        }
     }
 }

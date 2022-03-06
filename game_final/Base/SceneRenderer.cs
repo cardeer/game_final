@@ -1,9 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework;
-
 namespace game_final.Base
 {
     abstract class SceneRenderer

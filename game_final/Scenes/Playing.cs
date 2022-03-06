@@ -14,6 +14,9 @@ namespace game_final.Scenes
 
         public Playing()
         {
+            Environments.GameData.Initialize();
+            Environments.GameData.GenerateLevel();
+
             _leftVerticalLine = new Shapes.Line(Constants.REFLECT_LEFT - Settings.BALL_SIZE / 2, 0, Constants.REFLECT_LEFT - Settings.BALL_SIZE / 2, Settings.WINDOW_HEIGHT, 5, Settings.WINDOW_HEIGHT);
             _leftVerticalLine.SetColor(Color.Red);
             _leftVerticalLine.SetOrigin(2, 0);
