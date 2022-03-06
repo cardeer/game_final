@@ -38,7 +38,7 @@ namespace game_final.Scenes
             _bottomLine.SetOrigin(2, 0);
             _bottomLine.Rotation -= (float)(Math.PI / 2);
 
-            _topLine = new Shapes.Line(minX, Settings.PLAYING_UI_TOP_HEIGHT - Settings.PLAY_AREA_TOP_PADDING, maxX, Settings.PLAYING_UI_TOP_HEIGHT - Settings.PLAY_AREA_TOP_PADDING, 5, Constants.PLAY_WIDTH_LEFT + Settings.BALL_SIZE);
+            _topLine = new Shapes.Line(minX, Settings.PLAYING_UI_TOP_HEIGHT, maxX, Settings.PLAYING_UI_TOP_HEIGHT, 5, Constants.PLAY_WIDTH_LEFT + Settings.BALL_SIZE);
             _topLine.SetColor(Color.Red);
             _topLine.SetOrigin(2, 0);
             _topLine.Rotation -= (float)(Math.PI / 2);
@@ -71,7 +71,7 @@ namespace game_final.Scenes
                     Types.BallType type = Types.Ball.BallTypeFromCode(code);
 
                     int x = Constants.SNAP_X_PADDING + (j * Settings.BALL_SIZE / 2);
-                    int y = Settings.PLAYING_UI_TOP_HEIGHT + Settings.PLAY_AREA_TOP_PADDING + (i * Settings.BALL_SIZE);
+                    int y = Settings.PLAYING_UI_TOP_HEIGHT + Settings.PLAY_AREA_TOP_PADDING + Settings.BALL_SIZE / 2 + (i * Settings.BALL_SIZE);
 
                     DrawSprite(new Sprites.Ball(type, x, y));
                 }

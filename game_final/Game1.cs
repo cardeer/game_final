@@ -28,7 +28,7 @@ namespace game_final
             _graphics.PreferredBackBufferHeight = Settings.WINDOW_HEIGHT;
             _graphics.ApplyChanges();
 
-            Window.Title = "Isekai Bubble Slime";
+            Window.Title = "Midterm Game Project";
 
             base.Initialize();
         }
