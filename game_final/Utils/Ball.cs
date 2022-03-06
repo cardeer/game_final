@@ -47,14 +47,6 @@ namespace game_final.Utils
         {
             float relativeX = ball.X - Settings.PLAYING_UI_LEFT_WIDTH;
 
-            //float x = relativeX / Constants.PLAY_WIDTH_LEFT;
-            //x = (float)Math.Round(x * Settings.TEMPLATE_COL_BALLS - 1);
-            //x = Math.Clamp(x, 0, Settings.TEMPLATE_COL_BALLS - 1);
-
-            //float y = ball.Y / Constants.MAX_SNAP_Y;
-            //y = (float)Math.Floor(y * (Settings.TEMPLATE_ROW_BALLS - 1));
-            //y = Math.Clamp(y, 0, Settings.TEMPLATE_ROW_BALLS - 1);
-
             float x = relativeX / Constants.PLAY_WIDTH_LEFT;
             x = (float)(x * (Settings.TEMPLATE_COL_BALLS - 1));
             x = Math.Clamp(x, 0, Settings.TEMPLATE_COL_BALLS - 1);
@@ -62,18 +54,6 @@ namespace game_final.Utils
             float y = ball.Y / Constants.MAX_SNAP_Y;
             y = (float)(y * (Settings.TEMPLATE_ROW_BALLS - 1));
             y = Math.Clamp(y, 0, Settings.TEMPLATE_ROW_BALLS - 1);
-
-            //if ((y % 2 == 0 && x % 2 == 1) || (y % 2 == 1 && x % 2 == 0))
-            //{
-            //    x += 1;
-
-            //    if (x > Settings.TEMPLATE_COL_BALLS - 1) x = Settings.TEMPLATE_COL_BALLS - 1;
-
-            //    if (y % 2 == 0 && x % 2 == 1)
-            //    {
-            //        x -= 1;
-            //    }
-            //}
 
             return new Vector2(x, y);
         }
@@ -83,23 +63,6 @@ namespace game_final.Utils
             int[,] template = Environments.GameData.BallsTemplate;
 
             int half = Settings.BALL_SIZE / 2;
-            //int row = (int)ball.SnapPoint.Y;
-            //int col = (int)ball.SnapPoint.X;
-
-            //if (row > 0 && col > 0 && template[row - 1, col - 1] == 1)
-            //{
-            //    Debug.WriteLine($"overloap top-left: ({row}, {col}), ({row - 1}, {col - 1})");
-            //    return true;
-            //}
-            //else if (row > 0 && template[row - 1, col] == 1)
-            //{
-            //    Debug.WriteLine($"overloap top: ({row}, {col}), ({row - 1}, {col})");
-            //    return true;
-            //}
-            //else if (row > 0 && col < Settings.TEMPLATE_COL_BALLS - 1 && template[row - 1, col + 1] == 1)
-            //{
-            //    Debug.WriteLine($"overloap top-right: ({row}, {col}), ({row - 1}, {col + 1})");
-            //    return true;
 
             float posY = ball.SnapPoint.Y;
             float posX = ball.SnapPoint.X;
