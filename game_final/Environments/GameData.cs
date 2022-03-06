@@ -12,6 +12,7 @@ namespace game_final.Environments
         public static int[,] BallsTemplate;
         public static List<Sprites.Ball> ShotBalls;
         public static bool CanShoot = true;
+        public static int Score = 0;
 
         public static void Initialize()
         {
@@ -145,7 +146,7 @@ namespace game_final.Environments
         {
             for (int i = 0; i < 3; i++)
             {
-                for (int j = 0; j < Settings.TEMPLATE_COL_BALLS - 1; j++)
+                for (int j = 0; j < Settings.TEMPLATE_COL_BALLS; j++)
                 {
                     if (i % 2 == 0 && j % 2 == 0)
                     {

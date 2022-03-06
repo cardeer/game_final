@@ -25,7 +25,7 @@ namespace game_final.Sprites
         {
             ReflectPoint = new Vector2(0, 0);
 
-            SetPosition(Constants.REFLECT_CENTER_X - _width / 2, Settings.WINDOW_HEIGHT - _height);
+            SetPosition(Constants.REFLECT_CENTER_X - _width / 2, Settings.WINDOW_HEIGHT - Settings.SHOOTER_BOTTOM - _height);
 
             _body = new Shapes.Rectangle(_width, _height);
             _body.SetColor(Color.Red);
@@ -99,10 +99,10 @@ namespace game_final.Sprites
 
             if (_rotation > Math.PI / 2) _rotation = (float)(Math.PI - _rotation);
 
-            int reflectY = (int)((Settings.WINDOW_HEIGHT - Height / 2) - (Constants.PLAY_HALF_WIDTH * Math.Tan(_rotation)));
+            int reflectY = (int)((Settings.WINDOW_HEIGHT - Settings.SHOOTER_BOTTOM - Height / 2) - (Constants.PLAY_HALF_X * Math.Tan(_rotation)));
 
-            int diffX = Constants.PLAY_HALF_WIDTH;
-            int diffY = reflectY - (Settings.WINDOW_HEIGHT - Height / 2);
+            int diffX = Constants.PLAY_HALF_X;
+            int diffY = reflectY - (Settings.WINDOW_HEIGHT - Settings.SHOOTER_BOTTOM - Height / 2);
 
             int length = (int)Math.Ceiling(Math.Sqrt(diffX * diffX + diffY * diffY));
 
