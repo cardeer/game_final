@@ -7,13 +7,13 @@ namespace game_final.Sprites
 {
     class Ball : Base.Sprite
     {
-        public Environments.Ball.BallType Type;
+        public Types.BallType Type;
         public Vector2 SnapPoint;
         public Vector2 Unit;
 
         private bool _snapped = false;
 
-        public Ball(Environments.Ball.BallType type, int x, int y, Vector2 unit) : base(Utils.Ball.GetBallTexture(type), Settings.BALL_SIZE)
+        public Ball(Types.BallType type, int x, int y, Vector2 unit) : base(Utils.Ball.GetBallTexture(type), Settings.BALL_SIZE)
         {
             Type = type;
 
@@ -22,7 +22,7 @@ namespace game_final.Sprites
             SetPosition(x + unit.X * Width, y + unit.Y * Height);
         }
 
-        public Ball(Environments.Ball.BallType type, int x, int y) : base(Utils.Ball.GetBallTexture(type), Settings.BALL_SIZE)
+        public Ball(Types.BallType type, int x, int y) : base(Utils.Ball.GetBallTexture(type), Settings.BALL_SIZE)
         {
             Type = type;
             _snapped = true;
@@ -40,27 +40,19 @@ namespace game_final.Sprites
             }
 
             SetPosition(X + Unit.X * Settings.BALL_SPEED, Y + Unit.Y * Settings.BALL_SPEED);
+            SnapPoint = Utils.Ball.GetSnappedPosition(this);
 
             if (X <= Constants.REFLECT_LEFT || X >= Constants.REFLECT_RIGHT)
             {
                 Unit.X = -Unit.X;
             }
 
-            SnapPoint = Utils.Ball.GetSnappedPosition(this);
-            int snapX = (int)SnapPoint.X, snapY = (int)SnapPoint.Y;
+            Types.Snap snap = Utils.Ball.ShouldSnap(this);
 
-            int[,] template = Environments.GameData.BallsTemplate;
-
-            if (snapY <= 0)
-            {
-                snapY = 0;
-                _snapped = true;
-                Environments.GameData.SetBallTemplate(snapX, snapY, Utils.Ball.BallCode(Type));
-            }
-            else if (Utils.Ball.ShouldSnap(this))
+            if (snap.ShouldSnap)
             {
                 _snapped = true;
-                Environments.GameData.SetBallTemplate(snapX, snapY, Utils.Ball.BallCode(Type));
+                Environments.GameData.SetBallTemplate(snap.SnapRow, snap.SnapCol, Utils.Ball.BallCode(Type));
             }
         }
     }

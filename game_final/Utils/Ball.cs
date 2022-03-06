@@ -10,36 +10,36 @@ namespace game_final.Utils
 {
     static class Ball
     {
-        public static Texture2D GetBallTexture(Environments.Ball.BallType ballType)
+        public static Texture2D GetBallTexture(Types.BallType ballType)
         {
             switch (ballType)
             {
-                case Environments.Ball.BallType.LIGHT_BLUE:
+                case Types.BallType.LIGHT_BLUE:
                     return AssetTypes.Texture.LightBlueBall;
                 default:
                     return null;
             }
         }
 
-        public static int BallCode(Environments.Ball.BallType ballType)
+        public static int BallCode(Types.BallType ballType)
         {
             switch (ballType)
             {
-                case Environments.Ball.BallType.LIGHT_BLUE:
+                case Types.BallType.LIGHT_BLUE:
                     return 1;
                 default:
                     return -1;
             }
         }
 
-        public static Environments.Ball.BallType BallTypeFromCode(int ballCode)
+        public static Types.BallType BallTypeFromCode(int ballCode)
         {
             switch (ballCode)
             {
                 case 1:
-                    return Environments.Ball.BallType.LIGHT_BLUE;
+                    return Types.BallType.LIGHT_BLUE;
                 default:
-                    return Environments.Ball.BallType.NONE;
+                    return Types.BallType.NONE;
             }
         }
 
@@ -47,55 +47,108 @@ namespace game_final.Utils
         {
             float relativeX = ball.X - Settings.PLAYING_UI_LEFT_WIDTH;
 
+            //float x = relativeX / Constants.PLAY_WIDTH_LEFT;
+            //x = (float)Math.Round(x * Settings.TEMPLATE_COL_BALLS - 1);
+            //x = Math.Clamp(x, 0, Settings.TEMPLATE_COL_BALLS - 1);
+
+            //float y = ball.Y / Constants.MAX_SNAP_Y;
+            //y = (float)Math.Floor(y * (Settings.TEMPLATE_ROW_BALLS - 1));
+            //y = Math.Clamp(y, 0, Settings.TEMPLATE_ROW_BALLS - 1);
+
             float x = relativeX / Constants.PLAY_WIDTH_LEFT;
-            x = (float)Math.Floor(x * (Settings.TEMPLATE_COL_BALLS / 2));
-            x = Math.Clamp(x, 0, (Settings.TEMPLATE_COL_BALLS / 2) - 1);
+            x = (float)(x * (Settings.TEMPLATE_COL_BALLS - 1));
+            x = Math.Clamp(x, 0, Settings.TEMPLATE_COL_BALLS - 1);
 
             float y = ball.Y / Constants.MAX_SNAP_Y;
-            y = (float)Math.Floor(y * (Settings.TEMPLATE_ROW_BALLS));
+            y = (float)(y * (Settings.TEMPLATE_ROW_BALLS - 1));
             y = Math.Clamp(y, 0, Settings.TEMPLATE_ROW_BALLS - 1);
+
+            //if ((y % 2 == 0 && x % 2 == 1) || (y % 2 == 1 && x % 2 == 0))
+            //{
+            //    x += 1;
+
+            //    if (x > Settings.TEMPLATE_COL_BALLS - 1) x = Settings.TEMPLATE_COL_BALLS - 1;
+
+            //    if (y % 2 == 0 && x % 2 == 1)
+            //    {
+            //        x -= 1;
+            //    }
+            //}
 
             return new Vector2(x, y);
         }
 
-        public static bool ShouldSnap(Sprites.Ball ball)
+        public static Types.Snap ShouldSnap(Sprites.Ball ball)
         {
             int[,] template = Environments.GameData.BallsTemplate;
 
             int half = Settings.BALL_SIZE / 2;
-            int snapX = (int)ball.SnapPoint.X * 2;
-            int snapY = (int)ball.SnapPoint.Y;
+            //int row = (int)ball.SnapPoint.Y;
+            //int col = (int)ball.SnapPoint.X;
 
-            if (snapY > 0 && snapX > 0 && template[snapY - 1, snapX - 1] == 1)
+            //if (row > 0 && col > 0 && template[row - 1, col - 1] == 1)
+            //{
+            //    Debug.WriteLine($"overloap top-left: ({row}, {col}), ({row - 1}, {col - 1})");
+            //    return true;
+            //}
+            //else if (row > 0 && template[row - 1, col] == 1)
+            //{
+            //    Debug.WriteLine($"overloap top: ({row}, {col}), ({row - 1}, {col})");
+            //    return true;
+            //}
+            //else if (row > 0 && col < Settings.TEMPLATE_COL_BALLS - 1 && template[row - 1, col + 1] == 1)
+            //{
+            //    Debug.WriteLine($"overloap top-right: ({row}, {col}), ({row - 1}, {col + 1})");
+            //    return true;
+
+            float posY = ball.SnapPoint.Y;
+            float posX = ball.SnapPoint.X;
+
+            int roundY = (int)Math.Ceiling(posY);
+            int roundX = (int)Math.Floor(posX);
+
+            Vector2 pos = getPosFromIndex(posY, posX);
+            Vector2 left = getPosFromIndex(roundY, roundX - 1);
+            Vector2 right = getPosFromIndex(roundY, roundX + 1);
+            Vector2 topLeft = getPosFromIndex(roundY - 1, roundX - 1);
+            Vector2 top = getPosFromIndex(roundY - 1, roundX);
+            Vector2 topRight = getPosFromIndex(roundY - 1, roundX + 1);
+
+            Types.Snap result = new Types.Snap();
+            result.SnapRow = roundY;
+            result.SnapCol = roundX;
+
+            if (roundY == 0)
             {
-                //Debug.WriteLine($"top left {snapX * 2} {snapY}");
-                return true;
+                result.ShouldSnap = true;
             }
-            else if (snapY > 0 && template[snapY - 1, snapX] == 1)
+            else if (roundY > 0 && roundX > 0 && template[roundY - 1, roundX - 1] > 0 && pos.Y - half <= topLeft.Y + half && pos.X - half <= topLeft.X + half)
             {
-                //Debug.WriteLine($"top {snapX * 2} {snapY}");
-                return true;
+                result.ShouldSnap = true;
             }
-            else if (snapY > 0 && snapX < Settings.TEMPLATE_COL_BALLS - 1 && template[snapY - 1, snapX + 1] == 1)
+            else if (roundY > 0 && template[roundY - 1, roundX] > 0 && pos.Y - half <= top.Y + half)
             {
-                //Debug.WriteLine($"top right {snapX * 2} {snapY}");
-                return true;
+                result.ShouldSnap = true;
             }
-            else if (snapX > 0 && template[snapY, snapX - 1] == 1)
+            else if (roundY > 0 && roundX < Settings.TEMPLATE_COL_BALLS - 1 && template[roundY - 1, roundX + 1] > 0 && pos.Y - half <= topRight.Y + half && pos.X + half >= topRight.X - half)
             {
-                //Debug.WriteLine($"left {snapX * 2} {snapY}");
-                return true;
+                result.ShouldSnap = true;
             }
-            else if (snapX < Settings.TEMPLATE_COL_BALLS - 1 && template[snapY, snapX + 1] == 1)
+            else if (roundX > 0 && template[roundY, roundX - 1] > 0 && pos.X - half <= left.X + half)
             {
-                //Debug.WriteLine($"right {snapX * 2} {snapY}");
-                return true;
+                result.ShouldSnap = true;
+            }
+            else if (roundX < Settings.TEMPLATE_COL_BALLS - 1 && template[roundY, roundX + 1] > 0 && pos.X + half >= right.X - half)
+            {
+                result.ShouldSnap = true;
             }
 
-            return false;
+            if (result.ShouldSnap) result.FitPoints();
+
+            return result;
         }
 
-        private static Vector2 getPosFromIndex(int row, int col)
+        private static Vector2 getPosFromIndex(float row, float col)
         {
             return new Vector2(col * Settings.BALL_SIZE, row * Settings.BALL_SIZE);
         }

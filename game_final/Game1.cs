@@ -45,8 +45,8 @@ namespace game_final
             // TODO: use this.Content to load your game content here
             Assets.Initialize(Content, _spriteBatch, _graphics.GraphicsDevice);
 
-            MediaPlayer.Play(AssetTypes.Sound.MusicSound);
-            MediaPlayer.Volume = 0.2f;
+            //MediaPlayer.Play(AssetTypes.Sound.MusicSound);
+            //MediaPlayer.Volume = 0.2f;
         }
 
         protected override void Update(GameTime gameTime)

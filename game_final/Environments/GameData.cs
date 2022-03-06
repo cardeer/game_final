@@ -30,25 +30,36 @@ namespace game_final.Environments
                 { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
                 { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
                 { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-            }; 
+            };
             ShotBalls = new List<Sprites.Ball>();
         }
 
-        public static void SetBallTemplate(int x, int y, int ballTypeCode)
+        public static void SetBallTemplate(int row, int col, int ballTypeCode)
         {
-            int newX = x * 2;
-            if (y % 2 == 1 && newX % 2 == 0) {
-                //Debug.WriteLine("expected odd, got even");
-                //Debug.WriteLine($"{y} {newX}");
+            BallsTemplate[row, col] = ballTypeCode;
 
-                newX -= 1;
+            bool failed = false;
 
-                if (newX <= 0) newX = 1;
-
-                if (BallsTemplate[y, newX] == 1) newX += 2;
+            for (int i = 0; i < Settings.TEMPLATE_COL_BALLS; i++)
+            {
+                if (BallsTemplate[Settings.TEMPLATE_ROW_BALLS - 1, i] == 1)
+                {
+                    failed = true;
+                    break;
+                }
             }
 
-            BallsTemplate[y, newX] = ballTypeCode;
+            if (failed)
+            {
+                for (int i = 0; i < Settings.TEMPLATE_ROW_BALLS; i++)
+                {
+                    for (int j = 0; j < Settings.TEMPLATE_COL_BALLS; j++)
+                    {
+                        BallsTemplate[i, j] = 0;
+                    }
+                }
+            }
+
             CanShoot = true;
         }
     }
