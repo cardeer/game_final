@@ -10,7 +10,6 @@ namespace game_final.Environments
     class GameData
     {
         public static int[,] BallsTemplate;
-        public static List<Sprites.Ball> ShotBalls;
         public static bool CanShoot = true;
         public static int Score = 0;
 
@@ -24,7 +23,6 @@ namespace game_final.Environments
                     BallsTemplate[i, j] = 0;
                 }
             }
-            ShotBalls = new List<Sprites.Ball>();
         }
 
         public static void SetBallTemplate(int row, int col, int ballTypeCode)
@@ -38,11 +36,7 @@ namespace game_final.Environments
             queue.Enqueue(new Types.Vector2Int(col, row));
 
             bool failed = checkFailed();
-            if (failed)
-            {
-                CanShoot = true;
-                return;
-            }
+            if (failed) return;
 
             while (queue.Count > 0)
             {
@@ -118,8 +112,6 @@ namespace game_final.Environments
                     BallsTemplate[point.Y, point.X] = 0;
                 }
             }
-
-            CanShoot = true;
         }
 
         private static bool contains(List<Types.Vector2Int> list, Types.Vector2Int point)

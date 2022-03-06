@@ -57,7 +57,6 @@ namespace game_final.Scenes
             DrawSprite(_rightVerticalLine);
             DrawSprite(_topLine);
             DrawSprite(_bottomLine);
-            _shooter.Draw();
 
             // render balls from template
             int[,] template = Environments.GameData.BallsTemplate;
@@ -76,6 +75,8 @@ namespace game_final.Scenes
                     DrawSprite(new Sprites.Ball(type, x, y));
                 }
             }
+
+            _shooter.Draw();
         }
     }
 }

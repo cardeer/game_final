@@ -18,6 +18,8 @@ namespace game_final
         }
 
         private static void loadTextures() {
+            AssetTypes.Texture.Logo = s_content.Load<Texture2D>("logo");
+
             AssetTypes.Texture.BlueBall = s_content.Load<Texture2D>("Balls/blue");
             AssetTypes.Texture.BrownBall = s_content.Load<Texture2D>("Balls/brown");
             AssetTypes.Texture.GreenBall = s_content.Load<Texture2D>("Balls/green");
