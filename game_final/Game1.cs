@@ -40,13 +40,14 @@ namespace game_final
             // TODO: use this.Content to load your game content here
             Environments.Global.Graphics = _graphics.GraphicsDevice;
             Environments.Global.SpriteBatch = _spriteBatch;
+            Environments.Global.Content = Content;
 
             Assets.Initialize(Content);
 
             //MediaPlayer.Play(AssetTypes.Sound.MusicSound);
             //MediaPlayer.Volume = 0.2f;
 
-            Environments.Global.CurrentScene = new Scenes.Splash();
+            Environments.Global.CurrentScene = new Scenes.Playing();
         }
 
         protected override void Update(GameTime gameTime)

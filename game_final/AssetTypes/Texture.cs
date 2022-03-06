@@ -16,5 +16,10 @@ namespace game_final.AssetTypes
         public static Texture2D PurpleBall;
         public static Texture2D RedBall;
         public static Texture2D YellowBall;
+
+        public static Texture2D LeftWall;
+        public static Texture2D WallBorder;
+        public static Texture2D BottomWallBorder;
+        public static Texture2D TopWallBorder;
     }
 }

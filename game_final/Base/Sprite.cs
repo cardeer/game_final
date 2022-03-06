@@ -46,6 +46,19 @@ namespace game_final.Base
             _colorArray = new Color[Instance.Width * Instance.Height];
         }
 
+        public Sprite(Texture2D texture)
+        {
+            Position = new Vector2(0, 0);
+            Origin = new Vector2(0, 0);
+
+            Instance = texture;
+
+            _width = texture.Width;
+            _height = texture.Height;
+
+            _colorArray = new Color[Instance.Width * Instance.Height];
+        }
+
         public Color Color
         {
             get { return _color; }

@@ -30,6 +30,11 @@ namespace game_final
             AssetTypes.Texture.PurpleBall = s_content.Load<Texture2D>("Balls/purple");
             AssetTypes.Texture.RedBall = s_content.Load<Texture2D>("Balls/red");
             AssetTypes.Texture.YellowBall = s_content.Load<Texture2D>("Balls/yellow");
+
+            AssetTypes.Texture.LeftWall = s_content.Load<Texture2D>("Scenes/Playing/left_wall");
+            AssetTypes.Texture.WallBorder = s_content.Load<Texture2D>("Scenes/Playing/wall_border");
+            AssetTypes.Texture.TopWallBorder = s_content.Load<Texture2D>("Scenes/Playing/top_wall_border");
+            AssetTypes.Texture.BottomWallBorder = s_content.Load<Texture2D>("Scenes/Playing/bottom_wall_border");
         }
         private static void loadSounds()
         {

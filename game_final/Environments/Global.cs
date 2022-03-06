@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Content;
 
 namespace game_final.Environments
 {
@@ -17,6 +18,7 @@ namespace game_final.Environments
 
         public static Base.SceneRenderer CurrentScene;
 
+        public static ContentManager Content;
         public static SpriteBatch SpriteBatch;
         public static GraphicsDevice Graphics;
 

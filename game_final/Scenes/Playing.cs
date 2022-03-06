@@ -9,11 +9,16 @@ namespace game_final.Scenes
 {
     class Playing : Base.SceneRenderer
     {
-        private Shapes.Line _leftVerticalLine;
-        private Shapes.Line _rightVerticalLine;
-        private Shapes.Line _topLine;
         private Shapes.Line _bottomLine;
+        private Shapes.Rectangle _bottomRect;
+
         private Sprites.Shooter _shooter;
+
+        private Base.Sprite _leftWall;
+        private Base.Sprite _leftWallBorder;
+        private Base.Sprite _rightWallBorder;
+        private Base.Sprite _topWallBorder;
+        private Base.Sprite _bottomWallBorder;
 
         public Playing()
         {
@@ -23,25 +28,31 @@ namespace game_final.Scenes
             int minX = Constants.REFLECT_LEFT - Settings.BALL_SIZE / 2;
             int maxX = (Settings.WINDOW_WIDTH - Settings.PLAYING_UI_RIGHT_WIDTH) + (Settings.BALL_SIZE / 2);
 
-            _leftVerticalLine = new Shapes.Line(minX, 0, minX, Settings.WINDOW_HEIGHT, 5, Settings.WINDOW_HEIGHT);
-            _leftVerticalLine.SetColor(Color.Red);
-            _leftVerticalLine.SetOrigin(2, 0);
-            _leftVerticalLine.Rotation -= (float)(Math.PI / 2);
-
-            _rightVerticalLine = new Shapes.Line(maxX, 0, maxX, Settings.WINDOW_HEIGHT, 5, Settings.WINDOW_HEIGHT);
-            _rightVerticalLine.SetColor(Color.Red);
-            _rightVerticalLine.SetOrigin(2, 0);
-            _rightVerticalLine.Rotation -= (float)(Math.PI / 2);
-
             _bottomLine = new Shapes.Line(minX, Settings.WINDOW_HEIGHT - Settings.PLAYING_UI_BOTTOM_HEIGHT, maxX, Settings.WINDOW_HEIGHT - Settings.PLAYING_UI_BOTTOM_HEIGHT, 5, Constants.PLAY_WIDTH_LEFT + Settings.BALL_SIZE);
-            _bottomLine.SetColor(Color.Red);
+            _bottomLine.SetColor(new Color(255, 238, 184));
             _bottomLine.SetOrigin(2, 0);
             _bottomLine.Rotation -= (float)(Math.PI / 2);
 
-            _topLine = new Shapes.Line(minX, Settings.PLAYING_UI_TOP_HEIGHT, maxX, Settings.PLAYING_UI_TOP_HEIGHT, 5, Constants.PLAY_WIDTH_LEFT + Settings.BALL_SIZE);
-            _topLine.SetColor(Color.Red);
-            _topLine.SetOrigin(2, 0);
-            _topLine.Rotation -= (float)(Math.PI / 2);
+            _bottomRect = new Shapes.Rectangle(maxX - minX, Settings.PLAYING_UI_BOTTOM_HEIGHT - AssetTypes.Texture.TopWallBorder.Height);
+            _bottomRect.SetOrigin(0, _bottomRect.Height);
+            _bottomRect.SetColor(new Color(255, 238, 184));
+            _bottomRect.SetPosition(minX, Settings.WINDOW_HEIGHT - AssetTypes.Texture.TopWallBorder.Height);
+
+            _leftWall = new Base.Sprite(AssetTypes.Texture.LeftWall);
+            _leftWall.SetPosition(0, 0);
+
+            _leftWallBorder = new Base.Sprite(AssetTypes.Texture.WallBorder);
+            _leftWallBorder.SetPosition(_leftWall.Width, 0);
+
+            _rightWallBorder = new Base.Sprite(AssetTypes.Texture.WallBorder);
+            _rightWallBorder.SetPosition(maxX, 0);
+
+            _topWallBorder = new Base.Sprite(AssetTypes.Texture.TopWallBorder);
+            _topWallBorder.SetPosition(minX, 0);
+
+            _bottomWallBorder = new Base.Sprite(AssetTypes.Texture.TopWallBorder);
+            _bottomWallBorder.SetOrigin(0, _bottomWallBorder.Instance.Height);
+            _bottomWallBorder.SetPosition(minX, Settings.WINDOW_HEIGHT);
 
             _shooter = new Sprites.Shooter();
         }
@@ -53,10 +64,14 @@ namespace game_final.Scenes
 
         public override void Draw()
         {
-            DrawSprite(_leftVerticalLine);
-            DrawSprite(_rightVerticalLine);
-            DrawSprite(_topLine);
             DrawSprite(_bottomLine);
+            DrawSprite(_bottomRect);
+
+            DrawSprite(_leftWall);
+            DrawSprite(_leftWallBorder);
+            DrawSprite(_rightWallBorder);
+            DrawSprite(_topWallBorder);
+            DrawSprite(_bottomWallBorder);
 
             // render balls from template
             int[,] template = Environments.GameData.BallsTemplate;
