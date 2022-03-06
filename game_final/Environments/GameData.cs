@@ -38,7 +38,11 @@ namespace game_final.Environments
             queue.Enqueue(new Types.Vector2Int(col, row));
 
             bool failed = checkFailed();
-            if (failed) return;
+            if (failed)
+            {
+                CanShoot = true;
+                return;
+            }
 
             while (queue.Count > 0)
             {
