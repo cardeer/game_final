@@ -28,7 +28,7 @@ namespace game_final.Scenes
             {
                 _opacity -= (float)Environments.Global.GameTime.ElapsedGameTime.TotalSeconds * 1;
 
-                if (_opacity <= -1)
+                if (_opacity <= -0.3)
                 {
                     Environments.Global.SetScene(Types.SceneType.IN_GAME);
                 }

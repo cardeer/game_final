@@ -87,7 +87,8 @@ namespace game_final.Sprites
                 {
                     _nextBall.X -= (float)Environments.Global.GameTime.ElapsedGameTime.TotalSeconds * Settings.BALL_SIZE * 3;
                 }
-                else if (_shotBall.isDestroyed)
+                
+                if (_shotBall == null)
                 {
                     _currentBall = _nextBall;
                     _currentBall.SetPosition((int)(X + Width / 2), (int)(Y + Height / 2));
