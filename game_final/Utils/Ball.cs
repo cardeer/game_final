@@ -83,9 +83,9 @@ namespace game_final.Utils
             return new Vector2(col * Settings.BALL_SIZE, row * Settings.BALL_SIZE);
         }
 
-        public static Types.BallType RandomBallType()
+        public static int RandomBallCode()
         {
-            return Types.BallType.NONE;
+            return new Random().Next(1, Types.Ball.TotalTypes);
         }
     }
 }

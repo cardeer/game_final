@@ -14,11 +14,6 @@ namespace game_final
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
-        private MouseState _previousMouseState;
-
-        private int _mouseX;
-        private int _mouseY;
-
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -34,6 +29,7 @@ namespace game_final
             _graphics.ApplyChanges();
 
             Environments.GameData.Initialize();
+            Environments.GameData.GenerateLevel();
 
             base.Initialize();
         }
@@ -43,10 +39,15 @@ namespace game_final
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
-            Assets.Initialize(Content, _spriteBatch, _graphics.GraphicsDevice);
+            Environments.Global.Graphics = _graphics.GraphicsDevice;
+            Environments.Global.SpriteBatch = _spriteBatch;
+
+            Assets.Initialize(Content);
 
             //MediaPlayer.Play(AssetTypes.Sound.MusicSound);
             //MediaPlayer.Volume = 0.2f;
+
+            Environments.Global.CurrentScene = new Scenes.Playing();
         }
 
         protected override void Update(GameTime gameTime)
@@ -54,29 +55,25 @@ namespace game_final
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
+            Environments.Global.GameTime = gameTime;
+
             // TODO: Add your update logic here
+            Environments.Global.PreviousMouseState = Environments.Global.CurrentMouseState;
 
             MouseState mouseState = Mouse.GetState();
-            _mouseX = mouseState.X;
-            _mouseY = mouseState.Y;
+            Environments.Global.CurrentMouseState = mouseState;
 
-            Assets.Shooter.Update(mouseState, _previousMouseState);
-
-            _previousMouseState = mouseState;
+            Environments.Global.CurrentScene.Update();
 
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
 
             _spriteBatch.Begin();
-
-            Assets.PlayingScene.Draw();
-            Assets.Shooter.Draw();
-
-
+            Environments.Global.CurrentScene.Draw();
             _spriteBatch.End();
             // TODO: Add your drawing code here
 

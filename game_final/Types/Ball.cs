@@ -21,6 +21,7 @@ namespace game_final.Types
 
     static class Ball
     {
+        public static int TotalTypes = 8;
         public static Texture2D GetBallTexture(BallType ballType)
         {
             switch (ballType)

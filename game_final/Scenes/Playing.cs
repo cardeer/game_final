@@ -1,30 +1,39 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 using System.Diagnostics;
 using System;
 
 namespace game_final.Scenes
 {
-    class Playing : Base.UIRenderer
+    class Playing : Base.SceneRenderer
     {
         private Shapes.Line _leftVerticalLine;
+        private Sprites.Shooter _shooter;
 
-        public Playing(SpriteBatch spriteBatch, GraphicsDevice graphics) : base(spriteBatch)
+        public Playing()
         {
-            _leftVerticalLine = new Shapes.Line(graphics, Constants.REFLECT_LEFT - Settings.BALL_SIZE / 2, 0, Constants.REFLECT_LEFT - Settings.BALL_SIZE / 2, Settings.WINDOW_HEIGHT, 5, Settings.WINDOW_HEIGHT);
+            _leftVerticalLine = new Shapes.Line(Constants.REFLECT_LEFT - Settings.BALL_SIZE / 2, 0, Constants.REFLECT_LEFT - Settings.BALL_SIZE / 2, Settings.WINDOW_HEIGHT, 5, Settings.WINDOW_HEIGHT);
             _leftVerticalLine.SetColor(Color.Red);
             _leftVerticalLine.SetOrigin(2, 0);
             _leftVerticalLine.Rotation -= (float)(Math.PI / 2);
+
+            _shooter = new Sprites.Shooter();
         }
 
-        public void Draw()
+        public override void Update()
+        {
+            _shooter.Update();
+        }
+
+        public override void Draw()
         {
             DrawSprite(_leftVerticalLine);
+            _shooter.Draw();
 
             // render balls from template
-
-           int[,] template = Environments.GameData.BallsTemplate;
+            int[,] template = Environments.GameData.BallsTemplate;
             for (int i = 0; i < Settings.TEMPLATE_ROW_BALLS; i++)
             {
                 for (int j = 0; j < Settings.TEMPLATE_COL_BALLS; j++)

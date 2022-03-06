@@ -8,22 +8,13 @@ namespace game_final
     static class Assets
     {
         private static ContentManager s_content;
-        private static SpriteBatch s_spriteBatch;
-        private static GraphicsDevice s_graphics;
 
-        public static Sprites.Shooter Shooter;
-        public static Scenes.Playing PlayingScene;
-
-
-        public static void Initialize(ContentManager content, SpriteBatch spriteBatch, GraphicsDevice graphics)
+        public static void Initialize(ContentManager content)
         {
             s_content = content;
-            s_spriteBatch = spriteBatch;
-            s_graphics = graphics;
 
             loadTextures();
             loadSounds();
-            createSprites();
         }
 
         private static void loadTextures() {
@@ -39,12 +30,6 @@ namespace game_final
         private static void loadSounds()
         {
             AssetTypes.Sound.MusicSound = s_content.Load<Song>("Sounds/gurenge");
-        }
-
-        private static void createSprites()
-        {
-            Shooter = new Sprites.Shooter(s_spriteBatch, s_graphics);
-            PlayingScene = new Scenes.Playing(s_spriteBatch, s_graphics);
         }
     }
 }

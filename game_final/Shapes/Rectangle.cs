@@ -6,7 +6,7 @@ namespace game_final.Shapes
 {
     class Rectangle : Base.Sprite
     {
-        public Rectangle(GraphicsDevice graphics, int width, int height) : base(graphics, width, height)
+        public Rectangle(int width, int height) : base(width, height)
         {
 
         }

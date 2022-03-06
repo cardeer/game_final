@@ -6,13 +6,8 @@ namespace game_final.Base
 {
     class SpriteGroup : Object
     {
-        
-        protected SpriteBatch _spriteBatch;
-
-        public SpriteGroup(SpriteBatch spriteBatch, int width, int height)
+        public SpriteGroup(int width, int height)
         {
-            _spriteBatch = spriteBatch;
-
             _width = width;
             _height = height;
 
@@ -21,7 +16,7 @@ namespace game_final.Base
 
         protected void DrawSprite(Sprite sprite)
         {
-            _spriteBatch.Draw(
+            Environments.Global.SpriteBatch.Draw(
                 sprite.Instance,
                 new Vector2(Position.X + sprite.X, Position.Y + sprite.Y),
                 null,
@@ -31,7 +26,7 @@ namespace game_final.Base
                 1f,
                 SpriteEffects.None,
                 0f
-            ); ;
+            );
         }
     }
 }

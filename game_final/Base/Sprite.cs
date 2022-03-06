@@ -18,7 +18,7 @@ namespace game_final.Base
 
         public bool isDestroyed = false;
 
-        protected Sprite(GraphicsDevice graphics, int width, int height)
+        protected Sprite(int width, int height)
         {
             Position = new Vector2(0, 0);
             Origin = new Vector2(0, 0);
@@ -26,7 +26,7 @@ namespace game_final.Base
             _width = width;
             _height = height;
 
-            Instance = new Texture2D(graphics, width, height);
+            Instance = new Texture2D(Environments.Global.Graphics, width, height);
 
             _colorArray = new Color[Instance.Width * Instance.Height];
         }

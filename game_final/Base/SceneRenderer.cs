@@ -1,18 +1,16 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
+using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework;
+
 namespace game_final.Base
 {
-    class UIRenderer
+    abstract class SceneRenderer
     {
-        protected SpriteBatch _spriteBatch;
-        protected UIRenderer(SpriteBatch spriteBatch)
-        {
-            _spriteBatch = spriteBatch;
-        }
         protected void DrawSprite(Base.Sprite sprite)
         {
-            _spriteBatch.Draw(
+            Environments.Global.SpriteBatch.Draw(
                 sprite.Instance,
                 sprite.Position,
                 null,
@@ -24,5 +22,8 @@ namespace game_final.Base
                 0f
             );
         }
+
+        public abstract void Update();
+        public abstract void Draw();
     }
 }

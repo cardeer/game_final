@@ -149,5 +149,23 @@ namespace game_final.Environments
         {
             return list.Exists(p => p.X == point.X && p.Y == point.Y);
         }
+
+        public static void GenerateLevel()
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 0; j < Settings.TEMPLATE_COL_BALLS - 1; j++)
+                {
+                    if (i % 2 == 0 && j % 2 == 0)
+                    {
+                        BallsTemplate[i, j] = Utils.Ball.RandomBallCode();
+                    }
+                    else if (i % 2 == 1 && j % 2 == 1)
+                    {
+                        BallsTemplate[i, j] = Utils.Ball.RandomBallCode();
+                    }
+                }
+            }
+        }
     }
 }
