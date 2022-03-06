@@ -14,6 +14,7 @@ namespace game_final
             s_content = content;
 
             loadTextures();
+            loadFont();
             loadSounds();
         }
 
@@ -35,7 +36,14 @@ namespace game_final
             AssetTypes.Texture.WallBorder = s_content.Load<Texture2D>("Scenes/Playing/wall_border");
             AssetTypes.Texture.TopWallBorder = s_content.Load<Texture2D>("Scenes/Playing/top_wall_border");
             AssetTypes.Texture.BottomWallBorder = s_content.Load<Texture2D>("Scenes/Playing/bottom_wall_border");
+            AssetTypes.Texture.Button = s_content.Load<Texture2D>("Buttons/button");
         }
+
+        private static void loadFont()
+        {
+            AssetTypes.Font.spritefont = s_content.Load<SpriteFont>("Fonts/Font");
+        }
+
         private static void loadSounds()
         {
             AssetTypes.Sound.MusicSound = s_content.Load<Song>("Sounds/gurenge");
