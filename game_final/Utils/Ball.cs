@@ -68,7 +68,7 @@ namespace game_final.Utils
             float posX = ball.SnapPoint.X;
 
             int roundY = (int)Math.Ceiling(posY);
-            int roundX = (int)Math.Floor(posX);
+            int roundX = (int)Math.Round(posX);
 
             Vector2 pos = getPosFromIndex(posY, posX);
             Vector2 left = getPosFromIndex(roundY, roundX - 1);
