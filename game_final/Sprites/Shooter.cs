@@ -200,7 +200,6 @@ namespace game_final.Sprites
 
         public void Draw()
         {
-            DrawSprite(_body);
             
             if (_guide != null)
             {
@@ -211,6 +210,8 @@ namespace game_final.Sprites
             {
                 Environments.Global.SpriteBatch.Draw(_reflectGuide.Instance, _reflectGuide.Position, null, _reflectGuide.Color, _reflectGuide.Rotation, _reflectGuide.Origin, 1f, SpriteEffects.None, 0f);
             }
+
+            DrawSprite(_body);
 
             if (_extendGuide != null)
             {
