@@ -10,8 +10,11 @@ namespace game_final.Sprites
 	class Buttons : Types.Component
 	{
 		private Texture2D _buttonTex;
+
 		private SpriteFont _font;
+
 		private bool _isHovering;
+
 		private MouseState _currentMouse;
 		private MouseState _previousMouse;
 
@@ -27,7 +30,7 @@ namespace game_final.Sprites
 		{
 			get 
 			{
-				return new Rectangle((int)Position.X, (int)Position.Y, _buttonTex.Width, _buttonTex.Height);
+				return new Rectangle((int)Position.X, (int)Position.Y, _buttonTex.Width / 2, _buttonTex.Height / 2);
 			}
 		}
 
@@ -62,7 +65,7 @@ namespace game_final.Sprites
 
 		public override void Update()
 		{
-			_previousMouse = Environments.Global.CurrentMouseState;
+			_previousMouse = _currentMouse;
 			_currentMouse = Mouse.GetState();
 
 			var mouseRectangle = new Rectangle(_currentMouse.X, _currentMouse.Y, 1, 1);

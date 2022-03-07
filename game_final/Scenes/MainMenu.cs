@@ -8,32 +8,13 @@ namespace game_final.Scenes
 {
     class MainMenu : Base.SceneRenderer
     {
-        private Sprites.Buttons testButton;
+        private Sprites.Buttons playButton;
         private Sprites.Buttons quitButton;
 
-        public MainMenu()
-        {
-            testButton = new Sprites.Buttons(AssetTypes.Texture.Button, AssetTypes.Font.spritefont)
-            {
-                Position = new Vector2(150, 150),
-                Text = "Test Button",
-            };
-
-            testButton.Click += TestButton_Click;
-
-            quitButton = new Sprites.Buttons(AssetTypes.Texture.Button, AssetTypes.Font.spritefont)
-            {
-                Position = new Vector2(150, 400),
-                Text = "Quit Button"
-            };
-
-            quitButton.Click += QuitButton_Click;
-
-        }
 
         private void TestButton_Click(object sender, System.EventArgs e)
         {
-            Environments.Global.SetScene(Types.SceneType.IN_GAME);
+            Environments.Scene.SetScene(Types.SceneType.IN_GAME);
         }
 
         private void QuitButton_Click(object sender, System.EventArgs e)
@@ -43,7 +24,21 @@ namespace game_final.Scenes
 
         public override void LoadContent()
         {
+            playButton = new Sprites.Buttons(AssetTypes.Texture.Button, AssetTypes.Font.spritefont)
+            {
+                Position = new Vector2(150, 150),
+                Text = "Play",
+            };
 
+            playButton.Click += TestButton_Click;
+
+            quitButton = new Sprites.Buttons(AssetTypes.Texture.Button, AssetTypes.Font.spritefont)
+            {
+                Position = new Vector2(150, 400),
+                Text = "Quit Button"
+            };
+
+            quitButton.Click += QuitButton_Click;
         }
 
         public override void Setup()
@@ -53,12 +48,14 @@ namespace game_final.Scenes
 
         public override void Update()
         {
-
+            playButton.Update();
+            quitButton.Update();
+            
         }
 
         public override void Draw()
         {
-            testButton.Draw();
+            playButton.Draw();
             quitButton.Draw();
         }
     }
