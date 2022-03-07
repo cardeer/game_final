@@ -74,7 +74,10 @@ namespace game_final.Utils
                 result.ShouldSnap = true;
             }
 
-            if (result.ShouldSnap) result.FitPoints();
+            if (result.ShouldSnap)
+            {
+                result.FitPoints(ball);
+            }
 
             return result;
         }
