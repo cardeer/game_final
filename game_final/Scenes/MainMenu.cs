@@ -44,7 +44,7 @@ namespace game_final.Scenes
             _quitButton = new Sprites.Buttons(AssetTypes.Texture.Button, AssetTypes.Font.spritefont)
             {
                 Position = new Vector2(400, 650),
-                Text = "Quit Button"
+                Text = "Quit"
             };
 
             _playButton.Click += PlayButton_Click;
@@ -58,7 +58,7 @@ namespace game_final.Scenes
         {
             _logo = AssetTypes.Texture.Logo;
 
-            _logoPosition = new Vector2(Settings.WINDOW_WIDTH / 2 - _logo.Width / 2, 200);
+            _logoPosition = new Vector2(Settings.WINDOW_WIDTH / 2 - _logo.Width / 4, 100);
         }
 
         public override void Update()
@@ -71,7 +71,7 @@ namespace game_final.Scenes
 
         public override void Draw()
         {
-            Environments.Global.SpriteBatch.Draw(_logo, _logoPosition, null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
+            Environments.Global.SpriteBatch.Draw(_logo, _logoPosition, null, Color.White, 0f, Vector2.Zero, 0.5f, SpriteEffects.None, 0f);
 
             _playButton.Draw();
             _levelButton.Draw();
