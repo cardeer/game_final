@@ -60,6 +60,8 @@ namespace game_final.Scenes
             _bottomRect.SetColor(new Color(255, 238, 184));
             _bottomRect.SetPosition(minX, Settings.WINDOW_HEIGHT - AssetTypes.Texture.TopWallBorder.Height);
 
+            Debug.WriteLine($"{_bottomRect.Width} {_bottomRect.Height}");
+
             _leftWall = new Base.Sprite(AssetTypes.Texture.LeftWall);
             _leftWall.SetPosition(0, 0);
 
