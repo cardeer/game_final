@@ -14,6 +14,7 @@ namespace game_final.Scenes
         private Vector2 _logoPosition;
 
         private Texture2D _background;
+        private Vector2 _bgPosition;
 
         private Sprites.Buttons _playButton;
         private Sprites.Buttons _levelButton;
@@ -22,6 +23,9 @@ namespace game_final.Scenes
 
         public override void LoadContent()
         {
+            //Texture
+            AssetTypes.Texture.MainMenuBG = Environments.Global.Content.Load<Texture2D>("Scenes/MainMenu/mainMenuBG");
+
             //Button
             _playButton = new Sprites.Buttons(AssetTypes.Texture.Button, AssetTypes.Font.spritefont)
             {
@@ -57,8 +61,10 @@ namespace game_final.Scenes
         public override void Setup()
         {
             _logo = AssetTypes.Texture.Logo;
-
             _logoPosition = new Vector2(Settings.WINDOW_WIDTH / 2 - _logo.Width / 4, 100);
+
+            _background = AssetTypes.Texture.MainMenuBG;
+            _bgPosition = new Vector2(0, 0);
         }
 
         public override void Update()
@@ -71,6 +77,7 @@ namespace game_final.Scenes
 
         public override void Draw()
         {
+            Environments.Global.SpriteBatch.Draw(_background, _bgPosition, null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
             Environments.Global.SpriteBatch.Draw(_logo, _logoPosition, null, Color.White, 0f, Vector2.Zero, 0.5f, SpriteEffects.None, 0f);
 
             _playButton.Draw();
