@@ -9,5 +9,7 @@ namespace game_final.Types
         SPLASH,
         MAIN_MENU,
         IN_GAME,
+        SETTING_MENU,
+        LEVEL_MENU
     }
 }
