@@ -5,6 +5,13 @@ namespace game_final.Base
 {
     abstract class SceneRenderer
     {
+        private bool _ready = false;
+
+        public bool IsReady
+        {
+            get { return _ready; }
+        }
+
         protected void DrawSprite(Base.Sprite sprite)
         {
             Environments.Global.SpriteBatch.Draw(
@@ -19,8 +26,18 @@ namespace game_final.Base
                 0f
             );
         }
+        public void Ready()
+        {
+            _ready = true;
+        }
 
+        public abstract void LoadContent();
+        public abstract void Setup();
         public abstract void Update();
         public abstract void Draw();
+        public virtual void Dispose()
+        {
+            _ready = false;
+        }
     }
 }

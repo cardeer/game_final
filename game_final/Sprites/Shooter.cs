@@ -122,30 +122,30 @@ namespace game_final.Sprites
                 _currentBall = null;
             }
 
-            //bool isRightClicked = mouseState.RightButton != previousMouseState.RightButton && mouseState.RightButton == ButtonState.Pressed;
-            //if (isRightClicked)
-            //{
-            //    //string result = "";
-            //    //for (int i = 0; i < Settings.TEMPLATE_ROW_BALLS; i++)
-            //    //{
-            //    //    for (int j = 0; j < Settings.TEMPLATE_COL_BALLS; j++)
-            //    //    {
-            //    //        result += Environments.GameData.BallsTemplate[i, j] + ", ";
-            //    //    }
-            //    //    result += "\n";
-            //    //}
-            //    //Debug.WriteLine(result);
+            bool isRightClicked = mouseState.RightButton != previousMouseState.RightButton && mouseState.RightButton == ButtonState.Pressed;
+            if (isRightClicked)
+            {
+                string result = "";
+                for (int i = 0; i < Settings.TEMPLATE_ROW_BALLS; i++)
+                {
+                    for (int j = 0; j < Settings.TEMPLATE_COL_BALLS; j++)
+                    {
+                        result += Environments.GameData.BallsTemplate[i, j] + ", ";
+                    }
+                    result += "\n";
+                }
+                Debug.WriteLine(result);
 
-            //    Environments.GameData.PushFromTop();
-            //}
+                //Environments.GameData.PushFromTop();
+            }
 
             int reflectX = _rotation < Math.PI / 2 ? Constants.REFLECT_LEFT : _rotation > Math.PI / 2 ? Constants.REFLECT_RIGHT : Constants.REFLECT_CENTER_X;
 
             if (_rotation > Math.PI / 2) _rotation = (float)(Math.PI - _rotation);
 
-            int reflectY = (int)((Settings.WINDOW_HEIGHT - Settings.SHOOTER_BOTTOM - Height / 2) - (Constants.PLAY_HALF_X * Math.Tan(_rotation)));
+            int reflectY = (int)((Settings.WINDOW_HEIGHT - Settings.SHOOTER_BOTTOM - Height / 2) - (Constants.PLAY_HALF_WIDTH * Math.Tan(_rotation)));
 
-            int diffX = Constants.PLAY_HALF_X;
+            int diffX = Constants.PLAY_HALF_WIDTH;
             int diffY = reflectY - (Settings.WINDOW_HEIGHT - Settings.SHOOTER_BOTTOM - Height / 2);
 
             int length = (int)Math.Ceiling(Math.Sqrt(diffX * diffX + diffY * diffY));
@@ -188,7 +188,7 @@ namespace game_final.Sprites
                 _reflectGuide.Rotation += Converter.DegressToRadians(90);
 
                 int heightFromShooter = (int)(reflectY - (Y + Height / 2.0f));
-                int extendLength = (int)Math.Sqrt(heightFromShooter * heightFromShooter + Constants.PLAY_HALF_X * Constants.PLAY_HALF_X) - 200;
+                int extendLength = (int)Math.Sqrt(heightFromShooter * heightFromShooter + Constants.PLAY_HALF_WIDTH * Constants.PLAY_HALF_WIDTH) - 200;
 
                 _extendGuide = new Shapes.Line((int)(X + Width / 2), (int)(Y + Height / 2), reflectX, reflectY, 2, extendLength);
                 _extendGuide.SetColor(Settings.REFLEFCT_GUIDE_COLOR);

@@ -8,6 +8,8 @@ namespace game_final
 {
     static class Settings
     {
+        public const string GAME_NAME = "My Mana Ran Out, I'm Going to Shoot Slimes in a Different World";
+
         public const int WINDOW_WIDTH = 1000;
         public const int WINDOW_HEIGHT = 900;
 

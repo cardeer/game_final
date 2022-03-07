@@ -20,7 +20,24 @@ namespace game_final.Scenes
         private Base.Sprite _topWallBorder;
         private Base.Sprite _bottomWallBorder;
 
-        public Playing()
+        public override void LoadContent()
+        {
+            AssetTypes.Texture.Wand = Environments.Global.Content.Load<Texture2D>("Shooter/wand");
+            AssetTypes.Texture.BlueBall = Environments.Global.Content.Load<Texture2D>("Balls/blue");
+            AssetTypes.Texture.BrownBall = Environments.Global.Content.Load<Texture2D>("Balls/brown");
+            AssetTypes.Texture.GreenBall = Environments.Global.Content.Load<Texture2D>("Balls/green");
+            AssetTypes.Texture.GreyBall = Environments.Global.Content.Load<Texture2D>("Balls/grey");
+            AssetTypes.Texture.LightBlueBall = Environments.Global.Content.Load<Texture2D>("Balls/light_blue");
+            AssetTypes.Texture.PurpleBall = Environments.Global.Content.Load<Texture2D>("Balls/purple");
+            AssetTypes.Texture.RedBall = Environments.Global.Content.Load<Texture2D>("Balls/red");
+            AssetTypes.Texture.YellowBall = Environments.Global.Content.Load<Texture2D>("Balls/yellow");
+            AssetTypes.Texture.LeftWall = Environments.Global.Content.Load<Texture2D>("Scenes/Playing/left_wall");
+            AssetTypes.Texture.WallBorder = Environments.Global.Content.Load<Texture2D>("Scenes/Playing/wall_border");
+            AssetTypes.Texture.TopWallBorder = Environments.Global.Content.Load<Texture2D>("Scenes/Playing/top_wall_border");
+            AssetTypes.Texture.BottomWallBorder = Environments.Global.Content.Load<Texture2D>("Scenes/Playing/bottom_wall_border");
+        }
+
+        public override void Setup()
         {
             Environments.GameData.Initialize();
             Environments.GameData.GenerateLevel();
@@ -93,6 +110,25 @@ namespace game_final.Scenes
             }
 
             _shooter.Draw();
+        }
+
+        public override void Dispose()
+        {
+            AssetTypes.Texture.Wand.Dispose();
+            AssetTypes.Texture.BlueBall.Dispose();
+            AssetTypes.Texture.BrownBall.Dispose();
+            AssetTypes.Texture.GreenBall.Dispose();
+            AssetTypes.Texture.GreyBall.Dispose();
+            AssetTypes.Texture.LightBlueBall.Dispose();
+            AssetTypes.Texture.PurpleBall.Dispose();
+            AssetTypes.Texture.RedBall.Dispose();
+            AssetTypes.Texture.YellowBall.Dispose();
+            AssetTypes.Texture.LeftWall.Dispose();
+            AssetTypes.Texture.WallBorder.Dispose();
+            AssetTypes.Texture.TopWallBorder.Dispose();
+            AssetTypes.Texture.BottomWallBorder.Dispose();
+
+            base.Dispose();
         }
     }
 }
