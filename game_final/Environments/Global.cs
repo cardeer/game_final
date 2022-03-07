@@ -30,6 +30,11 @@ namespace game_final.Environments
 
         public static void SetScene(Types.SceneType type)
         {
+            if (CurrentScene != null)
+            {
+                CurrentScene.Dispose();
+            }
+
             if (CurrentScene == null || CurrentSceneType != type)
             {
                 CurrentSceneType = type;

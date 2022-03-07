@@ -1,11 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Media;
-
-using System;
-using game_final.Utils;
-using System.Diagnostics;
 
 namespace game_final
 {
@@ -44,9 +39,6 @@ namespace game_final
 
             Assets.Initialize(Content);
 
-            //MediaPlayer.Play(AssetTypes.Sound.MusicSound);
-            //MediaPlayer.Volume = 0.2f;
-
             Environments.Global.SetScene(Types.SceneType.SPLASH);
         }
 
@@ -63,7 +55,7 @@ namespace game_final
             MouseState mouseState = Mouse.GetState();
             Environments.Global.CurrentMouseState = mouseState;
 
-            if (Environments.Global.CurrentScene != null)
+            if (Environments.Global.CurrentScene != null && !Environments.Global.CurrentScene.Disposed)
             {
                 Environments.Global.CurrentScene.Update();
             }
@@ -76,7 +68,7 @@ namespace game_final
             GraphicsDevice.Clear(Color.Black);
 
             _spriteBatch.Begin();
-            if (Environments.Global.CurrentScene != null)
+            if (Environments.Global.CurrentScene != null && !Environments.Global.CurrentScene.Disposed)
             {
                 Environments.Global.CurrentScene.Draw();
             }

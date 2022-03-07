@@ -39,5 +39,12 @@ namespace game_final.Scenes
         {
             Environments.Global.SpriteBatch.Draw(_logo, _logoPosition, null, Color.White * _opacity, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
         }
+
+        public override void Dispose()
+        {
+            AssetTypes.Texture.Logo.Dispose();
+
+            base.Dispose();
+        }
     }
 }

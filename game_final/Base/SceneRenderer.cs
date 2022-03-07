@@ -5,6 +5,13 @@ namespace game_final.Base
 {
     abstract class SceneRenderer
     {
+        protected bool _disposed = false;
+
+        public bool Disposed
+        {
+            get { return _disposed; }
+        }
+
         protected void DrawSprite(Base.Sprite sprite)
         {
             Environments.Global.SpriteBatch.Draw(
@@ -22,5 +29,9 @@ namespace game_final.Base
 
         public abstract void Update();
         public abstract void Draw();
+        public virtual void Dispose()
+        {
+            _disposed = true;
+        }
     }
 }
