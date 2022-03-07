@@ -35,7 +35,7 @@ namespace game_final.Sprites
 
             _body = new Base.Sprite(AssetTypes.Texture.Wand, 400);
             _body.SetOrigin(_body.Instance.Width / 2, _body.Instance.Height / 2);
-            _body.SetPosition(_width / 2, _height / 2);
+            _body.SetPosition(X + _width / 2, Y + _height / 2);
             _body.Rotation = -(float)Math.PI / 2;
 
             _unitVector = new Vector2((float)Math.Cos(_rotation), (float)Math.Sin(_rotation));
@@ -154,7 +154,7 @@ namespace game_final.Sprites
             _guide = new Shapes.Line(_width / 2, _height / 2, _width / 2, 0, 5, 200);
             _guide.SetColor(Settings.GUIDE_COLOR);
             _guide.SetOrigin(5 / 2, _guide.Height);
-            _guide.SetPosition(_width / 2, _height / 2);
+            _guide.SetPosition(X + _width / 2, Y + _height / 2);
 
             if (_extendGuide != null)
             {

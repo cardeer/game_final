@@ -25,7 +25,7 @@ namespace game_final
 
         private static void loadFont()
         {
-            AssetTypes.Font.spritefont = s_content.Load<SpriteFont>("Fonts/Font");
+            AssetTypes.Font.SpriteFont = s_content.Load<SpriteFont>("Fonts/Font");
         }
 
         private static void loadSounds()
