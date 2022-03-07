@@ -5,80 +5,62 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
+using System.Diagnostics;
+
 namespace game_final.Sprites
 {
-	class Buttons : Types.Component
+	class Buttons : Base.Object
 	{
 		private Texture2D _buttonTex;
 
 		private SpriteFont _font;
 
-		private bool _isHovering;
-
-		private MouseState _currentMouse;
-		private MouseState _previousMouse;
-
-		public event EventHandler Click;
-
-		public bool Clicked { get; private set; }
-
 		public Color PenColor { get; set; }
 
-		public Vector2 Position { get; set; }
-
-		public Rectangle Rectangle
-		{
-			get 
-			{
-				return new Rectangle((int)Position.X, (int)Position.Y, _buttonTex.Width / 2, _buttonTex.Height / 2);
-			}
-		}
-
 		public string Text { get; set; }
+
+		private bool _isHovering = false;
 
 		public Buttons(Texture2D texture, SpriteFont font)
 		{
 			_buttonTex = texture;
+
+			_width = texture.Width / 2;
+			_height = texture.Height / 2;
+
 			_font = font;
 			PenColor = Color.Black;
 		}
 
-		public override void Draw()
+		public void Draw()
 		{
-			var color = Color.White;
+			Color color = Color.White;
 
-			if (_isHovering)
+			Rectangle hitBox = HitBox;
+
+			if (IsHovering)
 			{
 				color = Color.Gray;
 			}
 			
-			Environments.Global.SpriteBatch.Draw(_buttonTex, Rectangle, color);
+			Environments.Global.SpriteBatch.Draw(_buttonTex, hitBox, color);
 
 			if (!string.IsNullOrEmpty(Text))
 			{
-				var x = (Rectangle.X + (Rectangle.Width / 2)) - (_font.MeasureString(Text).X / 2);
-				var y = (Rectangle.Y + (Rectangle.Height / 2)) - (_font.MeasureString(Text).Y / 2);
+				var x = (hitBox.X + (hitBox.Width / 2)) - (_font.MeasureString(Text).X / 2);
+				var y = (hitBox.Y + (hitBox.Height / 2)) - (_font.MeasureString(Text).Y / 2);
 
 				Environments.Global.SpriteBatch.DrawString(_font, Text, new Vector2(x, y), PenColor);
 			}
 		}
 
-		public override void Update()
+		public void Update()
 		{
-			_previousMouse = _currentMouse;
-			_currentMouse = Mouse.GetState();
+			_isHovering = IsHovering;
 
-			var mouseRectangle = new Rectangle(_currentMouse.X, _currentMouse.Y, 1, 1);
-			_isHovering = false;
-
-			if (mouseRectangle.Intersects(Rectangle))
+			if (IsClicked)
 			{
-				_isHovering = true;
-
-				if (_currentMouse.LeftButton == ButtonState.Released && _previousMouse.LeftButton == ButtonState.Pressed)
-				{
-					Click?.Invoke(this, new EventArgs());
-				}
+				InvokeClick(this);
 			}
 		}
 	}

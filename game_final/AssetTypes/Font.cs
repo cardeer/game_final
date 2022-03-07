@@ -8,6 +8,6 @@ namespace game_final.AssetTypes
 {
 	static class Font
 	{
-		public static SpriteFont spritefont;
+		public static SpriteFont SpriteFont;
 	}
 }

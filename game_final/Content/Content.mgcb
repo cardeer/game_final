@@ -188,6 +188,18 @@
 /processorParam:TextureFormat=Color
 /build:Scenes/Playing/left_wall.png
 
+#begin Scenes/Playing/scroll.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Scenes/Playing/scroll.png
+
 #begin Scenes/Playing/top_wall_border.png
 /importer:TextureImporter
 /processor:TextureProcessor

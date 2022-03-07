@@ -27,25 +27,25 @@ namespace game_final.Scenes
             AssetTypes.Texture.MainMenuBG = Environments.Global.Content.Load<Texture2D>("Scenes/MainMenu/mainMenuBG");
 
             //Button
-            _playButton = new Sprites.Buttons(AssetTypes.Texture.Button, AssetTypes.Font.spritefont)
+            _playButton = new Sprites.Buttons(AssetTypes.Texture.Button, AssetTypes.Font.SpriteFont)
             {
                 Position = new Vector2(400, 350),
                 Text = "PLAY"
             };
 
-            _levelButton = new Sprites.Buttons(AssetTypes.Texture.Button, AssetTypes.Font.spritefont)
+            _levelButton = new Sprites.Buttons(AssetTypes.Texture.Button, AssetTypes.Font.SpriteFont)
             {
                 Position = new Vector2(400, 450),
                 Text = "LEVEL"
             };
 
-            _challengeButton = new Sprites.Buttons(AssetTypes.Texture.Button, AssetTypes.Font.spritefont)
+            _challengeButton = new Sprites.Buttons(AssetTypes.Texture.Button, AssetTypes.Font.SpriteFont)
             {
                 Position = new Vector2(400, 550),
                 Text = "CHALLENGE"
             };
 
-            _quitButton = new Sprites.Buttons(AssetTypes.Texture.Button, AssetTypes.Font.spritefont)
+            _quitButton = new Sprites.Buttons(AssetTypes.Texture.Button, AssetTypes.Font.SpriteFont)
             {
                 Position = new Vector2(400, 650),
                 Text = "QUIT"

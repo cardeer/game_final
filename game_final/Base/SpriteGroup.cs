@@ -18,7 +18,7 @@ namespace game_final.Base
         {
             Environments.Global.SpriteBatch.Draw(
                 sprite.Instance,
-                new Vector2(Position.X + sprite.X, Position.Y + sprite.Y),
+                new Vector2(sprite.X, sprite.Y),
                 null,
                 sprite.DrawColor,
                 Rotation + sprite.Rotation,
