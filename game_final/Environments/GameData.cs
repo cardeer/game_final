@@ -18,6 +18,8 @@ namespace game_final.Environments
 
         public static int PushCount = 0;
 
+        public static bool Failed = false;
+
         public static void Initialize()
         {
             BallsTemplate = new int[Settings.TEMPLATE_ROW_BALLS, Settings.TEMPLATE_COL_BALLS];
@@ -223,6 +225,8 @@ namespace game_final.Environments
 
             if (failed)
             {
+                Failed = failed;
+
                 ShootCount = 0;
 
                 for (int i = 0; i < Settings.TEMPLATE_ROW_BALLS; i++)
