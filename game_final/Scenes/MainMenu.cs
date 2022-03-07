@@ -46,7 +46,6 @@ namespace game_final.Scenes
             _levelButton.Click += LevelButton_Click;
             _challengeButton.Click += ChallengeButton_Click;
             _quitButton.Click += QuitButton_Click;
-
         }
 
         public override void Setup()
