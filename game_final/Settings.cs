@@ -25,7 +25,7 @@ namespace game_final
         public const int BALL_SIZE = 50;
         public const int BALL_SPEED = 1500;
 
-        public const int TEMPLATE_COL_BALLS = ((WINDOW_WIDTH - PLAYING_UI_LEFT_WIDTH - PLAYING_UI_RIGHT_WIDTH) / BALL_SIZE) * 2 - 1;
+        public const int TEMPLATE_COL_BALLS = ((WINDOW_WIDTH - PLAYING_UI_LEFT_WIDTH - PLAYING_UI_RIGHT_WIDTH) / BALL_SIZE) * 2;
         public const int TEMPLATE_ROW_BALLS = 13;
 
         public const int MAX_GUIDE_LENGTH = 500;

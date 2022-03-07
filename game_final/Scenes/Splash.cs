@@ -13,7 +13,9 @@ namespace game_final.Scenes
         private Texture2D _logo;
         private Vector2 _logoPosition;
 
-        private float _opacity = 1f;
+        private float _opacity = 0f;
+        private bool _isFadingOut = false;
+        private float _waitTime = 0;
 
         public override void LoadContent()
         {
@@ -29,7 +31,26 @@ namespace game_final.Scenes
 
         public override void Update()
         {
-            if (Environments.Global.GameTime.TotalGameTime.TotalSeconds > 1.5)
+            if (!_isFadingOut && _waitTime < 1)
+            {
+                _waitTime += (float)Environments.Global.GameTime.ElapsedGameTime.TotalSeconds;
+            }
+            if (!_isFadingOut && _waitTime >= 1)
+            {
+                _opacity += (float)Environments.Global.GameTime.ElapsedGameTime.TotalSeconds * 1;
+
+                if (_opacity >= 1)
+                {
+                    _isFadingOut = true;
+                    _waitTime = 0;
+                }
+            }
+
+            if (_isFadingOut && _waitTime < 1)
+            {
+                _waitTime += (float)Environments.Global.GameTime.ElapsedGameTime.TotalSeconds;
+            }
+            else if (_isFadingOut && _waitTime >= 1)
             {
                 _opacity -= (float)Environments.Global.GameTime.ElapsedGameTime.TotalSeconds * 1;
 

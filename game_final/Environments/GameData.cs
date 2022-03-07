@@ -148,7 +148,7 @@ namespace game_final.Environments
         {
             for (int i = 0; i < 3; i++)
             {
-                for (int j = 0; j < Settings.TEMPLATE_COL_BALLS - 1; j++)
+                for (int j = 0; j < Settings.TEMPLATE_COL_BALLS; j++)
                 {
                     if (i % 2 == j % 2)
                     {
@@ -168,7 +168,7 @@ namespace game_final.Environments
             {
                 if (i == 0)
                 {
-                    for (int j = 0; j < Settings.TEMPLATE_COL_BALLS - 1; j++)
+                    for (int j = 0; j < Settings.TEMPLATE_COL_BALLS; j++)
                     {
                         if (j % 2 == PushCount % 2)
                         {
@@ -178,26 +178,6 @@ namespace game_final.Environments
                 }
                 else
                 {
-                    //if (i % 2 == 0)
-                    //{
-                    //    for (int j = 0; j < Settings.TEMPLATE_COL_BALLS; j++)
-                    //    {
-                    //        if (j % 2 == 0 && j < Settings.TEMPLATE_COL_BALLS - 1)
-                    //        {
-                    //            newTemplate[i, j] = BallsTemplate[i - 1, j + 1];
-                    //        }
-                    //    }
-                    //}
-                    //else
-                    //{
-                    //    for (int j = 1; j < Settings.TEMPLATE_COL_BALLS; j++)
-                    //    {
-                    //        if (j % 2 == 1)
-                    //        {
-                    //            newTemplate[i, j] = BallsTemplate[i - 1, j - 1];
-                    //        }
-                    //    }
-                    //}
                     for (int j = 0; j < Settings.TEMPLATE_COL_BALLS; j++)
                     {
                         newTemplate[i, j] = BallsTemplate[i - 1, j];

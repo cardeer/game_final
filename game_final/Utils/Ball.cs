@@ -12,12 +12,12 @@ namespace game_final.Utils
     {
         public static Vector2 GetSnappedPosition(Sprites.Ball ball)
         {
-            float relativeX = ball.X - Settings.PLAYING_UI_LEFT_WIDTH;
+            float relativeX = ball.X - Settings.PLAYING_UI_LEFT_WIDTH - Settings.BALL_SIZE / 4;
             float relativeY = ball.Y - Settings.PLAYING_UI_TOP_HEIGHT - Settings.PLAY_AREA_TOP_PADDING - Settings.BALL_SIZE / 2;
 
             float x = relativeX / Constants.PLAY_WIDTH_LEFT;
             x = (float)(x * (Settings.TEMPLATE_COL_BALLS - 1));
-            x = Math.Clamp(x, 0, Settings.TEMPLATE_COL_BALLS - 2);
+            x = Math.Clamp(x, 0, Settings.TEMPLATE_COL_BALLS - 1);
 
             float y = relativeY / Constants.MAX_SNAP_Y;
             y = (float)(y * (Settings.TEMPLATE_ROW_BALLS - 1));
@@ -94,7 +94,7 @@ namespace game_final.Utils
 
         public static Vector2 GetRenderPosition(int row, int col)
         {
-            int x = Constants.SNAP_X_PADDING + (col * Settings.BALL_SIZE / 2);
+            int x = Constants.SNAP_X_PADDING + Settings.BALL_SIZE / 4 + (col * Settings.BALL_SIZE / 2);
             int y = Settings.PLAYING_UI_TOP_HEIGHT + Settings.PLAY_AREA_TOP_PADDING + Settings.BALL_SIZE / 2 + (row * Settings.BALL_SIZE);
 
             return new Vector2(x, y);
