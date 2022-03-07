@@ -223,6 +223,8 @@ namespace game_final.Environments
 
             if (failed)
             {
+                ShootCount = 0;
+
                 for (int i = 0; i < Settings.TEMPLATE_ROW_BALLS; i++)
                 {
                     for (int j = 0; j < Settings.TEMPLATE_COL_BALLS; j++)
