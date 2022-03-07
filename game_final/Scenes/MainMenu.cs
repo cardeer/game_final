@@ -8,18 +8,37 @@ namespace game_final.Scenes
 {
     class MainMenu : Base.SceneRenderer
     {
-        public MainMenu()
+        private Sprites.Buttons playButton;
+        private Sprites.Buttons quitButton;
+
+
+        private void TestButton_Click(object sender, System.EventArgs e)
         {
-            var TestButton = new Sprites.Buttons(AssetTypes.Texture.Button, AssetTypes.Font.spritefont)
-            {
-                Position = new Vector2(150, 150),
-                Text = "Test Button"
-            };
+            Environments.Scene.SetScene(Types.SceneType.IN_GAME);
+        }
+
+        private void QuitButton_Click(object sender, System.EventArgs e)
+        {
+            System.Environment.Exit(0);
         }
 
         public override void LoadContent()
         {
+            playButton = new Sprites.Buttons(AssetTypes.Texture.Button, AssetTypes.Font.spritefont)
+            {
+                Position = new Vector2(150, 150),
+                Text = "Play",
+            };
 
+            playButton.Click += TestButton_Click;
+
+            quitButton = new Sprites.Buttons(AssetTypes.Texture.Button, AssetTypes.Font.spritefont)
+            {
+                Position = new Vector2(150, 400),
+                Text = "Quit Button"
+            };
+
+            quitButton.Click += QuitButton_Click;
         }
 
         public override void Setup()
@@ -29,12 +48,15 @@ namespace game_final.Scenes
 
         public override void Update()
         {
-
+            playButton.Update();
+            quitButton.Update();
+            
         }
 
         public override void Draw()
         {
-
+            playButton.Draw();
+            quitButton.Draw();
         }
     }
 }
