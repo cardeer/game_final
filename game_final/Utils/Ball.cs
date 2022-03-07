@@ -74,7 +74,10 @@ namespace game_final.Utils
                 result.ShouldSnap = true;
             }
 
-            if (result.ShouldSnap) result.FitPoints();
+            if (result.ShouldSnap)
+            {
+                result.FitPoints(ball);
+            }
 
             return result;
         }
@@ -87,6 +90,14 @@ namespace game_final.Utils
         public static int RandomBallCode()
         {
             return new Random().Next(1, Types.Ball.TotalTypes);
+        }
+
+        public static Vector2 GetRenderPosition(int row, int col)
+        {
+            int x = Constants.SNAP_X_PADDING + (col * Settings.BALL_SIZE / 2);
+            int y = Settings.PLAYING_UI_TOP_HEIGHT + Settings.PLAY_AREA_TOP_PADDING + Settings.BALL_SIZE / 2 + (row * Settings.BALL_SIZE);
+
+            return new Vector2(x, y);
         }
     }
 }

@@ -20,6 +20,9 @@ namespace game_final.Scenes
         private Base.Sprite _topWallBorder;
         private Base.Sprite _bottomWallBorder;
 
+        private int _shake = 0;
+        private double _shakeWait = 0;
+
         public override void LoadContent()
         {
             AssetTypes.Texture.Wand = Environments.Global.Content.Load<Texture2D>("Shooter/wand");
@@ -77,7 +80,31 @@ namespace game_final.Scenes
 
         public override void Update()
         {
+
+            if (Environments.GameData.ShootCount >= 8)
+            {
+                _shakeWait += Environments.Global.GameTime.ElapsedGameTime.TotalSeconds;
+
+                if (_shake == 0)
+                {
+                    _shake = 2;
+                }
+
+                if (_shakeWait >= .1)
+                {
+                    _shakeWait = 0;
+                    _shake = -_shake;
+                }
+            }
+
             _shooter.Update();
+
+            Environments.GameData.MagicCircles.RemoveAll(m => m.ShouldDestroy);
+
+            foreach (Sprites.MagicCircle magicCirle in Environments.GameData.MagicCircles)
+            {
+                magicCirle.Update();
+            }
         }
 
         public override void Draw()
@@ -102,11 +129,15 @@ namespace game_final.Scenes
                     int code = template[i, j];
                     Types.BallType type = Types.Ball.BallTypeFromCode(code);
 
-                    int x = Constants.SNAP_X_PADDING + (j * Settings.BALL_SIZE / 2);
-                    int y = Settings.PLAYING_UI_TOP_HEIGHT + Settings.PLAY_AREA_TOP_PADDING + Settings.BALL_SIZE / 2 + (i * Settings.BALL_SIZE);
+                    Vector2 pos = Utils.Ball.GetRenderPosition(i, j);
 
-                    DrawSprite(new Sprites.Ball(type, x, y));
+                    DrawSprite(new Sprites.Ball(type, (int)pos.X + _shake, (int)pos.Y));
                 }
+            }
+
+            foreach (Sprites.MagicCircle magicCirle in Environments.GameData.MagicCircles)
+            {
+                magicCirle.Draw();
             }
 
             _shooter.Draw();
