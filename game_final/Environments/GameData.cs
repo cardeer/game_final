@@ -16,6 +16,8 @@ namespace game_final.Environments
         public static List<Sprites.MagicCircle> MagicCircles;
         public static int ShootCount = 0;
 
+        public static int PushCount = 0;
+
         public static void Initialize()
         {
             BallsTemplate = new int[Settings.TEMPLATE_ROW_BALLS, Settings.TEMPLATE_COL_BALLS];
@@ -206,7 +208,7 @@ namespace game_final.Environments
 
             for (int i = 0; i < Settings.TEMPLATE_COL_BALLS; i++)
             {
-                if (BallsTemplate[Settings.TEMPLATE_ROW_BALLS - 2, i] > 1)
+                if (BallsTemplate[Settings.TEMPLATE_ROW_BALLS - 2, i] > 0)
                 {
                     failed = true;
                     break;
