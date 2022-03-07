@@ -38,6 +38,7 @@ namespace game_final.Scenes
             AssetTypes.Texture.WallBorder = Environments.Global.Content.Load<Texture2D>("Scenes/Playing/wall_border");
             AssetTypes.Texture.TopWallBorder = Environments.Global.Content.Load<Texture2D>("Scenes/Playing/top_wall_border");
             AssetTypes.Texture.BottomWallBorder = Environments.Global.Content.Load<Texture2D>("Scenes/Playing/bottom_wall_border");
+            AssetTypes.Texture.MagicCircle = Environments.Global.Content.Load<Texture2D>("Effects/magic_circle");
         }
 
         public override void Setup()
@@ -158,6 +159,7 @@ namespace game_final.Scenes
             AssetTypes.Texture.WallBorder.Dispose();
             AssetTypes.Texture.TopWallBorder.Dispose();
             AssetTypes.Texture.BottomWallBorder.Dispose();
+            AssetTypes.Texture.MagicCircle.Dispose();
 
             base.Dispose();
         }

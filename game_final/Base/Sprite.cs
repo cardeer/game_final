@@ -68,16 +68,19 @@ namespace game_final.Base
             get { return _color != Color.Transparent ? _color : Color.White; }
         }
 
-        public void SetColor(Color color)
+        public void SetColor(Color color, bool reTexture = true)
         {
             _color = color;
 
-            for (int i = 0; i < _colorArray.Length; i++)
+            if (reTexture)
             {
-                _colorArray[i] = color;
-            }
+                for (int i = 0; i < _colorArray.Length; i++)
+                {
+                    _colorArray[i] = color;
+                }
 
-            Instance.SetData(_colorArray);
+                Instance.SetData(_colorArray);
+            }
         }
 
         public void SetOrigin(float x, float y)

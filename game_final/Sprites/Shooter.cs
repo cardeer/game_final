@@ -33,7 +33,7 @@ namespace game_final.Sprites
 
             SetPosition(Constants.REFLECT_CENTER_X - _width / 2, Settings.WINDOW_HEIGHT - Settings.SHOOTER_BOTTOM - _height);
 
-            _body = new Base.Sprite(AssetTypes.Texture.Wand, 300);
+            _body = new Base.Sprite(AssetTypes.Texture.Wand, 400);
             _body.SetOrigin(_body.Instance.Width / 2, _body.Instance.Height / 2);
             _body.SetPosition(_width / 2, _height / 2);
             _body.Rotation = -(float)Math.PI / 2;
@@ -118,22 +118,22 @@ namespace game_final.Sprites
                 _currentBall = null;
             }
 
-            bool isRightClicked = mouseState.RightButton != previousMouseState.RightButton && mouseState.RightButton == ButtonState.Pressed;
-            if (isRightClicked)
-            {
-                string result = "";
-                for (int i = 0; i < Settings.TEMPLATE_ROW_BALLS; i++)
-                {
-                    for (int j = 0; j < Settings.TEMPLATE_COL_BALLS; j++)
-                    {
-                        result += Environments.GameData.BallsTemplate[i, j] + ", ";
-                    }
-                    result += "\n";
-                }
-                Debug.WriteLine(result);
+            //bool isRightClicked = mouseState.RightButton != previousMouseState.RightButton && mouseState.RightButton == ButtonState.Pressed;
+            //if (isRightClicked)
+            //{
+            //    string result = "";
+            //    for (int i = 0; i < Settings.TEMPLATE_ROW_BALLS; i++)
+            //    {
+            //        for (int j = 0; j < Settings.TEMPLATE_COL_BALLS; j++)
+            //        {
+            //            result += Environments.GameData.BallsTemplate[i, j] + ", ";
+            //        }
+            //        result += "\n";
+            //    }
+            //    Debug.WriteLine(result);
 
-                //Environments.GameData.PushFromTop();
-            }
+            //    //Environments.GameData.PushFromTop();
+            //}
 
             int reflectX = _rotation < Math.PI / 2 ? Constants.REFLECT_LEFT : _rotation > Math.PI / 2 ? Constants.REFLECT_RIGHT : Constants.REFLECT_CENTER_X;
 

@@ -10,22 +10,22 @@ namespace game_final.Sprites
     class MagicCircle : Base.Sprite
     {
         public float Angle = 0;
-        public float MaxAngle = 90;
+        public float MaxAngle = 180;
 
-        public MagicCircle(int width, int height) : base(width, height)
+        public MagicCircle(Texture2D texture, int size) : base(texture, size)
         {
-            SetOrigin(width / 2, height / 2);
-            SetColor(Color.Red);
+            SetOrigin(texture.Width / 2, texture.Height / 2);
+            SetColor(Color.Pink, false);
         }
 
         public bool ShouldDestroy
         {
-            get { return Angle >= 90; }
+            get { return Angle >= MaxAngle; }
         }
 
         public void Update()
         {
-            Angle += 3;
+            Angle += 180 * (float)Environments.Global.GameTime.ElapsedGameTime.TotalSeconds;
         }
 
         public void Draw()
@@ -34,10 +34,10 @@ namespace game_final.Sprites
                 Instance,
                 Position,
                 null,
-                DrawColor * ((MaxAngle - Angle) / 90),
+                DrawColor * ((MaxAngle - Angle) / MaxAngle),
                 Utils.Converter.DegressToRadians(Angle),
                 Origin,
-                Scale * ((MaxAngle - Angle) / 90),
+                Scale * ((MaxAngle - Angle) / MaxAngle * 2),
                 SpriteEffects.None,
                 0f
             );

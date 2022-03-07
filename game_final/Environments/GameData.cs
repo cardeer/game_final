@@ -117,7 +117,7 @@ namespace game_final.Environments
                 foreach (Types.Vector2Int point in removePoints)
                 {
                     BallsTemplate[point.Y, point.X] = 0;
-                    Sprites.MagicCircle magicCircle = new Sprites.MagicCircle(Settings.BALL_SIZE, Settings.BALL_SIZE);
+                    Sprites.MagicCircle magicCircle = new Sprites.MagicCircle(AssetTypes.Texture.MagicCircle, Settings.BALL_SIZE);
                     Vector2 pos = Utils.Ball.GetRenderPosition(point.Y, point.X);
                     magicCircle.SetPosition(pos.X, pos.Y);
 
