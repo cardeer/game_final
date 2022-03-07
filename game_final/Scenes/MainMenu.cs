@@ -30,25 +30,25 @@ namespace game_final.Scenes
             _playButton = new Sprites.Buttons(AssetTypes.Texture.Button, AssetTypes.Font.spritefont)
             {
                 Position = new Vector2(400, 350),
-                Text = "Play",
+                Text = "PLAY"
             };
 
             _levelButton = new Sprites.Buttons(AssetTypes.Texture.Button, AssetTypes.Font.spritefont)
             {
                 Position = new Vector2(400, 450),
-                Text = "Level",
+                Text = "LEVEL"
             };
 
             _challengeButton = new Sprites.Buttons(AssetTypes.Texture.Button, AssetTypes.Font.spritefont)
             {
                 Position = new Vector2(400, 550),
-                Text = "Challenge",
+                Text = "CHALLENGE"
             };
 
             _quitButton = new Sprites.Buttons(AssetTypes.Texture.Button, AssetTypes.Font.spritefont)
             {
                 Position = new Vector2(400, 650),
-                Text = "Quit"
+                Text = "QUIT"
             };
 
             _playButton.Click += PlayButton_Click;
