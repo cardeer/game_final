@@ -20,7 +20,7 @@ namespace game_final
 
         public const int PLAY_AREA_TOP_PADDING = 10;
 
-        public const int SHOOTER_BOTTOM = 50;
+        public const int SHOOTER_BOTTOM = 70;
 
         public const int BALL_SIZE = 50;
         public const int BALL_SPEED = 1500;

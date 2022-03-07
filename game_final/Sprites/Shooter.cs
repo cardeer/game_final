@@ -44,7 +44,7 @@ namespace game_final.Sprites
             _currentBall = new Sprites.Ball(Types.Ball.BallTypeFromCode(code), (int)(X + Width / 2), (int)(Y + Height / 2), false);
 
             int nextCode = Utils.Ball.RandomBallCode();
-            _nextBall = new Sprites.Ball(Types.Ball.BallTypeFromCode(nextCode), (int)(X + Width + Settings.BALL_SIZE), (int)(Y + Settings.BALL_SIZE / 2), false);
+            _nextBall = new Sprites.Ball(Types.Ball.BallTypeFromCode(nextCode), (int)(X + Width + Settings.BALL_SIZE), (int)(Y + Height / 2), false);
         }
 
         private void updateUnitVector()
@@ -75,11 +75,14 @@ namespace game_final.Sprites
             }
 
             Rotation = _rotation;
+
             updateUnitVector();
 
             if (_currentBall != null)
             {
                 _currentBall.Rotation = Rotation - (float)Math.PI / 2;
+
+                _nextBall.Rotation += Converter.DegressToRadians(3);
             }
             else
             {
@@ -94,21 +97,14 @@ namespace game_final.Sprites
                     _currentBall.SetPosition((int)(X + Width / 2), (int)(Y + Height / 2));
 
                     int nextCode = Utils.Ball.RandomBallCode();
-                    _nextBall = new Sprites.Ball(Types.Ball.BallTypeFromCode(nextCode), (int)(X + Width + Settings.BALL_SIZE), (int)(Y + Settings.BALL_SIZE / 2), false);
+                    _nextBall = new Sprites.Ball(Types.Ball.BallTypeFromCode(nextCode), (int)(X + Width + Settings.BALL_SIZE), (int)(Y + Height / 2), false);
 
                     Environments.GameData.CanShoot = true;
                 }
             }
 
-            if (_shotBall != null && _shotBall.isDestroyed)
-            {
-                _shotBall = null;
-            }
-
-            if (_shotBall != null)
-            {
-                _shotBall.Update();
-            }
+            if (_shotBall != null && _shotBall.isDestroyed) _shotBall = null;
+            if (_shotBall != null) _shotBall.Update();
 
             bool isClicked = mouseState.LeftButton != previousMouseState.LeftButton && mouseState.LeftButton == ButtonState.Pressed;
             if (isClicked && Environments.GameData.CanShoot)
@@ -220,7 +216,7 @@ namespace game_final.Sprites
 
             if (_shotBall != null)
             {
-                Environments.Global.SpriteBatch.Draw(_shotBall.Instance, _shotBall.Position, null, _shotBall.DrawColor, _shotBall.Rotation, _shotBall.Origin, _shotBall.Scale, SpriteEffects.None, 0f);
+                Environments.Global.SpriteBatch.Draw(_shotBall.Instance, _shotBall.Position, null, _shotBall.DrawColor, 0f, _shotBall.Origin, _shotBall.Scale, SpriteEffects.None, 0f);
             }
 
             if (_currentBall != null)

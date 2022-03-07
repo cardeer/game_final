@@ -37,7 +37,7 @@ namespace game_final.Sprites
                 DrawColor * ((MaxAngle - Angle) / 90),
                 Utils.Converter.DegressToRadians(Angle),
                 Origin,
-                Scale,
+                Scale * ((MaxAngle - Angle) / 90),
                 SpriteEffects.None,
                 0f
             );
