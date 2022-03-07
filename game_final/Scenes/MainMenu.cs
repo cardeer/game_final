@@ -17,6 +17,16 @@ namespace game_final.Scenes
             };
         }
 
+        public override void LoadContent()
+        {
+
+        }
+
+        public override void Setup()
+        {
+
+        }
+
         public override void Update()
         {
 

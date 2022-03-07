@@ -15,7 +15,12 @@ namespace game_final.Scenes
 
         private float _opacity = 1f;
 
-        public Splash()
+        public override void LoadContent()
+        {
+            AssetTypes.Texture.Logo = Environments.Global.Content.Load<Texture2D>("logo");
+        }
+
+        public override void Setup()
         {
             _logo = AssetTypes.Texture.Logo;
 
@@ -30,7 +35,7 @@ namespace game_final.Scenes
 
                 if (_opacity <= -0.3)
                 {
-                    Environments.Global.SetScene(Types.SceneType.IN_GAME);
+                    Environments.Scene.SetScene(Types.SceneType.IN_GAME);
                 }
             }
         }

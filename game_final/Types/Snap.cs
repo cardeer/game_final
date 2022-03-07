@@ -28,7 +28,7 @@ namespace game_final.Types
         {
             int[,] template = Environments.GameData.BallsTemplate;
 
-            //Debug.WriteLine($"{SnapRow}, {SnapCol}");
+            Debug.WriteLine($"{SnapRow}, {SnapCol}");
 
             while (template[SnapRow, SnapCol] > 0 || (SnapRow % 2 == 0 && SnapCol % 2 == 1) || (SnapRow % 2 == 1 && SnapCol % 2 == 0))
             {
@@ -50,7 +50,7 @@ namespace game_final.Types
                 }
             }
 
-            //Debug.WriteLine($"{SnapRow}, {SnapCol}");
+            Debug.WriteLine($"{SnapRow}, {SnapCol}");
         }
     }
 }

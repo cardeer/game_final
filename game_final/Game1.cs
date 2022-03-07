@@ -23,7 +23,7 @@ namespace game_final
             _graphics.PreferredBackBufferHeight = Settings.WINDOW_HEIGHT;
             _graphics.ApplyChanges();
 
-            Window.Title = "My Mana Ran Out, I'm Going to Shoot Slimes in a Different World";
+            Window.Title = Settings.GAME_NAME;
 
             base.Initialize();
         }
@@ -39,7 +39,7 @@ namespace game_final
 
             Assets.Initialize(Content);
 
-            Environments.Global.SetScene(Types.SceneType.SPLASH);
+            Environments.Scene.SetScene(Types.SceneType.SPLASH);
         }
 
         protected override void Update(GameTime gameTime)
@@ -55,9 +55,9 @@ namespace game_final
             MouseState mouseState = Mouse.GetState();
             Environments.Global.CurrentMouseState = mouseState;
 
-            if (Environments.Global.CurrentScene != null && !Environments.Global.CurrentScene.Disposed)
+            if (Environments.Scene.CurrentScene != null && Environments.Scene.CurrentScene.IsReady)
             {
-                Environments.Global.CurrentScene.Update();
+                Environments.Scene.CurrentScene.Update();
             }
 
             base.Update(gameTime);
@@ -68,9 +68,9 @@ namespace game_final
             GraphicsDevice.Clear(Color.Black);
 
             _spriteBatch.Begin();
-            if (Environments.Global.CurrentScene != null && !Environments.Global.CurrentScene.Disposed)
+            if (Environments.Scene.CurrentScene != null && Environments.Scene.CurrentScene.IsReady)
             {
-                Environments.Global.CurrentScene.Draw();
+                Environments.Scene.CurrentScene.Draw();
             }
             _spriteBatch.End();
             // TODO: Add your drawing code here

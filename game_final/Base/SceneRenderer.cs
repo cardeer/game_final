@@ -5,11 +5,11 @@ namespace game_final.Base
 {
     abstract class SceneRenderer
     {
-        protected bool _disposed = false;
+        private bool _ready = false;
 
-        public bool Disposed
+        public bool IsReady
         {
-            get { return _disposed; }
+            get { return _ready; }
         }
 
         protected void DrawSprite(Base.Sprite sprite)
@@ -26,12 +26,18 @@ namespace game_final.Base
                 0f
             );
         }
+        public void Ready()
+        {
+            _ready = true;
+        }
 
+        public abstract void LoadContent();
+        public abstract void Setup();
         public abstract void Update();
         public abstract void Draw();
         public virtual void Dispose()
         {
-            _disposed = true;
+            _ready = false;
         }
     }
 }

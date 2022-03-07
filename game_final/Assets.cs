@@ -18,24 +18,8 @@ namespace game_final
             loadSounds();
         }
 
-        private static void loadTextures() {
-            AssetTypes.Texture.Logo = s_content.Load<Texture2D>("logo");
-
-            AssetTypes.Texture.Wand = s_content.Load<Texture2D>("Shooter/wand");
-
-            AssetTypes.Texture.BlueBall = s_content.Load<Texture2D>("Balls/blue");
-            AssetTypes.Texture.BrownBall = s_content.Load<Texture2D>("Balls/brown");
-            AssetTypes.Texture.GreenBall = s_content.Load<Texture2D>("Balls/green");
-            AssetTypes.Texture.GreyBall = s_content.Load<Texture2D>("Balls/grey");
-            AssetTypes.Texture.LightBlueBall = s_content.Load<Texture2D>("Balls/light_blue");
-            AssetTypes.Texture.PurpleBall = s_content.Load<Texture2D>("Balls/purple");
-            AssetTypes.Texture.RedBall = s_content.Load<Texture2D>("Balls/red");
-            AssetTypes.Texture.YellowBall = s_content.Load<Texture2D>("Balls/yellow");
-
-            AssetTypes.Texture.LeftWall = s_content.Load<Texture2D>("Scenes/Playing/left_wall");
-            AssetTypes.Texture.WallBorder = s_content.Load<Texture2D>("Scenes/Playing/wall_border");
-            AssetTypes.Texture.TopWallBorder = s_content.Load<Texture2D>("Scenes/Playing/top_wall_border");
-            AssetTypes.Texture.BottomWallBorder = s_content.Load<Texture2D>("Scenes/Playing/bottom_wall_border");
+        private static void loadTextures()
+        {
             AssetTypes.Texture.Button = s_content.Load<Texture2D>("Buttons/button");
         }
 
