@@ -91,5 +91,13 @@ namespace game_final.Utils
         {
             return new Random().Next(1, Types.Ball.TotalTypes);
         }
+
+        public static Vector2 GetRenderPosition(int row, int col)
+        {
+            int x = Constants.SNAP_X_PADDING + (col * Settings.BALL_SIZE / 2);
+            int y = Settings.PLAYING_UI_TOP_HEIGHT + Settings.PLAY_AREA_TOP_PADDING + Settings.BALL_SIZE / 2 + (row * Settings.BALL_SIZE);
+
+            return new Vector2(x, y);
+        }
     }
 }

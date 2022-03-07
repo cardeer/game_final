@@ -13,6 +13,9 @@ namespace game_final.Environments
         public static bool CanShoot = true;
         public static int Score = 0;
 
+        public static List<Sprites.MagicCircle> MagicCircles;
+        public static int ShootCount = 0;
+
         public static void Initialize()
         {
             BallsTemplate = new int[Settings.TEMPLATE_ROW_BALLS, Settings.TEMPLATE_COL_BALLS];
@@ -23,6 +26,8 @@ namespace game_final.Environments
                     BallsTemplate[i, j] = 0;
                 }
             }
+
+            MagicCircles = new List<Sprites.MagicCircle>();
         }
 
         public static void SetBallTemplate(int row, int col, int ballTypeCode)
@@ -110,7 +115,23 @@ namespace game_final.Environments
                 foreach (Types.Vector2Int point in removePoints)
                 {
                     BallsTemplate[point.Y, point.X] = 0;
+                    Sprites.MagicCircle magicCircle = new Sprites.MagicCircle(Settings.BALL_SIZE, Settings.BALL_SIZE);
+                    Vector2 pos = Utils.Ball.GetRenderPosition(point.Y, point.X);
+                    magicCircle.SetPosition(pos.X, pos.Y);
+
+                    MagicCircles.Add(magicCircle);
                 }
+            }
+
+            ShootCount++;
+
+            if (ShootCount >= 10)
+            {
+                double total = 0;
+                while (total <= 0.3) total += Environments.Global.GameTime.ElapsedGameTime.TotalSeconds;
+
+                ShootCount = 0;
+                PushFromTop();
             }
         }
 
