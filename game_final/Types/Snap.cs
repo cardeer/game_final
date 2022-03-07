@@ -30,27 +30,80 @@ namespace game_final.Types
 
             //Debug.WriteLine($"{SnapRow}, {SnapCol} {ball.Unit.X}");
 
-            while (template[SnapRow, SnapCol] > 0 || SnapRow % 2 != SnapCol % 2)
+            //while (template[SnapRow, SnapCol] > 0 || (SnapRow % 2 != SnapCol % 2))
+            //{
+            //    if (SnapCol > 0 && template[SnapRow, SnapCol - 1] == 0)
+            //    {
+            //        SnapCol -= 1;
+            //        if (template[SnapRow, SnapCol] > 0)
+            //        {
+            //            SnapCol += 2;
+            //        }
+            //    }
+            //    else if (SnapCol < Settings.TEMPLATE_COL_BALLS - 1 && template[SnapRow, SnapCol + 1] == 0)
+            //    {
+            //        SnapCol += 1;
+            //        if (template[SnapRow, SnapCol] > 0)
+            //        {
+            //            SnapCol -= 2;
+            //        }
+            //    }
+            //    else
+            //    {
+            //        SnapRow += 1;
+            //    }
+            //}
+
+            if (Environments.GameData.PushCount % 2 == 0)
             {
-                if (SnapCol > 0 && template[SnapRow, SnapCol - 1] == 0)
+                while (template[SnapRow, SnapCol] > 0 || (SnapRow % 2 != SnapCol % 2))
                 {
-                    SnapCol -= 1;
-                    if (template[SnapRow, SnapCol] > 0)
+                    if (SnapCol > 0 && template[SnapRow, SnapCol - 1] == 0)
                     {
-                        SnapCol += 2;
+                        SnapCol -= 1;
+                        if (template[SnapRow, SnapCol] > 0)
+                        {
+                            SnapCol += 2;
+                        }
+                    }
+                    else if (SnapCol < Settings.TEMPLATE_COL_BALLS - 1 && template[SnapRow, SnapCol + 1] == 0)
+                    {
+                        SnapCol += 1;
+                        if (template[SnapRow, SnapCol] > 0)
+                        {
+                            SnapCol -= 2;
+                        }
+                    }
+                    else
+                    {
+                        SnapRow += 1;
                     }
                 }
-                else if (SnapCol < Settings.TEMPLATE_COL_BALLS - 1 && template[SnapRow, SnapCol + 1] == 0)
+            }
+            else
+            {
+                while (template[SnapRow, SnapCol] > 0 || (SnapRow % 2 == SnapCol % 2))
                 {
-                    SnapCol += 1;
-                    if (template[SnapRow, SnapCol] > 0)
+                    if (SnapCol > 0 && template[SnapRow, SnapCol - 1] == 0)
                     {
-                        SnapCol -= 2;
+                        SnapCol -= 1;
+                        if (template[SnapRow, SnapCol] > 0)
+                        {
+                            SnapCol += 2;
+                        }
                     }
-                }
-                else
-                {
-                    SnapRow += 1;
+                    else if (SnapCol < Settings.TEMPLATE_COL_BALLS - 1 && template[SnapRow, SnapCol + 1] == 0)
+                    {
+                        SnapCol += 1;
+                        if (template[SnapRow, SnapCol] > 0)
+                        {
+                            SnapCol -= 2;
+                        }
+                    }
+                    else
+                    {
+                        SnapRow += 1;
+                    }
                 }
             }
 
