@@ -143,9 +143,9 @@ namespace game_final.Sprites
 
             if (_rotation > Math.PI / 2) _rotation = (float)(Math.PI - _rotation);
 
-            int reflectY = (int)((Settings.WINDOW_HEIGHT - Settings.SHOOTER_BOTTOM - Height / 2) - (Constants.PLAY_HALF_X * Math.Tan(_rotation)));
+            int reflectY = (int)((Settings.WINDOW_HEIGHT - Settings.SHOOTER_BOTTOM - Height / 2) - (Constants.PLAY_HALF_WIDTH * Math.Tan(_rotation)));
 
-            int diffX = Constants.PLAY_HALF_X;
+            int diffX = Constants.PLAY_HALF_WIDTH;
             int diffY = reflectY - (Settings.WINDOW_HEIGHT - Settings.SHOOTER_BOTTOM - Height / 2);
 
             int length = (int)Math.Ceiling(Math.Sqrt(diffX * diffX + diffY * diffY));
@@ -188,7 +188,7 @@ namespace game_final.Sprites
                 _reflectGuide.Rotation += Converter.DegressToRadians(90);
 
                 int heightFromShooter = (int)(reflectY - (Y + Height / 2.0f));
-                int extendLength = (int)Math.Sqrt(heightFromShooter * heightFromShooter + Constants.PLAY_HALF_X * Constants.PLAY_HALF_X) - 200;
+                int extendLength = (int)Math.Sqrt(heightFromShooter * heightFromShooter + Constants.PLAY_HALF_WIDTH * Constants.PLAY_HALF_WIDTH) - 200;
 
                 _extendGuide = new Shapes.Line((int)(X + Width / 2), (int)(Y + Height / 2), reflectX, reflectY, 2, extendLength);
                 _extendGuide.SetColor(Settings.REFLEFCT_GUIDE_COLOR);

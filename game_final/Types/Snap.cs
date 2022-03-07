@@ -35,18 +35,14 @@ namespace game_final.Types
                 if (SnapCol > 0 && template[SnapRow, SnapCol - 1] == 0)
                 {
                     SnapCol -= 1;
-                    if (template[SnapRow, SnapCol] > 0)
-                    {
-                        SnapCol += 2;
-                    }
                 }
                 else if (SnapCol < Settings.TEMPLATE_COL_BALLS - 1 && template[SnapRow, SnapCol + 1] == 0)
                 {
                     SnapCol += 1;
-                    if (template[SnapRow, SnapCol] > 0)
-                    {
-                        SnapCol -= 2;
-                    }
+                }
+                else if (SnapRow > 0 && template[SnapRow - 1, SnapCol] == 0)
+                {
+                    SnapRow -= 1;
                 }
                 else
                 {
