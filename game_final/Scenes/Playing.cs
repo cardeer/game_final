@@ -143,25 +143,5 @@ namespace game_final.Scenes
 
             _shooter.Draw();
         }
-
-        public override void Dispose()
-        {
-            AssetTypes.Texture.Wand.Dispose();
-            AssetTypes.Texture.BlueBall.Dispose();
-            AssetTypes.Texture.BrownBall.Dispose();
-            AssetTypes.Texture.GreenBall.Dispose();
-            AssetTypes.Texture.GreyBall.Dispose();
-            AssetTypes.Texture.LightBlueBall.Dispose();
-            AssetTypes.Texture.PurpleBall.Dispose();
-            AssetTypes.Texture.RedBall.Dispose();
-            AssetTypes.Texture.YellowBall.Dispose();
-            AssetTypes.Texture.LeftWall.Dispose();
-            AssetTypes.Texture.WallBorder.Dispose();
-            AssetTypes.Texture.TopWallBorder.Dispose();
-            AssetTypes.Texture.BottomWallBorder.Dispose();
-            AssetTypes.Texture.MagicCircle.Dispose();
-
-            base.Dispose();
-        }
     }
 }

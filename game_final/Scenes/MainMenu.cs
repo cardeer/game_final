@@ -4,6 +4,8 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
+using System.Diagnostics;
+
 namespace game_final.Scenes
 {
     class MainMenu : Base.SceneRenderer
@@ -19,11 +21,7 @@ namespace game_final.Scenes
         private Sprites.Buttons _quitButton;
 
         public override void LoadContent()
-        {   
-            //Texture
-            AssetTypes.Texture.Logo = Environments.Global.Content.Load<Texture2D>("logo");
-            //AssetTypes.Texture.MainMenuBG = Environments.Global.Content.Load<Texture2D>("");
-
+        {
             //Button
             _playButton = new Sprites.Buttons(AssetTypes.Texture.Button, AssetTypes.Font.spritefont)
             {
@@ -60,7 +58,7 @@ namespace game_final.Scenes
         {
             _logo = AssetTypes.Texture.Logo;
 
-            _logoPosition = new Vector2(400, 200);
+            _logoPosition = new Vector2(Settings.WINDOW_WIDTH / 2 - _logo.Width / 2, 200);
         }
 
         public override void Update()
@@ -73,7 +71,7 @@ namespace game_final.Scenes
 
         public override void Draw()
         {
-            Environments.Global.SpriteBatch.Draw(_logo, _logoPosition, Color.White);
+            Environments.Global.SpriteBatch.Draw(_logo, _logoPosition, null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
 
             _playButton.Draw();
             _levelButton.Draw();
@@ -81,13 +79,7 @@ namespace game_final.Scenes
             _quitButton.Draw();
         }
 
-		public override void Dispose()
-		{
-
-            base.Dispose();
-		}
-
-		private void PlayButton_Click(object sender, System.EventArgs e)
+        private void PlayButton_Click(object sender, System.EventArgs e)
         {
             Environments.Scene.SetScene(Types.SceneType.IN_GAME);
         }
