@@ -48,6 +48,7 @@ namespace game_final.Scenes
             AssetTypes.Texture.TopWallBorder = Environments.Global.Content.Load<Texture2D>("Scenes/Playing/top_wall_border");
             AssetTypes.Texture.BottomWallBorder = Environments.Global.Content.Load<Texture2D>("Scenes/Playing/bottom_wall_border");
             AssetTypes.Texture.MagicCircle = Environments.Global.Content.Load<Texture2D>("Effects/magic_circle");
+            AssetTypes.Texture.PlayBackground = Environments.Global.Content.Load<Texture2D>("Scenes/Playing/background");
 
             AssetTypes.Sound.MusicSound = Environments.Global.Content.Load<Song>("Sounds/PlayBGM");
         }
@@ -150,6 +151,12 @@ namespace game_final.Scenes
 
         public override void Draw()
         {
+            Environments.Global.SpriteBatch.Draw(
+                AssetTypes.Texture.PlayBackground,
+                new Rectangle(Settings.PLAYING_UI_LEFT_WIDTH - Settings.BALL_SIZE / 2, 0, Constants.PLAY_WIDTH_LEFT + Settings.BALL_SIZE, Settings.WINDOW_HEIGHT),
+                Color.White
+            );
+
             DrawSprite(_bottomLine);
             DrawSprite(_bottomRect);
 

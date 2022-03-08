@@ -27,5 +27,7 @@ namespace game_final.AssetTypes
         public static Texture2D TopWallBorder;
 
         public static Texture2D MagicCircle;
+
+        public static Texture2D PlayBackground;
     }
 }
