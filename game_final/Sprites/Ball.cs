@@ -44,7 +44,7 @@ namespace game_final.Sprites
 
         public void Update()
         {
-            if (_snapped)
+            if (_snapped || isDestroyed)
             {
                 Destroy();
                 return;
