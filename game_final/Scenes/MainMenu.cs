@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Media;
 
 using System.Diagnostics;
 
@@ -21,6 +22,9 @@ namespace game_final.Scenes
         private Sprites.MenuButtons _challengeButton;
         private Sprites.MenuButtons _quitButton;
 
+        private Song _mainBGM;
+        public static bool _isPlaying = false;
+
         private int _buttonWidth = 400;
         private int _buttonHeight = 70;
 
@@ -28,15 +32,27 @@ namespace game_final.Scenes
         {
             //Texture
             AssetTypes.Texture.MainMenuBG = Environments.Global.Content.Load<Texture2D>("Scenes/MainMenu/mainMenuBG");
+
+            //BGM
+            AssetTypes.Sound.MusicSound = Environments.Global.Content.Load<Song>("Sounds/MainMenuBGM");
         }
 
         public override void Setup()
-        {
+        {   
+            //GameTitle
             _logo = AssetTypes.Texture.Logo;
             _logoPosition = new Vector2(Settings.WINDOW_WIDTH / 2, 75);
-
+            
+            //Background
             _background = AssetTypes.Texture.MainMenuBG;
             _bgPosition = new Vector2(0, 0);
+
+            //BGM
+            if (!_isPlaying)
+            {
+                _mainBGM = AssetTypes.Sound.MusicSound;
+                MediaPlayer.Play(_mainBGM); 
+            }
 
             //Buttons
             _playButton = new Sprites.MenuButtons(AssetTypes.Texture.Button, AssetTypes.Font.SpriteFont, "PLAY", _buttonWidth, _buttonHeight);

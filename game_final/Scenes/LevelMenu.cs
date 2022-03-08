@@ -85,18 +85,21 @@ namespace game_final.Scenes
         {
             //todo
             Environments.Global.Level = 1;
+            MainMenu._isPlaying = true;
             Environments.Scene.SetScene(Types.SceneType.MAIN_MENU);
         }
 
         private void NormalButton_Click(object sender, System.EventArgs e)
         {
             Environments.Global.Level = 2;
+            MainMenu._isPlaying = true;
             Environments.Scene.SetScene(Types.SceneType.MAIN_MENU);
         }
 
         private void HardButton_Click(object sender, System.EventArgs e)
         {
             Environments.Global.Level = 3;
+            MainMenu._isPlaying = true;
             Environments.Scene.SetScene(Types.SceneType.MAIN_MENU);
         }
 
