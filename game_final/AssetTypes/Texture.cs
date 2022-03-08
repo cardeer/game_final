@@ -23,6 +23,8 @@ namespace game_final.AssetTypes
         public static Texture2D YellowBall;
 
         public static Texture2D LeftWall;
+        public static Texture2D WallPaper;
+        public static Texture2D Scoreboard;
         public static Texture2D WallBorder;
         public static Texture2D BottomWallBorder;
         public static Texture2D TopWallBorder;
@@ -30,5 +32,8 @@ namespace game_final.AssetTypes
         public static Texture2D MagicCircle;
 
         public static Texture2D PlayBackground;
+
+        public static Texture2D InfoBoard;
+        public static Texture2D Megumin;
     }
 }

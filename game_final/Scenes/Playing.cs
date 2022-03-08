@@ -12,17 +12,21 @@ namespace game_final.Scenes
     class Playing : Base.SceneRenderer
     {
         private Shapes.Line _bottomLine;
-        private Shapes.Rectangle _bottomRect;
-
+        
         private Sprites.Shooter _shooter;
 
         private Song _playBGM;
 
         private Base.Sprite _leftWall;
+        private Base.Sprite _wallpaper;
+        private Base.Sprite _scoreboard;
         private Base.Sprite _leftWallBorder;
         private Base.Sprite _rightWallBorder;
         private Base.Sprite _topWallBorder;
         private Base.Sprite _bottomWallBorder;
+
+        private Base.Sprite _infoBoard;
+        private Base.Sprite _megumin;
 
         private Sprites.Buttons _homeButton;
 
@@ -35,6 +39,7 @@ namespace game_final.Scenes
         {   
             //Texture
             AssetTypes.Texture.Wand = Environments.Global.Content.Load<Texture2D>("Shooter/wand");
+            
             AssetTypes.Texture.BlueBall = Environments.Global.Content.Load<Texture2D>("Balls/blue");
             AssetTypes.Texture.BrownBall = Environments.Global.Content.Load<Texture2D>("Balls/brown");
             AssetTypes.Texture.GreenBall = Environments.Global.Content.Load<Texture2D>("Balls/green");
@@ -43,12 +48,18 @@ namespace game_final.Scenes
             AssetTypes.Texture.PurpleBall = Environments.Global.Content.Load<Texture2D>("Balls/purple");
             AssetTypes.Texture.RedBall = Environments.Global.Content.Load<Texture2D>("Balls/red");
             AssetTypes.Texture.YellowBall = Environments.Global.Content.Load<Texture2D>("Balls/yellow");
+            
             AssetTypes.Texture.LeftWall = Environments.Global.Content.Load<Texture2D>("Scenes/Playing/left_wall");
+            AssetTypes.Texture.WallPaper = Environments.Global.Content.Load<Texture2D>("Scenes/Playing/wallPaper");
+            AssetTypes.Texture.Scoreboard = Environments.Global.Content.Load<Texture2D>("Scenes/Playing/scoreboard");
             AssetTypes.Texture.WallBorder = Environments.Global.Content.Load<Texture2D>("Scenes/Playing/wall_border");
             AssetTypes.Texture.TopWallBorder = Environments.Global.Content.Load<Texture2D>("Scenes/Playing/top_wall_border");
             AssetTypes.Texture.BottomWallBorder = Environments.Global.Content.Load<Texture2D>("Scenes/Playing/bottom_wall_border");
             AssetTypes.Texture.MagicCircle = Environments.Global.Content.Load<Texture2D>("Effects/magic_circle");
             AssetTypes.Texture.PlayBackground = Environments.Global.Content.Load<Texture2D>("Scenes/Playing/background");
+
+            AssetTypes.Texture.InfoBoard = Environments.Global.Content.Load<Texture2D>("Scenes/Playing/board_clean");
+            AssetTypes.Texture.Megumin = Environments.Global.Content.Load<Texture2D>("Scenes/Playing/megumin");
 
             AssetTypes.Sound.MusicSound = Environments.Global.Content.Load<Song>("Sounds/PlayBGM");
         }
@@ -67,13 +78,22 @@ namespace game_final.Scenes
             _bottomLine.SetPosition(minX, Settings.WINDOW_HEIGHT - Settings.PLAYING_UI_BOTTOM_HEIGHT - 135);
             _bottomLine.Rotation -= (float)(Math.PI / 2);
 
-            _bottomRect = new Shapes.Rectangle(maxX - minX, Settings.PLAYING_UI_BOTTOM_HEIGHT);
-            _bottomRect.SetOrigin(0, _bottomRect.Height);
-            _bottomRect.SetColor(new Color(255, 238, 184));
-            _bottomRect.SetPosition(minX, Settings.WINDOW_HEIGHT - AssetTypes.Texture.TopWallBorder.Height);
+            _infoBoard = new Base.Sprite(AssetTypes.Texture.InfoBoard);
+            _infoBoard.SetOrigin(0, _infoBoard.Height);
+            _infoBoard.SetPosition(minX, Settings.WINDOW_HEIGHT - AssetTypes.Texture.TopWallBorder.Height);
+
+            _megumin = new Base.Sprite(AssetTypes.Texture.Megumin, 120);
+            _megumin.SetOrigin(0, _megumin.Height);
+            _megumin.SetPosition(minX + 40, Settings.WINDOW_HEIGHT - AssetTypes.Texture.InfoBoard.Height);
 
             _leftWall = new Base.Sprite(AssetTypes.Texture.LeftWall);
             _leftWall.SetPosition(0, 0);
+
+            _wallpaper = new Base.Sprite(AssetTypes.Texture.WallPaper);
+            _wallpaper.SetPosition(0, 0);
+
+            _scoreboard = new Base.Sprite(AssetTypes.Texture.Scoreboard, 180);
+            _scoreboard.SetPosition(35, 120);
 
             _leftWallBorder = new Base.Sprite(AssetTypes.Texture.WallBorder);
             _leftWallBorder.SetPosition(_leftWall.Width, 0);
@@ -89,7 +109,7 @@ namespace game_final.Scenes
             _bottomWallBorder.SetPosition(minX, Settings.WINDOW_HEIGHT);
 
             _homeButton = new Sprites.Buttons(AssetTypes.Texture.Button, AssetTypes.Font.PlayingButton, "HOME", 220, 40);
-            _homeButton.SetPosition((Settings.PLAYING_UI_LEFT_WIDTH - 100) / 2 - 10, Settings.WINDOW_HEIGHT - 50);
+            _homeButton.SetPosition((Settings.PLAYING_UI_LEFT_WIDTH - 100) / 2 - 10, Settings.WINDOW_HEIGHT - 100);
 
             _homeButton.Click += _homeButton_Click;
 
@@ -158,9 +178,12 @@ namespace game_final.Scenes
             );
 
             DrawSprite(_bottomLine);
-            DrawSprite(_bottomRect);
+            DrawSprite(_infoBoard);
+            DrawSprite(_megumin);
 
             DrawSprite(_leftWall);
+            DrawSprite(_wallpaper);
+            DrawSprite(_scoreboard);
             DrawSprite(_leftWallBorder);
             DrawSprite(_rightWallBorder);
             DrawSprite(_topWallBorder);
