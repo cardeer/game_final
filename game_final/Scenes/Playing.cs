@@ -1,9 +1,11 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 
 using System.Diagnostics;
 using System;
+using game_final.Types;
 
 namespace game_final.Scenes
 {
@@ -13,6 +15,8 @@ namespace game_final.Scenes
         private Shapes.Rectangle _bottomRect;
 
         private Sprites.Shooter _shooter;
+
+        private Song _playBGM;
 
         private Base.Sprite _leftWall;
         private Base.Sprite _leftWallBorder;
@@ -28,7 +32,8 @@ namespace game_final.Scenes
         public Playing() : base(true) { }
 
         public override void LoadContent()
-        {
+        {   
+            //Texture
             AssetTypes.Texture.Wand = Environments.Global.Content.Load<Texture2D>("Shooter/wand");
             AssetTypes.Texture.BlueBall = Environments.Global.Content.Load<Texture2D>("Balls/blue");
             AssetTypes.Texture.BrownBall = Environments.Global.Content.Load<Texture2D>("Balls/brown");
@@ -43,6 +48,8 @@ namespace game_final.Scenes
             AssetTypes.Texture.TopWallBorder = Environments.Global.Content.Load<Texture2D>("Scenes/Playing/top_wall_border");
             AssetTypes.Texture.BottomWallBorder = Environments.Global.Content.Load<Texture2D>("Scenes/Playing/bottom_wall_border");
             AssetTypes.Texture.MagicCircle = Environments.Global.Content.Load<Texture2D>("Effects/magic_circle");
+
+            AssetTypes.Sound.MusicSound = Environments.Global.Content.Load<Song>("Sounds/PlayBGM");
         }
 
         public override void Setup()
@@ -86,6 +93,11 @@ namespace game_final.Scenes
             _exitButton.Click += _exitButton_Click;
 
             _shooter = new Sprites.Shooter();
+
+            //BGM
+            _playBGM = AssetTypes.Sound.MusicSound;
+            MediaPlayer.Volume -= 0.2f;
+            MediaPlayer.Play(_playBGM);
 
             base.Setup();
         }
@@ -169,5 +181,5 @@ namespace game_final.Scenes
 
             base.Draw();
         }
-    }
+	}
 }

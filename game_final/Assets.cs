@@ -32,8 +32,6 @@ namespace game_final
 
         private static void loadSounds()
         {
-            AssetTypes.Sound.MusicSound = s_content.Load<Song>("Sounds/gurenge");
-
             // load sound effects
             AssetTypes.Sound.ButtonHover = s_content.Load<SoundEffect>("Sounds/SoundEffects/button_hover");
             AssetTypes.Sound.ButtonClick = s_content.Load<SoundEffect>("Sounds/SoundEffects/button_click");

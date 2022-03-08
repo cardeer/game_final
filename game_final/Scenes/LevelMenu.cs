@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Diagnostics;
 
 namespace game_final.Scenes
 {
@@ -83,18 +84,22 @@ namespace game_final.Scenes
         private void EasyButton_Click(object sender, System.EventArgs e)
         {
             //todo
+            Environments.Global.Level = 1;
+            MainMenu._isPlaying = true;
             Environments.Scene.SetScene(Types.SceneType.MAIN_MENU);
         }
 
         private void NormalButton_Click(object sender, System.EventArgs e)
         {
-            //todo
+            Environments.Global.Level = 2;
+            MainMenu._isPlaying = true;
             Environments.Scene.SetScene(Types.SceneType.MAIN_MENU);
         }
 
         private void HardButton_Click(object sender, System.EventArgs e)
         {
-            //todo
+            Environments.Global.Level = 3;
+            MainMenu._isPlaying = true;
             Environments.Scene.SetScene(Types.SceneType.MAIN_MENU);
         }
 
