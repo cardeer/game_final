@@ -107,7 +107,7 @@ namespace game_final.Sprites
             if (_shotBall != null) _shotBall.Update();
 
             bool isClicked = mouseState.LeftButton != previousMouseState.LeftButton && mouseState.LeftButton == ButtonState.Pressed;
-            if (Environments.Global.WindowActive && isClicked && Environments.GameData.CanShoot)
+            if (Environments.Global.WindowActive && isClicked && Environments.GameData.CanShoot && !Environments.Global.HoveringButton)
             {
                 Environments.GameData.CanShoot = false;
 
@@ -118,22 +118,11 @@ namespace game_final.Sprites
                 _currentBall = null;
             }
 
-            bool isRightClicked = mouseState.RightButton != previousMouseState.RightButton && mouseState.RightButton == ButtonState.Pressed;
-            if (Environments.Global.WindowActive && isRightClicked)
-            {
-                string result = "";
-                for (int i = 0; i < Settings.TEMPLATE_ROW_BALLS; i++)
-                {
-                    for (int j = 0; j < Settings.TEMPLATE_COL_BALLS; j++)
-                    {
-                        result += Environments.GameData.BallsTemplate[i, j] + ", ";
-                    }
-                    result += "\n";
-                }
-                Debug.WriteLine(result);
-
-                //Environments.GameData.PushFromTop();
-            }
+            //bool isRightClicked = mouseState.RightButton != previousMouseState.RightButton && mouseState.RightButton == ButtonState.Pressed;
+            //if (Environments.Global.WindowActive && isRightClicked)
+            //{
+            //    Environments.GameData.PrintTemplate();
+            //}
 
             int reflectX = _rotation < Math.PI / 2 ? Constants.REFLECT_LEFT : _rotation > Math.PI / 2 ? Constants.REFLECT_RIGHT : Constants.REFLECT_CENTER_X;
 
@@ -214,7 +203,7 @@ namespace game_final.Sprites
                 Environments.Global.SpriteBatch.Draw(_extendGuide.Instance, _extendGuide.Position, null, _extendGuide.Color, _extendGuide.Rotation, _extendGuide.Origin, 1f, SpriteEffects.None, 0f);
             }
 
-            if (_shotBall != null)
+            if (_shotBall != null && !Environments.GameData.Failed && !Environments.GameData.Won)
             {
                 Environments.Global.SpriteBatch.Draw(_shotBall.Instance, _shotBall.Position, null, _shotBall.DrawColor, 0f, _shotBall.Origin, _shotBall.Scale, SpriteEffects.None, 0f);
             }

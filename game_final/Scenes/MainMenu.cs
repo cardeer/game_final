@@ -16,10 +16,10 @@ namespace game_final.Scenes
         private Texture2D _background;
         private Vector2 _bgPosition;
 
-        private Sprites.MenuButtons _playButton;
-        private Sprites.MenuButtons _levelButton;
-        private Sprites.MenuButtons _challengeButton;
-        private Sprites.MenuButtons _quitButton;
+        private Sprites.Buttons _playButton;
+        private Sprites.Buttons _levelButton;
+        private Sprites.Buttons _challengeButton;
+        private Sprites.Buttons _quitButton;
 
         private int _buttonWidth = 400;
         private int _buttonHeight = 70;
@@ -39,16 +39,16 @@ namespace game_final.Scenes
             _bgPosition = new Vector2(0, 0);
 
             //Buttons
-            _playButton = new Sprites.MenuButtons(AssetTypes.Texture.Button, AssetTypes.Font.SpriteFont, "PLAY", _buttonWidth, _buttonHeight);
+            _playButton = new Sprites.Buttons(AssetTypes.Texture.Button, AssetTypes.Font.SpriteFont, "PLAY", _buttonWidth, _buttonHeight);
             _playButton.SetPosition(Settings.WINDOW_WIDTH / 2, 500);
 
-            _levelButton = new Sprites.MenuButtons(AssetTypes.Texture.Button, AssetTypes.Font.SpriteFont, "LEVEL", _buttonWidth, _buttonHeight);
+            _levelButton = new Sprites.Buttons(AssetTypes.Texture.Button, AssetTypes.Font.SpriteFont, "LEVEL", _buttonWidth, _buttonHeight);
             _levelButton.SetPosition(Settings.WINDOW_WIDTH / 2, 600);
 
-            _challengeButton = new Sprites.MenuButtons(AssetTypes.Texture.Button, AssetTypes.Font.SpriteFont, "CHALLENGE", _buttonWidth, _buttonHeight);
+            _challengeButton = new Sprites.Buttons(AssetTypes.Texture.Button, AssetTypes.Font.SpriteFont, "CHALLENGE", _buttonWidth, _buttonHeight);
             _challengeButton.SetPosition(Settings.WINDOW_WIDTH / 2, 700);
 
-            _quitButton = new Sprites.MenuButtons(AssetTypes.Texture.Button, AssetTypes.Font.SpriteFont, "QUIT", _buttonWidth, _buttonHeight);
+            _quitButton = new Sprites.Buttons(AssetTypes.Texture.Button, AssetTypes.Font.SpriteFont, "QUIT", _buttonWidth, _buttonHeight);
             _quitButton.SetPosition(Settings.WINDOW_WIDTH / 2, 800);
 
             _playButton.Click += PlayButton_Click;

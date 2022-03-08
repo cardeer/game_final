@@ -20,6 +20,8 @@ namespace game_final.Scenes
         private Base.Sprite _topWallBorder;
         private Base.Sprite _bottomWallBorder;
 
+        private Sprites.Buttons _exitButton;
+
         private int _shake = 0;
         private double _shakeWait = 0;
 
@@ -62,8 +64,6 @@ namespace game_final.Scenes
             _bottomRect.SetColor(new Color(255, 238, 184));
             _bottomRect.SetPosition(minX, Settings.WINDOW_HEIGHT - AssetTypes.Texture.TopWallBorder.Height);
 
-            Debug.WriteLine($"{_bottomRect.Width} {_bottomRect.Height}");
-
             _leftWall = new Base.Sprite(AssetTypes.Texture.LeftWall);
             _leftWall.SetPosition(0, 0);
 
@@ -80,31 +80,43 @@ namespace game_final.Scenes
             _bottomWallBorder.SetOrigin(0, _bottomWallBorder.Instance.Height);
             _bottomWallBorder.SetPosition(minX, Settings.WINDOW_HEIGHT);
 
+            _exitButton = new Sprites.Buttons(AssetTypes.Texture.Button, AssetTypes.Font.PlayingButton, "EXIT", 220, 40);
+            _exitButton.SetPosition((Settings.PLAYING_UI_LEFT_WIDTH - 100) / 2 - 10, Settings.WINDOW_HEIGHT - 50);
+
+            _exitButton.Click += _exitButton_Click;
+
             _shooter = new Sprites.Shooter();
 
             base.Setup();
         }
 
+        private void _exitButton_Click(object sender, EventArgs e)
+        {
+            Environments.Scene.SetScene(Types.SceneType.MAIN_MENU, true);
+        }
+
         public override void Update()
         {
-
-            if (Environments.GameData.ShootCount >= 8)
+            if (!Environments.GameData.Failed && !Environments.GameData.Won)
             {
-                _shakeWait += Environments.Global.GameTime.ElapsedGameTime.TotalSeconds;
-
-                if (_shake == 0)
+                if (Environments.GameData.ShootCount >= 8)
                 {
-                    _shake = 2;
+                    _shakeWait += Environments.Global.GameTime.ElapsedGameTime.TotalSeconds;
+
+                    if (_shake == 0)
+                    {
+                        _shake = 2;
+                    }
+
+                    if (_shakeWait >= .1)
+                    {
+                        _shakeWait = 0;
+                        _shake = -_shake;
+                    }
                 }
 
-                if (_shakeWait >= .1)
-                {
-                    _shakeWait = 0;
-                    _shake = -_shake;
-                }
+                _shooter.Update();
             }
-
-            _shooter.Update();
 
             Environments.GameData.MagicCircles.RemoveAll(m => m.ShouldDestroy);
 
@@ -112,6 +124,8 @@ namespace game_final.Scenes
             {
                 magicCirle.Update();
             }
+
+            _exitButton.Update();
 
             base.Update();
         }
@@ -150,6 +164,8 @@ namespace game_final.Scenes
             }
 
             _shooter.Draw();
+
+            _exitButton.Draw();
 
             base.Draw();
         }

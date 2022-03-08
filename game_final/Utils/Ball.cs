@@ -51,7 +51,7 @@ namespace game_final.Utils
 
             if (roundY <= Environments.GameData.PushCount)
             {
-                roundY = Environments.GameData.PushCount;
+                result.SnapRow = Environments.GameData.PushCount;
                 result.ShouldSnap = true;
             }
             else if (roundY > 0 && roundX > 0 && template[roundY - 1, roundX - 1] > 0 && pos.Y - half <= topLeft.Y + half && pos.X - half <= topLeft.X + half)
@@ -88,9 +88,32 @@ namespace game_final.Utils
             return new Vector2(col * Settings.BALL_SIZE, row * Settings.BALL_SIZE);
         }
 
-        public static int RandomBallCode()
+        public static int RandomBallCode(bool newTemplate = false)
         {
-            return new Random().Next(1, Types.Ball.TotalTypes);
+            if (!newTemplate)
+            {
+                int[,] template = Environments.GameData.BallsTemplate;
+                List<int> ballCodesInTemplate = new List<int>();
+
+                for (int i = 0; i < Settings.TEMPLATE_ROW_BALLS; i++)
+                {
+                    for (int j = 0; j < Settings.TEMPLATE_COL_BALLS; j++)
+                    {
+                        if (template[i, j] == 0) continue;
+
+                        int code = template[i, j];
+
+                        if (!ballCodesInTemplate.Contains(code))
+                        {
+                            ballCodesInTemplate.Add(code);
+                        }
+                    }
+                }
+                int randomIndex = new Random().Next(0, ballCodesInTemplate.Count - 1);
+                return ballCodesInTemplate[randomIndex];
+            }
+
+            return new Random().Next(1, 8);
         }
 
         public static Vector2 GetRenderPosition(int row, int col)

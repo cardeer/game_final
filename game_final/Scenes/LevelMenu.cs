@@ -14,10 +14,10 @@ namespace game_final.Scenes
         private Texture2D _background;
         private Vector2 _bgPosition;
 
-        private Sprites.MenuButtons _easyButton;
-        private Sprites.MenuButtons _normalButton;
-        private Sprites.MenuButtons _hardButton;
-        private Sprites.MenuButtons _backButton;
+        private Sprites.Buttons _easyButton;
+        private Sprites.Buttons _normalButton;
+        private Sprites.Buttons _hardButton;
+        private Sprites.Buttons _backButton;
 
         private int _buttonWidth = 400;
         private int _buttonHeight = 70;
@@ -37,16 +37,16 @@ namespace game_final.Scenes
             _bgPosition = new Vector2(0, 0);
 
             //Buttons
-            _easyButton = new Sprites.MenuButtons(AssetTypes.Texture.Button, AssetTypes.Font.SpriteFont, "EASY", _buttonWidth, _buttonHeight);
+            _easyButton = new Sprites.Buttons(AssetTypes.Texture.Button, AssetTypes.Font.SpriteFont, "EASY", _buttonWidth, _buttonHeight);
             _easyButton.SetPosition(Settings.WINDOW_WIDTH / 2, 500);
 
-            _normalButton = new Sprites.MenuButtons(AssetTypes.Texture.Button, AssetTypes.Font.SpriteFont, "NORMAL", _buttonWidth, _buttonHeight);
+            _normalButton = new Sprites.Buttons(AssetTypes.Texture.Button, AssetTypes.Font.SpriteFont, "NORMAL", _buttonWidth, _buttonHeight);
             _normalButton.SetPosition(Settings.WINDOW_WIDTH / 2, 600);
 
-            _hardButton = new Sprites.MenuButtons(AssetTypes.Texture.Button, AssetTypes.Font.SpriteFont, "HARD", _buttonWidth, _buttonHeight);
+            _hardButton = new Sprites.Buttons(AssetTypes.Texture.Button, AssetTypes.Font.SpriteFont, "HARD", _buttonWidth, _buttonHeight);
             _hardButton.SetPosition(Settings.WINDOW_WIDTH / 2, 700);
 
-            _backButton = new Sprites.MenuButtons(AssetTypes.Texture.Button, AssetTypes.Font.SpriteFont, "BACK", _buttonWidth, _buttonHeight);
+            _backButton = new Sprites.Buttons(AssetTypes.Texture.Button, AssetTypes.Font.SpriteFont, "BACK", _buttonWidth, _buttonHeight);
             _backButton.SetPosition(Settings.WINDOW_WIDTH / 2, 800);
 
             _easyButton.Click += EasyButton_Click;

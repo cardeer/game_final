@@ -19,6 +19,7 @@ namespace game_final.Environments
         public static int PushCount = 0;
 
         public static bool Failed = false;
+        public static bool Won = false;
 
         public static void Initialize()
         {
@@ -124,10 +125,15 @@ namespace game_final.Environments
 
                     MagicCircles.Add(magicCircle);
                 }
+
+                checkWin();
+                if (Won) return;
             }
 
-            bool failed = checkFailed();
-            if (failed) return;
+
+            checkFailed();
+
+            if (Failed) return;
 
             ShootCount++;
 
@@ -148,16 +154,18 @@ namespace game_final.Environments
 
         public static void GenerateLevel()
         {
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < 1; i++)
             {
                 for (int j = 0; j < Settings.TEMPLATE_COL_BALLS; j++)
                 {
                     if (i % 2 == j % 2)
                     {
-                        BallsTemplate[i, j] = Utils.Ball.RandomBallCode();
+                        BallsTemplate[i, j] = Utils.Ball.RandomBallCode(true);
                     }
                 }
             }
+
+            Debug.WriteLine("level generated");
         }
 
         public static void PushFromTop()
@@ -200,7 +208,7 @@ namespace game_final.Environments
             checkFailed();
         }
 
-        private static bool checkFailed()
+        private static void checkFailed()
         {
             bool failed = false;
 
@@ -220,16 +228,47 @@ namespace game_final.Environments
                 PushCount = 0;
                 ShootCount = 0;
 
-                for (int i = 0; i < Settings.TEMPLATE_ROW_BALLS; i++)
+                //for (int i = 0; i < Settings.TEMPLATE_ROW_BALLS; i++)
+                //{
+                //    for (int j = 0; j < Settings.TEMPLATE_COL_BALLS; j++)
+                //    {
+                //        BallsTemplate[i, j] = 0;
+                //    }
+                //}
+            }
+        }
+
+        private static void checkWin()
+        {
+            bool hasBall = false;
+
+            for (int i = 0; i < Settings.TEMPLATE_ROW_BALLS; i++)
+            {
+                for (int j = 0; j < Settings.TEMPLATE_COL_BALLS; j++)
                 {
-                    for (int j = 0; j < Settings.TEMPLATE_COL_BALLS; j++)
+                    if (BallsTemplate[i, j] > 0)
                     {
-                        BallsTemplate[i, j] = 0;
+                        hasBall = true;
+                        break;
                     }
                 }
             }
 
-            return failed;
+            if (!hasBall) Won = true;
+        }
+
+        public static void PrintTemplate()
+        {
+            string result = "";
+            for (int i = 0; i < Settings.TEMPLATE_ROW_BALLS; i++)
+            {
+                for (int j = 0; j < Settings.TEMPLATE_COL_BALLS; j++)
+                {
+                    result += BallsTemplate[i, j] + ", ";
+                }
+                result += "\n";
+            }
+            Debug.WriteLine(result);
         }
     }
 }

@@ -21,6 +21,7 @@ namespace game_final.Environments
         public static GraphicsDevice Graphics;
 
         public static bool WindowActive;
+        public static bool HoveringButton;
 
         public static float Elapsed
         {
