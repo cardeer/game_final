@@ -9,17 +9,15 @@ namespace game_final.Environments
 {
     class GameData
     {
-        public static int[,] BallsTemplate;
         public static bool CanShoot = true;
         public static int Score = 0;
-
-        public static List<Sprites.MagicCircle> MagicCircles;
-        public static int ShootCount = 0;
-
-        public static int PushCount = 0;
-
         public static bool Failed = false;
         public static bool Won = false;
+        public static int PushCount = 0;
+        public static int ShootCount = 0;
+
+        public static int[,] BallsTemplate;
+        public static List<Sprites.MagicCircle> MagicCircles;
 
         public static void Initialize()
         {
@@ -33,6 +31,13 @@ namespace game_final.Environments
             }
 
             MagicCircles = new List<Sprites.MagicCircle>();
+
+            CanShoot = true;
+            Score = 0;
+            Failed = false;
+            Won = false;
+            PushCount = 0;
+            ShootCount = 0;
         }
 
         public static void SetBallTemplate(int row, int col, int ballTypeCode)
