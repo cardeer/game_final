@@ -20,11 +20,12 @@ namespace game_final.Scenes
         public override void LoadContent()
         {
             AssetTypes.Texture.Logo = Environments.Global.Content.Load<Texture2D>("logo");
+            AssetTypes.Texture.LogoNoBorder = Environments.Global.Content.Load<Texture2D>("logo_no_border");
         }
 
         public override void Setup()
         {
-            _logo = AssetTypes.Texture.Logo;
+            _logo = AssetTypes.Texture.LogoNoBorder;
 
             _logoPosition = new Vector2(Settings.WINDOW_WIDTH / 2 - _logo.Width / 2, Settings.WINDOW_HEIGHT / 2 - _logo.Height / 2);
         }

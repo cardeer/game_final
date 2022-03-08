@@ -5,6 +5,7 @@ namespace game_final.AssetTypes
     static class Texture
     {
         public static Texture2D Logo;
+        public static Texture2D LogoNoBorder;
 
         public static Texture2D Wand;
 

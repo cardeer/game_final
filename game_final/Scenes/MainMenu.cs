@@ -40,7 +40,7 @@ namespace game_final.Scenes
         {   
             //GameTitle
             _logo = AssetTypes.Texture.Logo;
-            _logoPosition = new Vector2(Settings.WINDOW_WIDTH / 2, 75);
+            _logoPosition = new Vector2(Settings.WINDOW_WIDTH / 2, 50);
             
             //Background
             _background = AssetTypes.Texture.MainMenuBG;

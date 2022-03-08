@@ -32,7 +32,7 @@ namespace game_final.Scenes
         public override void Setup()
         {
             _logo = AssetTypes.Texture.Logo;
-            _logoPosition = new Vector2(Settings.WINDOW_WIDTH / 2, 75);
+            _logoPosition = new Vector2(Settings.WINDOW_WIDTH / 2, 50);
 
             _background = AssetTypes.Texture.MainMenuBG;
             _bgPosition = new Vector2(0, 0);
