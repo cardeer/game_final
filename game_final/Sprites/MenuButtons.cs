@@ -23,7 +23,7 @@ namespace game_final.Sprites
 		private string _text;
 		private Vector2 _measureString;
 
-
+		private bool _playedSound = false;
 
 		public MenuButtons(Texture2D texture, SpriteFont font, string text, int width, int height)
 		{
@@ -53,6 +53,12 @@ namespace game_final.Sprites
 
 			if (IsHovering)
 			{
+				if (!_playedSound)
+                {
+					_playedSound = true;
+					AssetTypes.Sound.ButtonHover.Play(0.2f, 0, 0);
+				}
+
 				int newWidth = (int)(_width * _effectScale);
 				int newHeight = (int)(_height * _effectScale);
 				Environments.Global.SpriteBatch.Draw(_buttonHoverEffect, new Rectangle((int)(X - newWidth / 2), (int)(Y - newHeight / 2), newWidth, newHeight), Color.Gray * 0.5f);
@@ -78,6 +84,7 @@ namespace game_final.Sprites
 			}
 			else
             {
+				_playedSound = false;
 				_atMinScale = false;
 				_effectDirection = 1;
 				_effectScale = _maxEffectScale;
@@ -96,6 +103,7 @@ namespace game_final.Sprites
 		{
 			if (IsClicked)
 			{
+				AssetTypes.Sound.ButtonClick.Play(0.2f, 0, 0);
 				InvokeClick(this);
 			}
 		}

@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Media;
+using Microsoft.Xna.Framework.Audio;
 
 namespace game_final
 {
@@ -31,6 +32,8 @@ namespace game_final
         private static void loadSounds()
         {
             AssetTypes.Sound.MusicSound = s_content.Load<Song>("Sounds/gurenge");
+            AssetTypes.Sound.ButtonHover = s_content.Load<SoundEffect>("Sounds/SoundEffects/button_hover");
+            AssetTypes.Sound.ButtonClick = s_content.Load<SoundEffect>("Sounds/SoundEffects/button_click");
         }
     }
 }

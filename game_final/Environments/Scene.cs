@@ -9,14 +9,14 @@ namespace game_final.Environments
         public static Base.SceneRenderer CurrentScene;
         public static Types.SceneType CurrentSceneType;
 
-        public static void SetScene(Types.SceneType type)
+        public static void SetScene(Types.SceneType type, bool fadeOut = false)
         {
-            if (CurrentScene != null)
+            if (CurrentScene != null && CurrentSceneType != type)
             {
-                CurrentScene.Dispose();
+                CurrentScene.Dispose(type, fadeOut);
             }
 
-            if (CurrentScene == null || CurrentSceneType != type)
+            if (!fadeOut & (CurrentScene == null || CurrentSceneType != type))
             {
                 CurrentSceneType = type;
 

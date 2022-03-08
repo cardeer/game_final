@@ -49,8 +49,9 @@ namespace game_final.Utils
             result.SnapRow = roundY;
             result.SnapCol = roundX;
 
-            if (roundY == 0)
+            if (roundY <= Environments.GameData.PushCount)
             {
+                roundY = Environments.GameData.PushCount;
                 result.ShouldSnap = true;
             }
             else if (roundY > 0 && roundX > 0 && template[roundY - 1, roundX - 1] > 0 && pos.Y - half <= topLeft.Y + half && pos.X - half <= topLeft.X + half)

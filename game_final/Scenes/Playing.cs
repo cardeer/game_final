@@ -23,6 +23,8 @@ namespace game_final.Scenes
         private int _shake = 0;
         private double _shakeWait = 0;
 
+        public Playing() : base(true) { }
+
         public override void LoadContent()
         {
             AssetTypes.Texture.Wand = Environments.Global.Content.Load<Texture2D>("Shooter/wand");
@@ -79,6 +81,8 @@ namespace game_final.Scenes
             _bottomWallBorder.SetPosition(minX, Settings.WINDOW_HEIGHT);
 
             _shooter = new Sprites.Shooter();
+
+            base.Setup();
         }
 
         public override void Update()
@@ -108,6 +112,8 @@ namespace game_final.Scenes
             {
                 magicCirle.Update();
             }
+
+            base.Update();
         }
 
         public override void Draw()
@@ -144,6 +150,8 @@ namespace game_final.Scenes
             }
 
             _shooter.Draw();
+
+            base.Draw();
         }
     }
 }

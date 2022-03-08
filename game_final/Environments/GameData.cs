@@ -44,9 +44,6 @@ namespace game_final.Environments
             Queue<Types.Vector2Int> queue = new Queue<Types.Vector2Int>();
             queue.Enqueue(new Types.Vector2Int(col, row));
 
-            bool failed = checkFailed();
-            if (failed) return;
-
             while (queue.Count > 0)
             {
                 Types.Vector2Int currentPoint = queue.Dequeue();
@@ -127,6 +124,9 @@ namespace game_final.Environments
                 }
             }
 
+            bool failed = checkFailed();
+            if (failed) return;
+
             ShootCount++;
 
             if (ShootCount >= 10)
@@ -164,24 +164,32 @@ namespace game_final.Environments
 
             PushCount++;
 
-            for (int i = 0; i < Settings.TEMPLATE_ROW_BALLS; i++)
+            //for (int i = 0; i < Settings.TEMPLATE_ROW_BALLS; i++)
+            //{
+            //    if (i == 0)
+            //    {
+            //        for (int j = 0; j < Settings.TEMPLATE_COL_BALLS; j++)
+            //        {
+            //            if (j % 2 == PushCount % 2)
+            //            {
+            //                newTemplate[i, j] = Utils.Ball.RandomBallCode();
+            //            }
+            //        }
+            //    }
+            //    else
+            //    {
+            //        for (int j = 0; j < Settings.TEMPLATE_COL_BALLS; j++)
+            //        {
+            //            newTemplate[i, j] = BallsTemplate[i - 1, j];
+            //        }
+            //    }
+            //}
+
+            for (int i = PushCount; i < Settings.TEMPLATE_ROW_BALLS; i++)
             {
-                if (i == 0)
+                for (int j = 0; j < Settings.TEMPLATE_COL_BALLS; j++)
                 {
-                    for (int j = 0; j < Settings.TEMPLATE_COL_BALLS; j++)
-                    {
-                        if (j % 2 == PushCount % 2)
-                        {
-                            newTemplate[i, j] = Utils.Ball.RandomBallCode();
-                        }
-                    }
-                }
-                else
-                {
-                    for (int j = 0; j < Settings.TEMPLATE_COL_BALLS; j++)
-                    {
-                        newTemplate[i, j] = BallsTemplate[i - 1, j];
-                    }
+                    newTemplate[i, j] = BallsTemplate[i - 1, j];
                 }
             }
 
@@ -207,6 +215,7 @@ namespace game_final.Environments
             {
                 Failed = failed;
 
+                PushCount = 0;
                 ShootCount = 0;
 
                 for (int i = 0; i < Settings.TEMPLATE_ROW_BALLS; i++)

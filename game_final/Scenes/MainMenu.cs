@@ -28,8 +28,17 @@ namespace game_final.Scenes
         {
             //Texture
             AssetTypes.Texture.MainMenuBG = Environments.Global.Content.Load<Texture2D>("Scenes/MainMenu/mainMenuBG");
+        }
 
-            //Button
+        public override void Setup()
+        {
+            _logo = AssetTypes.Texture.Logo;
+            _logoPosition = new Vector2(Settings.WINDOW_WIDTH / 2, 75);
+
+            _background = AssetTypes.Texture.MainMenuBG;
+            _bgPosition = new Vector2(0, 0);
+
+            //Buttons
             _playButton = new Sprites.MenuButtons(AssetTypes.Texture.Button, AssetTypes.Font.SpriteFont, "PLAY", _buttonWidth, _buttonHeight);
             _playButton.SetPosition(Settings.WINDOW_WIDTH / 2, 500);
 
@@ -46,15 +55,8 @@ namespace game_final.Scenes
             _levelButton.Click += LevelButton_Click;
             _challengeButton.Click += ChallengeButton_Click;
             _quitButton.Click += QuitButton_Click;
-        }
 
-        public override void Setup()
-        {
-            _logo = AssetTypes.Texture.Logo;
-            _logoPosition = new Vector2(Settings.WINDOW_WIDTH / 2, 75);
-
-            _background = AssetTypes.Texture.MainMenuBG;
-            _bgPosition = new Vector2(0, 0);
+            base.Setup();
         }
 
         public override void Update()
@@ -63,6 +65,8 @@ namespace game_final.Scenes
             _levelButton.Update();
             _challengeButton.Update();
             _quitButton.Update();
+
+            base.Update();
         }
 
         public override void Draw()
@@ -74,11 +78,13 @@ namespace game_final.Scenes
             _levelButton.Draw();
             _challengeButton.Draw();
             _quitButton.Draw();
+
+            base.Draw();
         }
 
         private void PlayButton_Click(object sender, System.EventArgs e)
         {
-            Environments.Scene.SetScene(Types.SceneType.IN_GAME);
+            Environments.Scene.SetScene(Types.SceneType.IN_GAME, true);
         }
 
         private void LevelButton_Click(object sender, System.EventArgs e)

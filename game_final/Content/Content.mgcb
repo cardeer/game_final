@@ -242,3 +242,15 @@
 /processorParam:Quality=Best
 /build:Sounds/gurenge.mp3
 
+#begin Sounds/SoundEffects/button_click.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/SoundEffects/button_click.mp3
+
+#begin Sounds/SoundEffects/button_hover.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/SoundEffects/button_hover.mp3
+
