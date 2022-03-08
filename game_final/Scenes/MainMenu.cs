@@ -22,7 +22,6 @@ namespace game_final.Scenes
         private Sprites.Buttons _challengeButton;
         private Sprites.Buttons _quitButton;
 
-        private Song _mainBGM;
         public static bool _isPlaying = false;
 
         private int _buttonWidth = 400;
@@ -48,10 +47,10 @@ namespace game_final.Scenes
             _bgPosition = new Vector2(0, 0);
 
             //BGM
-            if (!_isPlaying)
+            if (MediaPlayer.State != MediaState.Playing)
             {
-                _mainBGM = AssetTypes.Sound.MusicSound;
-                MediaPlayer.Play(_mainBGM); 
+                MediaPlayer.Volume = 0.4f;
+                MediaPlayer.Play(AssetTypes.Sound.MusicSound);
             }
 
             //Buttons
@@ -101,6 +100,7 @@ namespace game_final.Scenes
         private void PlayButton_Click(object sender, System.EventArgs e)
         {
             Environments.Scene.SetScene(Types.SceneType.IN_GAME, true);
+            MediaPlayer.Stop();
         }
 
         private void LevelButton_Click(object sender, System.EventArgs e)

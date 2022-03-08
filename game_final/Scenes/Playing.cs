@@ -181,5 +181,12 @@ namespace game_final.Scenes
 
             base.Draw();
         }
-	}
+
+        public override void Dispose(SceneType nextScene, bool fadeOut)
+        {
+            MediaPlayer.Stop();
+
+            base.Dispose(nextScene, fadeOut);
+        }
+    }
 }
