@@ -40,12 +40,15 @@ namespace game_final.Scenes
             //Buttons
             _easyButton = new Sprites.Buttons(AssetTypes.Texture.Button, AssetTypes.Font.SpriteFont, "EASY", _buttonWidth, _buttonHeight);
             _easyButton.SetPosition(Settings.WINDOW_WIDTH / 2, 500);
+            _easyButton.TextColor = Color.LightGreen;
 
             _normalButton = new Sprites.Buttons(AssetTypes.Texture.Button, AssetTypes.Font.SpriteFont, "NORMAL", _buttonWidth, _buttonHeight);
             _normalButton.SetPosition(Settings.WINDOW_WIDTH / 2, 600);
+            _normalButton.TextColor = Color.Yellow;
 
             _hardButton = new Sprites.Buttons(AssetTypes.Texture.Button, AssetTypes.Font.SpriteFont, "HARD", _buttonWidth, _buttonHeight);
             _hardButton.SetPosition(Settings.WINDOW_WIDTH / 2, 700);
+            _hardButton.TextColor = Color.OrangeRed;
 
             _backButton = new Sprites.Buttons(AssetTypes.Texture.Button, AssetTypes.Font.SpriteFont, "BACK", _buttonWidth, _buttonHeight);
             _backButton.SetPosition(Settings.WINDOW_WIDTH / 2, 800);
@@ -83,7 +86,6 @@ namespace game_final.Scenes
 
         private void EasyButton_Click(object sender, System.EventArgs e)
         {
-            //todo
             Environments.Global.Level = 1;
             MainMenu._isPlaying = true;
             Environments.Scene.SetScene(Types.SceneType.MAIN_MENU);
