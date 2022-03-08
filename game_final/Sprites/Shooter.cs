@@ -27,6 +27,11 @@ namespace game_final.Sprites
         private Sprites.Ball _currentBall;
         private Sprites.Ball _nextBall;
 
+        public Sprites.Ball NextBall
+        {
+            get { return _nextBall; }
+        }
+
         public Shooter() : base(50, 50)
         {
             ReflectPoint = new Vector2(0, 0);
