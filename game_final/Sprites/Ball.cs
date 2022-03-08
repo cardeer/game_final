@@ -9,6 +9,8 @@ namespace game_final.Sprites
     {
         public Types.BallType Type;
         public Vector2 SnapPoint;
+        public Types.Vector2Int CurrentSnap;
+        public Types.Vector2Int PreviousSnap;
         public Vector2 Unit;
 
         private bool _snapped = false;
@@ -54,6 +56,7 @@ namespace game_final.Sprites
             float distY = Unit.Y * Settings.BALL_SPEED * Environments.Global.Elapsed;
 
             SetPosition(X + distX, Y + distY);
+
             SnapPoint = Utils.Ball.GetSnappedPosition(this);
 
             if (X <= Constants.REFLECT_LEFT || X >= Constants.REFLECT_RIGHT)

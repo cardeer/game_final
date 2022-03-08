@@ -38,17 +38,41 @@ namespace game_final.Utils
             int roundY = (int)Math.Round(posY);
             int roundX = (int)Math.Round(posX);
 
+            ball.PreviousSnap = ball.CurrentSnap;
+
+            int pushState = Environments.GameData.PushCount % 2;
+
+            if (pushState == 0)
+            {
+                if (roundX == 0 && roundY % 2 != roundX % 2)
+                {
+                    roundX++;
+                }
+                else if (roundX == Settings.TEMPLATE_COL_BALLS - 1 && roundY % 2 != roundX % 2)
+                {
+                    roundX--;
+                }
+            }
+            else
+            {
+                if (roundX == 0 && roundY % 2 == roundX % 2)
+                {
+                    roundX++;
+                }
+                else if (roundX == Settings.TEMPLATE_COL_BALLS - 1 && roundY % 2 == roundX % 2)
+                {
+                    roundX--;
+                }
+            }
+
+            ball.CurrentSnap = new Types.Vector2Int(roundX, roundY);
+
             Vector2 pos = GetPosFromIndex(posY, posX);
             Vector2 left = GetPosFromIndex(roundY, roundX - 1);
             Vector2 right = GetPosFromIndex(roundY, roundX + 1);
             Vector2 topLeft = GetPosFromIndex(roundY - 1, roundX - 1);
             Vector2 top = GetPosFromIndex(roundY - 1, roundX);
             Vector2 topRight = GetPosFromIndex(roundY - 1, roundX + 1);
-
-            if (template[roundY, roundX] > 0)
-            {
-                roundY++;
-            }
 
             Types.Snap result = new Types.Snap();
             result.SnapRow = roundY;
