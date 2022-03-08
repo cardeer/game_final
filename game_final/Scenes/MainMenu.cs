@@ -62,7 +62,7 @@ namespace game_final.Scenes
 
             _challengeButton = new Sprites.Buttons(AssetTypes.Texture.Button, AssetTypes.Font.SpriteFont, "CHALLENGE", _buttonWidth, _buttonHeight);
             _challengeButton.SetPosition(Settings.WINDOW_WIDTH / 2, 700);
-            _challengeButton.TextColor = Color.Red;
+
 
             _quitButton = new Sprites.Buttons(AssetTypes.Texture.Button, AssetTypes.Font.SpriteFont, "QUIT", _buttonWidth, _buttonHeight);
             _quitButton.SetPosition(Settings.WINDOW_WIDTH / 2, 800);
@@ -111,7 +111,16 @@ namespace game_final.Scenes
 
         private void ChallengeButton_Click(object sender, System.EventArgs e)
         {
-            //Environments.Scene.SetScene(Types.SceneType.IN_GAME);
+            if (_challengeButton.TextColor == Color.White)
+            {
+                _challengeButton.TextColor = Color.OrangeRed;
+                //Todo change mode
+            }
+            else
+            {
+                _challengeButton.TextColor = Color.White;
+                //Todo change mode
+            }
         }
 
         private void QuitButton_Click(object sender, System.EventArgs e)
