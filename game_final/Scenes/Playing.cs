@@ -24,7 +24,7 @@ namespace game_final.Scenes
         private Base.Sprite _topWallBorder;
         private Base.Sprite _bottomWallBorder;
 
-        private Sprites.Buttons _exitButton;
+        private Sprites.Buttons _homeButton;
 
         private int _shake = 0;
         private double _shakeWait = 0;
@@ -87,10 +87,10 @@ namespace game_final.Scenes
             _bottomWallBorder.SetOrigin(0, _bottomWallBorder.Instance.Height);
             _bottomWallBorder.SetPosition(minX, Settings.WINDOW_HEIGHT);
 
-            _exitButton = new Sprites.Buttons(AssetTypes.Texture.Button, AssetTypes.Font.PlayingButton, "EXIT", 220, 40);
-            _exitButton.SetPosition((Settings.PLAYING_UI_LEFT_WIDTH - 100) / 2 - 10, Settings.WINDOW_HEIGHT - 50);
+            _homeButton = new Sprites.Buttons(AssetTypes.Texture.Button, AssetTypes.Font.PlayingButton, "HOME", 220, 40);
+            _homeButton.SetPosition((Settings.PLAYING_UI_LEFT_WIDTH - 100) / 2 - 10, Settings.WINDOW_HEIGHT - 50);
 
-            _exitButton.Click += _exitButton_Click;
+            _homeButton.Click += _homeButton_Click;
 
             _shooter = new Sprites.Shooter();
 
@@ -101,7 +101,7 @@ namespace game_final.Scenes
             base.Setup();
         }
 
-        private void _exitButton_Click(object sender, EventArgs e)
+        private void _homeButton_Click(object sender, EventArgs e)
         {
             Environments.Scene.SetScene(Types.SceneType.MAIN_MENU, true);
         }
@@ -136,7 +136,7 @@ namespace game_final.Scenes
                 magicCirle.Update();
             }
 
-            _exitButton.Update();
+            _homeButton.Update();
 
             base.Update();
         }
@@ -176,7 +176,7 @@ namespace game_final.Scenes
 
             _shooter.Draw();
 
-            _exitButton.Draw();
+            _homeButton.Draw();
 
             base.Draw();
         }
