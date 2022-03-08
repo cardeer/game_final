@@ -15,6 +15,7 @@ namespace game_final.Environments
         public static bool Won = false;
         public static int PushCount = 0;
         public static int ShootCount = 0;
+        public static bool DataReady = true;
 
         public static int[,] BallsTemplate;
         public static List<Sprites.MagicCircle> MagicCircles;
@@ -38,10 +39,13 @@ namespace game_final.Environments
             Won = false;
             PushCount = 0;
             ShootCount = 0;
+            DataReady = true;
         }
 
         public static void SetBallTemplate(int row, int col, int ballTypeCode)
         {
+            DataReady = false;
+
             BallsTemplate[row, col] = ballTypeCode;
 
             List<Types.Vector2Int> removePoints = new List<Types.Vector2Int>();
@@ -145,11 +149,13 @@ namespace game_final.Environments
             if (ShootCount >= 10)
             {
                 double total = 0;
-                while (total <= 0.3) total += Environments.Global.GameTime.ElapsedGameTime.TotalSeconds;
+                while (total <= 1) total += Environments.Global.GameTime.ElapsedGameTime.TotalSeconds;
 
                 ShootCount = 0;
                 PushFromTop();
             }
+
+            DataReady = true;
         }
 
         private static bool contains(List<Types.Vector2Int> list, Types.Vector2Int point)
@@ -264,9 +270,23 @@ namespace game_final.Environments
 
         public static void PrintTemplate()
         {
-            string result = "";
+            string result = "  ";
+            for (int i = 0; i < Settings.TEMPLATE_COL_BALLS; i++)
+            {
+                if (i < 10)
+                {
+                    result += i + "  ";
+                }
+                else
+                {
+                    result += i + " ";
+                }
+            }
+            result += "\n";
+
             for (int i = 0; i < Settings.TEMPLATE_ROW_BALLS; i++)
             {
+                result += i + " ";
                 for (int j = 0; j < Settings.TEMPLATE_COL_BALLS; j++)
                 {
                     result += BallsTemplate[i, j] + ", ";
