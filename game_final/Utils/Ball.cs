@@ -35,15 +35,20 @@ namespace game_final.Utils
             float posY = ball.SnapPoint.Y;
             float posX = ball.SnapPoint.X;
 
-            int roundY = (int)Math.Ceiling(posY);
-            int roundX = (int)Math.Ceiling(posX);
+            int roundY = (int)Math.Round(posY);
+            int roundX = (int)Math.Round(posX);
 
-            Vector2 pos = getPosFromIndex(posY, posX);
-            Vector2 left = getPosFromIndex(roundY, roundX - 1);
-            Vector2 right = getPosFromIndex(roundY, roundX + 1);
-            Vector2 topLeft = getPosFromIndex(roundY - 1, roundX - 1);
-            Vector2 top = getPosFromIndex(roundY - 1, roundX);
-            Vector2 topRight = getPosFromIndex(roundY - 1, roundX + 1);
+            Vector2 pos = GetPosFromIndex(posY, posX);
+            Vector2 left = GetPosFromIndex(roundY, roundX - 1);
+            Vector2 right = GetPosFromIndex(roundY, roundX + 1);
+            Vector2 topLeft = GetPosFromIndex(roundY - 1, roundX - 1);
+            Vector2 top = GetPosFromIndex(roundY - 1, roundX);
+            Vector2 topRight = GetPosFromIndex(roundY - 1, roundX + 1);
+
+            if (template[roundY, roundX] > 0)
+            {
+                roundY++;
+            }
 
             Types.Snap result = new Types.Snap();
             result.SnapRow = roundY;
@@ -77,13 +82,14 @@ namespace game_final.Utils
 
             if (result.ShouldSnap)
             {
+                ball.Destroy();
                 result.FitPoints(ball);
             }
 
             return result;
         }
 
-        private static Vector2 getPosFromIndex(float row, float col)
+        public static Vector2 GetPosFromIndex(float row, float col)
         {
             return new Vector2(col * Settings.BALL_SIZE, row * Settings.BALL_SIZE);
         }

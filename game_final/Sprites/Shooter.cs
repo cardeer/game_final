@@ -112,7 +112,7 @@ namespace game_final.Sprites
             if (_shotBall != null) _shotBall.Update();
 
             bool isClicked = mouseState.LeftButton != previousMouseState.LeftButton && mouseState.LeftButton == ButtonState.Pressed;
-            if (Environments.Global.WindowActive && isClicked && Environments.GameData.CanShoot && !Environments.Global.HoveringButton)
+            if (Environments.Global.WindowActive && isClicked && Environments.GameData.CanShoot && Environments.GameData.DataReady && !Environments.Global.HoveringButton)
             {
                 Environments.GameData.CanShoot = false;
 
