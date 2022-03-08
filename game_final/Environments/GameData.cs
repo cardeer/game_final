@@ -113,6 +113,8 @@ namespace game_final.Environments
 
             if (removePoints.Count >= 3)
             {
+                AssetTypes.Sound.BallPop.Play(.3f, 0, 0);
+
                 foreach (Types.Vector2Int point in removePoints)
                 {
                     BallsTemplate[point.Y, point.X] = 0;

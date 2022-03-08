@@ -12,5 +12,6 @@ namespace game_final.AssetTypes
 
 		public static SoundEffect ButtonHover;
 		public static SoundEffect ButtonClick;
+		public static SoundEffect BallPop;
 	}
 }
