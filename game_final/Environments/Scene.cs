@@ -31,6 +31,9 @@ namespace game_final.Environments
                     case Types.SceneType.IN_GAME:
                         CurrentScene = new Scenes.Playing();
                         break;
+                    case Types.SceneType.LEVEL_MENU:
+                        CurrentScene = new Scenes.LevelMenu();
+                        break;
                 }
 
                 CurrentScene.LoadContent();
