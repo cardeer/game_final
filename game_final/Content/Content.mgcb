@@ -159,7 +159,7 @@
 /processorParam:TextureFormat=Color
 /build:logo.png
 
-#begin Scenes/MainMenu/mainMenuBG.png
+#begin Scenes/MainMenu/MainMenuBG.jpg
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -169,7 +169,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Scenes/MainMenu/mainMenuBG.png
+/build:Scenes/MainMenu/MainMenuBG.jpg
 
 #begin Scenes/Playing/bottom_wall_border.png
 /importer:TextureImporter
