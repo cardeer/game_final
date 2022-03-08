@@ -107,7 +107,7 @@ namespace game_final.Sprites
             if (_shotBall != null) _shotBall.Update();
 
             bool isClicked = mouseState.LeftButton != previousMouseState.LeftButton && mouseState.LeftButton == ButtonState.Pressed;
-            if (isClicked && Environments.GameData.CanShoot)
+            if (Environments.Global.WindowActive && isClicked && Environments.GameData.CanShoot)
             {
                 Environments.GameData.CanShoot = false;
 
@@ -119,7 +119,7 @@ namespace game_final.Sprites
             }
 
             bool isRightClicked = mouseState.RightButton != previousMouseState.RightButton && mouseState.RightButton == ButtonState.Pressed;
-            if (isRightClicked)
+            if (Environments.Global.WindowActive && isRightClicked)
             {
                 string result = "";
                 for (int i = 0; i < Settings.TEMPLATE_ROW_BALLS; i++)
