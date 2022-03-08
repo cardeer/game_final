@@ -96,7 +96,6 @@ namespace game_final.Scenes
 
             //BGM
             _playBGM = AssetTypes.Sound.MusicSound;
-            MediaPlayer.Volume -= 0.2f;
             MediaPlayer.Play(_playBGM);
 
             base.Setup();

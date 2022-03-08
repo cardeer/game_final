@@ -12,6 +12,7 @@ namespace game_final.Sprites
     class Buttons : Base.Object
     {
         public bool Effect = true;
+        public Color TextColor = Color.White;
 
         private Texture2D _texture;
 
@@ -114,7 +115,7 @@ namespace game_final.Sprites
                 var x = (hitBox.X + (hitBox.Width / 2)) - (_measureString.X / 2);
                 var y = (hitBox.Y + (hitBox.Height / 2)) - (_measureString.Y / 2);
 
-                Environments.Global.SpriteBatch.DrawString(_font, _text, new Vector2(x, y), Color.White);
+                Environments.Global.SpriteBatch.DrawString(_font, _text, new Vector2(x, y), TextColor);
             }
         }
     }
