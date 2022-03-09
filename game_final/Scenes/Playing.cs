@@ -12,7 +12,7 @@ namespace game_final.Scenes
     class Playing : Base.SceneRenderer
     {
         private Shapes.Line _bottomLine;
-        
+
         private Sprites.Shooter _shooter;
 
         private Song _playBGM;
@@ -36,10 +36,11 @@ namespace game_final.Scenes
         public Playing() : base(true) { }
 
         public override void LoadContent()
-        {   
+        {
             //ObjectTexture
             AssetTypes.Texture.Wand = Environments.Global.Content.Load<Texture2D>("Shooter/wand");
-            
+            AssetTypes.Texture.ShooterArrow = Environments.Global.Content.Load<Texture2D>("Shooter/arrow");
+
             //BallTexture
             AssetTypes.Texture.BlueBall = Environments.Global.Content.Load<Texture2D>("Balls/blue_slime");
             AssetTypes.Texture.LightBlueBall = Environments.Global.Content.Load<Texture2D>("Balls/lightBlue_slime");
@@ -47,7 +48,7 @@ namespace game_final.Scenes
             AssetTypes.Texture.GreyBall = Environments.Global.Content.Load<Texture2D>("Balls/grey_slime");
             AssetTypes.Texture.PurpleBall = Environments.Global.Content.Load<Texture2D>("Balls/purple_slime");
             AssetTypes.Texture.RedBall = Environments.Global.Content.Load<Texture2D>("Balls/red_slime");
-            
+
             //
             AssetTypes.Texture.LeftWall = Environments.Global.Content.Load<Texture2D>("Scenes/Playing/left_wall");
             AssetTypes.Texture.WallPaper = Environments.Global.Content.Load<Texture2D>("Scenes/Playing/wallPaper");
@@ -57,6 +58,7 @@ namespace game_final.Scenes
             AssetTypes.Texture.BottomWallBorder = Environments.Global.Content.Load<Texture2D>("Scenes/Playing/bottom_wall_border");
             AssetTypes.Texture.MagicCircle = Environments.Global.Content.Load<Texture2D>("Effects/magic_circle");
             AssetTypes.Texture.PlayBackground = Environments.Global.Content.Load<Texture2D>("Scenes/Playing/background");
+            AssetTypes.Texture.Ceiling = Environments.Global.Content.Load<Texture2D>("Scenes/Playing/ceiling");
 
             AssetTypes.Texture.InfoBoard = Environments.Global.Content.Load<Texture2D>("Scenes/Playing/board_clean");
             AssetTypes.Texture.Megumin = Environments.Global.Content.Load<Texture2D>("Scenes/Playing/megumin");
@@ -203,6 +205,24 @@ namespace game_final.Scenes
                     Vector2 pos = Utils.Ball.GetRenderPosition(i, j);
 
                     DrawSprite(new Sprites.Ball(type, (int)pos.X + _shake, (int)pos.Y));
+                }
+            }
+
+            if (Environments.GameData.PushCount > 0)
+            {
+                for (int i = 0; i < Environments.GameData.PushCount; i++)
+                {
+                    Environments.Global.SpriteBatch.Draw(
+                        AssetTypes.Texture.Ceiling,
+                        new Vector2(Settings.PLAYING_UI_LEFT_WIDTH - Settings.BALL_SIZE / 2, Settings.PLAYING_UI_TOP_HEIGHT + AssetTypes.Texture.Ceiling.Height * i),
+                        null,
+                        Color.White,
+                        0f,
+                        Vector2.Zero,
+                        1f,
+                        SpriteEffects.None,
+                        0f
+                    );
                 }
             }
 

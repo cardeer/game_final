@@ -15,7 +15,6 @@ namespace game_final.Sprites
         public Vector2 ReflectPoint;
 
         private Base.Sprite _body;
-        private Shapes.Line _guide;
 
         private Shapes.Line _extendGuide;
         private Shapes.Line _reflectGuide;
@@ -145,11 +144,6 @@ namespace game_final.Sprites
 
             if (GuideLength > Settings.MAX_GUIDE_LENGTH || GuideLength <= 0) GuideLength = Settings.MAX_GUIDE_LENGTH;
 
-            _guide = new Shapes.Line(_width / 2, _height / 2, _width / 2, 0, 5, 200);
-            _guide.SetColor(Settings.GUIDE_COLOR);
-            _guide.SetOrigin(5 / 2, _guide.Height);
-            _guide.SetPosition(X + _width / 2, Y + _height / 2);
-
             if (_extendGuide != null)
             {
                 _extendGuide.Destroy();
@@ -190,18 +184,24 @@ namespace game_final.Sprites
 
         public void Draw()
         {
-            
-            if (_guide != null)
-            {
-                DrawSprite(_guide);
-            }
-
             if (_reflectGuide != null)
             {
                 Environments.Global.SpriteBatch.Draw(_reflectGuide.Instance, _reflectGuide.Position, null, _reflectGuide.Color, _reflectGuide.Rotation, _reflectGuide.Origin, 1f, SpriteEffects.None, 0f);
             }
 
             DrawSprite(_body);
+
+            Environments.Global.SpriteBatch.Draw(
+                AssetTypes.Texture.ShooterArrow,
+                new Vector2(X + _width / 2, Y + _height / 2) - new Vector2((float)Math.Cos(Rotation) * 115, (float)Math.Sin(Rotation) * 115),
+                null,
+                Color.White,
+                Rotation - (float)Math.PI / 2,
+                new Vector2(AssetTypes.Texture.ShooterArrow.Width / 2, AssetTypes.Texture.ShooterArrow.Height),
+                0.5f,
+                SpriteEffects.None,
+                0f
+            );
 
             if (_extendGuide != null)
             {
