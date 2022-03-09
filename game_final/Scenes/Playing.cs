@@ -32,9 +32,13 @@ namespace game_final.Scenes
         private Base.Sprite _mana;
 
         private Sprites.Buttons _homeButton;
+        private Sprites.Buttons _replayButton;
+        private Sprites.Buttons _muteButton;
 
         private int _shake = 0;
         private double _shakeWait = 0;
+
+        public static bool _isPlayingBGM = true;
 
         public Playing() : base(true) { }
 
@@ -80,6 +84,7 @@ namespace game_final.Scenes
             int minX = Constants.REFLECT_LEFT - Settings.BALL_SIZE / 2;
             int maxX = (Settings.WINDOW_WIDTH - Settings.PLAYING_UI_RIGHT_WIDTH) + (Settings.BALL_SIZE / 2);
 
+            //Texture
             _bottomLine = new Shapes.Line(minX, Settings.WINDOW_HEIGHT - Settings.PLAYING_UI_BOTTOM_HEIGHT, maxX, Settings.WINDOW_HEIGHT - Settings.PLAYING_UI_BOTTOM_HEIGHT, 5, Constants.PLAY_WIDTH_LEFT + Settings.BALL_SIZE);
             _bottomLine.SetColor(new Color(255, 238, 184));
             _bottomLine.SetOrigin(2, 0);
@@ -128,12 +133,26 @@ namespace game_final.Scenes
             _bottomWallBorder.SetOrigin(0, _bottomWallBorder.Instance.Height);
             _bottomWallBorder.SetPosition(minX, Settings.WINDOW_HEIGHT);
 
+            _shooter = new Sprites.Shooter();
+
+            //Button
             _homeButton = new Sprites.Buttons(AssetTypes.Texture.Button, AssetTypes.Font.PlayingButton, "HOME", 220, 40);
             _homeButton.SetPosition((Settings.PLAYING_UI_LEFT_WIDTH - 100) / 2 - 10, Settings.WINDOW_HEIGHT - 100);
+            _homeButton.Effect = false;
+
+            _replayButton = new Sprites.Buttons(AssetTypes.Texture.IconReplay, AssetTypes.Font.PlayingButton, 50, 50);
+            _replayButton.SetPosition((Settings.PLAYING_UI_LEFT_WIDTH - 100) / 2 - 10, Settings.WINDOW_HEIGHT - 200);
+            _replayButton.TextColor = Color.Black;
+            _replayButton.Effect = false;
+
+            _muteButton = new Sprites.Buttons(AssetTypes.Texture.IconMute, AssetTypes.Font.PlayingButton, 50, 50);
+            _muteButton.SetPosition((Settings.PLAYING_UI_LEFT_WIDTH - 100) / 2 - 10, Settings.WINDOW_HEIGHT - 300);
+            _muteButton.TextColor = Color.Black;
+            _muteButton.Effect = false;
 
             _homeButton.Click += _homeButton_Click;
-
-            _shooter = new Sprites.Shooter();
+            _replayButton.Click += _replayButton_Click;
+            _muteButton.Click += _muteButton_Click;
 
             //BGM
             _playBGM = AssetTypes.Sound.MusicSound;
@@ -145,6 +164,25 @@ namespace game_final.Scenes
         private void _homeButton_Click(object sender, EventArgs e)
         {
             Environments.Scene.SetScene(Types.SceneType.MAIN_MENU, true);
+        }
+
+        private void _replayButton_Click(object sender, EventArgs e)
+        {
+            Environments.Scene.SetScene(Types.SceneType.IN_GAME, true);
+        }
+
+        private void _muteButton_Click(object sender, EventArgs e)
+        {
+            if (_isPlayingBGM)
+            {
+                MediaPlayer.Volume = 0f;
+                _isPlayingBGM = false;
+            }
+            else 
+            {
+                MediaPlayer.Volume = 1f;
+                _isPlayingBGM = true;
+            }
         }
 
         public override void Update()
@@ -185,6 +223,8 @@ namespace game_final.Scenes
             }
 
             _homeButton.Update();
+            _replayButton.Update();
+            _muteButton.Update();
 
             base.Update();
         }
@@ -255,6 +295,8 @@ namespace game_final.Scenes
             _shooter.Draw();
 
             _homeButton.Draw();
+            _replayButton.Draw();
+            _muteButton.Draw();
 
             base.Draw();
         }

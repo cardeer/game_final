@@ -45,6 +45,18 @@ namespace game_final.Sprites
             SetOrigin(_width / 2, _height / 2);
         }
 
+        public Buttons(Texture2D texture, SpriteFont font, int width, int height)
+        {
+            _texture = texture;
+
+            _font = font;
+
+            _width = width;
+            _height = height;
+
+            SetOrigin(_width / 2, _height / 2);
+        }
+
         public void Update()
         {
             if (IsHovering)

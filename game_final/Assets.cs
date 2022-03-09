@@ -22,6 +22,9 @@ namespace game_final
         private static void loadTextures()
         {
             AssetTypes.Texture.Button = s_content.Load<Texture2D>("Buttons/button");
+            AssetTypes.Texture.IconMute = s_content.Load<Texture2D>("Buttons/icon_audio");
+            AssetTypes.Texture.IconUnmute = s_content.Load<Texture2D>("Buttons/icon_audio_mute");
+            AssetTypes.Texture.IconReplay = s_content.Load<Texture2D>("Buttons/icon_replay");
         }
 
         private static void loadFont()

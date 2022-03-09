@@ -11,6 +11,9 @@ namespace game_final.AssetTypes
         public static Texture2D ShooterArrow;
 
         public static Texture2D Button;
+        public static Texture2D IconMute;
+        public static Texture2D IconUnmute;
+        public static Texture2D IconReplay;
 
         public static Texture2D MainMenuBG;
 
@@ -25,7 +28,6 @@ namespace game_final.AssetTypes
         public static Texture2D WallPaper;
         public static Texture2D Scoreboard;
         public static Texture2D WallBorder;
-        public static Texture2D BottomWallBorder;
         public static Texture2D TopWallBorder;
         public static Texture2D Ceiling;
 
