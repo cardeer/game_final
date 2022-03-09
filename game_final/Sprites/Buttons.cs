@@ -13,6 +13,7 @@ namespace game_final.Sprites
     {
         public bool Effect = true;
         public Color TextColor = Color.White;
+        public bool MultipleClicks = false;
 
         private Texture2D _texture;
 
@@ -57,6 +58,11 @@ namespace game_final.Sprites
             _height = height;
 
             SetOrigin(_width / 2, _height / 2);
+        }
+
+        public void SetTexture(Texture2D texture)
+        {
+            _texture = texture;
         }
 
         public void Update()
@@ -114,7 +120,12 @@ namespace game_final.Sprites
             if (IsClicked)
             {
                 AssetTypes.Sound.ButtonClick.Play(0.2f, 0, 0);
-                Environments.Global.HoveringButton = false;
+
+                if (!MultipleClicks)
+                {
+                    Environments.Global.HoveringButton = false;
+                }
+
                 InvokeClick(this);
             }
         }

@@ -144,11 +144,13 @@ namespace game_final.Scenes
             _replayButton.SetPosition((Settings.PLAYING_UI_LEFT_WIDTH - 100) / 2 - 10, Settings.WINDOW_HEIGHT - 200);
             _replayButton.TextColor = Color.Black;
             _replayButton.Effect = false;
+            _replayButton.MultipleClicks = true;
 
             _muteButton = new Sprites.Buttons(AssetTypes.Texture.IconMute, AssetTypes.Font.PlayingButton, 50, 50);
             _muteButton.SetPosition((Settings.PLAYING_UI_LEFT_WIDTH - 100) / 2 - 10, Settings.WINDOW_HEIGHT - 300);
             _muteButton.TextColor = Color.Black;
             _muteButton.Effect = false;
+            _muteButton.MultipleClicks = true;
 
             _homeButton.Click += _homeButton_Click;
             _replayButton.Click += _replayButton_Click;
@@ -181,7 +183,7 @@ namespace game_final.Scenes
                 MediaPlayer.Volume = 0f;
                 _isPlayingBGM = false;
             }
-            else 
+            else
             {
                 MediaPlayer.Volume = Settings.PLAYING_BGM_VOLUME;
                 _isPlayingBGM = true;
