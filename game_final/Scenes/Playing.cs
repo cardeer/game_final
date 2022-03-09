@@ -38,7 +38,7 @@ namespace game_final.Scenes
         private int _shake = 0;
         private double _shakeWait = 0;
 
-        public static bool _isPlayingBGM = true;
+        public static bool _isPlayingBGM;
 
         public Playing() : base(true) { }
 
@@ -158,6 +158,7 @@ namespace game_final.Scenes
             _playBGM = AssetTypes.Sound.MusicSound;
             MediaPlayer.Volume = Settings.PLAYING_BGM_VOLUME;
             MediaPlayer.Play(_playBGM);
+            _isPlayingBGM = true;
 
             base.Setup();
         }
@@ -169,7 +170,8 @@ namespace game_final.Scenes
 
         private void _replayButton_Click(object sender, EventArgs e)
         {
-            Environments.Scene.SetScene(Types.SceneType.IN_GAME, true);
+            Environments.GameData.Initialize();
+            Environments.GameData.GenerateLevel();
         }
 
         private void _muteButton_Click(object sender, EventArgs e)
