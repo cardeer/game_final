@@ -34,5 +34,8 @@ namespace game_final
         public static int REFLECT_GUIDE_WIDTH = 3;
 
         public static float MIN_SHOOTER_ANGLE = 25;
+
+        public static float MAIN_MENU_BGM_VOLUME = 0.4f;
+        public static float PLAYING_BGM_VOLUME = 0.4f;
     }
 }

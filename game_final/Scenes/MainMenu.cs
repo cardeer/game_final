@@ -49,7 +49,7 @@ namespace game_final.Scenes
             //BGM
             if (MediaPlayer.State != MediaState.Playing)
             {
-                MediaPlayer.Volume = 0.4f;
+                MediaPlayer.Volume = Settings.MAIN_MENU_BGM_VOLUME;
                 MediaPlayer.Play(AssetTypes.Sound.MusicSound);
             }
 

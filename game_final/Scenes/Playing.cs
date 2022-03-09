@@ -156,6 +156,7 @@ namespace game_final.Scenes
 
             //BGM
             _playBGM = AssetTypes.Sound.MusicSound;
+            MediaPlayer.Volume = Settings.PLAYING_BGM_VOLUME;
             MediaPlayer.Play(_playBGM);
 
             base.Setup();
@@ -180,7 +181,7 @@ namespace game_final.Scenes
             }
             else 
             {
-                MediaPlayer.Volume = 1f;
+                MediaPlayer.Volume = Settings.PLAYING_BGM_VOLUME;
                 _isPlayingBGM = true;
             }
         }
