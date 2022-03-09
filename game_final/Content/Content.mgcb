@@ -183,7 +183,7 @@
 /processorParam:TextureFormat=Color
 /build:Scenes/Playing/board_clean.png
 
-#begin Scenes/Playing/bottom_wall_border.png
+#begin Scenes/Playing/ceiling.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -193,7 +193,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Scenes/Playing/bottom_wall_border.png
+/build:Scenes/Playing/ceiling.png
 
 #begin Scenes/Playing/Character_window.png
 /importer:TextureImporter
@@ -207,7 +207,7 @@
 /processorParam:TextureFormat=Color
 /build:Scenes/Playing/Character_window.png
 
-#begin Scenes/Playing/ceiling.png
+#begin Scenes/Playing/heart.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -217,7 +217,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Scenes/Playing/ceiling.png
+/build:Scenes/Playing/heart.png
 
 #begin Scenes/Playing/left_wall.png
 /importer:TextureImporter
@@ -230,6 +230,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Scenes/Playing/left_wall.png
+
+#begin Scenes/Playing/manaPotion.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Scenes/Playing/manaPotion.png
 
 #begin Scenes/Playing/megumin.png
 /importer:TextureImporter

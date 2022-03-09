@@ -36,5 +36,7 @@ namespace game_final.AssetTypes
         public static Texture2D InfoBoard;
         public static Texture2D CharacterWindow;
         public static Texture2D Megumin;
+        public static Texture2D Heart;
+        public static Texture2D Mana;
     }
 }

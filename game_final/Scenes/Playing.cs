@@ -28,6 +28,8 @@ namespace game_final.Scenes
         private Base.Sprite _infoBoard;
         private Base.Sprite _characterWindow;
         private Base.Sprite _megumin;
+        private Base.Sprite _heart;
+        private Base.Sprite _mana;
 
         private Sprites.Buttons _homeButton;
 
@@ -55,7 +57,6 @@ namespace game_final.Scenes
             AssetTypes.Texture.Scoreboard = Environments.Global.Content.Load<Texture2D>("Scenes/Playing/scoreboard");
             AssetTypes.Texture.WallBorder = Environments.Global.Content.Load<Texture2D>("Scenes/Playing/wall_border");
             AssetTypes.Texture.TopWallBorder = Environments.Global.Content.Load<Texture2D>("Scenes/Playing/top_wall_border");
-            AssetTypes.Texture.BottomWallBorder = Environments.Global.Content.Load<Texture2D>("Scenes/Playing/bottom_wall_border");
             AssetTypes.Texture.MagicCircle = Environments.Global.Content.Load<Texture2D>("Effects/magic_circle");
             AssetTypes.Texture.PlayBackground = Environments.Global.Content.Load<Texture2D>("Scenes/Playing/background");
             AssetTypes.Texture.Ceiling = Environments.Global.Content.Load<Texture2D>("Scenes/Playing/ceiling");
@@ -64,6 +65,8 @@ namespace game_final.Scenes
             AssetTypes.Texture.InfoBoard = Environments.Global.Content.Load<Texture2D>("Scenes/Playing/board_clean");
             AssetTypes.Texture.CharacterWindow = Environments.Global.Content.Load<Texture2D>("Scenes/Playing/Character_window");
             AssetTypes.Texture.Megumin = Environments.Global.Content.Load<Texture2D>("Scenes/Playing/megumin");
+            AssetTypes.Texture.Heart = Environments.Global.Content.Load<Texture2D>("Scenes/Playing/heart");
+            AssetTypes.Texture.Mana = Environments.Global.Content.Load<Texture2D>("Scenes/Playing/manaPotion");
 
             //Sound
             AssetTypes.Sound.MusicSound = Environments.Global.Content.Load<Song>("Sounds/PlayBGM");
@@ -94,6 +97,14 @@ namespace game_final.Scenes
             _characterWindow = new Base.Sprite(AssetTypes.Texture.CharacterWindow, 120);
             _characterWindow.SetOrigin(0, _characterWindow.Height);
             _characterWindow.SetPosition(minX + 30, Settings.WINDOW_HEIGHT - AssetTypes.Texture.InfoBoard.Height);
+
+            _heart = new Base.Sprite(AssetTypes.Texture.Heart, 80);
+            _heart.SetOrigin(0, _infoBoard.Height);
+            _heart.SetPosition(Settings.WINDOW_WIDTH - 250, Settings.WINDOW_HEIGHT - AssetTypes.Texture.InfoBoard.Height + 20);
+
+            _mana = new Base.Sprite(AssetTypes.Texture.Mana, 80);
+            _mana.SetOrigin(0, _infoBoard.Height);
+            _mana.SetPosition(Settings.WINDOW_WIDTH - 250, Settings.WINDOW_HEIGHT - AssetTypes.Texture.InfoBoard.Height + 50);
 
             _leftWall = new Base.Sprite(AssetTypes.Texture.LeftWall);
             _leftWall.SetPosition(0, 0);
@@ -190,6 +201,8 @@ namespace game_final.Scenes
             DrawSprite(_infoBoard);
             DrawSprite(_characterWindow);
             DrawSprite(_megumin);
+            DrawSprite(_heart);
+            DrawSprite(_mana);
 
             DrawSprite(_leftWall);
             DrawSprite(_wallpaper);
