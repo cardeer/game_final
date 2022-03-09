@@ -212,13 +212,6 @@ namespace game_final.Scenes
 
                 _shooter.Update();
             }
-            else
-            {
-                if (Math.Abs(_shooter.NextBall.X - (_shooter.X + _shooter.Width / 2)) > 1)
-                {
-                    _shooter.NextBall.X -= (float)Environments.Global.GameTime.ElapsedGameTime.TotalSeconds * Settings.BALL_SIZE * 3;
-                }
-            }
 
             Environments.GameData.MagicCircles.RemoveAll(m => m.ShouldDestroy);
 
