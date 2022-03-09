@@ -60,6 +60,11 @@ namespace game_final.Sprites
             SetOrigin(_width / 2, _height / 2);
         }
 
+        public void SetTexture(Texture2D texture)
+        {
+            _texture = texture;
+        }
+
         public void Update()
         {
             if (IsHovering)

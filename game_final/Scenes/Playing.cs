@@ -183,7 +183,7 @@ namespace game_final.Scenes
                 MediaPlayer.Volume = 0f;
                 _isPlayingBGM = false;
             }
-            else 
+            else
             {
                 MediaPlayer.Volume = Settings.PLAYING_BGM_VOLUME;
                 _isPlayingBGM = true;
