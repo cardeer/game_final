@@ -41,14 +41,9 @@ namespace game_final.Types
             Types.Vector2Int current = ball.CurrentSnap;
             Types.Vector2Int prev = ball.PreviousSnap;
 
-            if (!correctPosition(SnapRow, SnapCol))
+            while (!correctPosition(SnapRow, SnapCol))
             {
-                if (correctPosition(prev.Y, prev.X))
-                {
-                    SnapRow = prev.Y;
-                    SnapCol = prev.X;
-                }
-                else if (current.Y < prev.Y)
+                if (current.Y < prev.Y)
                 {
                     SnapRow++;
                 }

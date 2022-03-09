@@ -31,7 +31,6 @@ namespace game_final.Utils
             int[,] template = Environments.GameData.BallsTemplate;
 
             int half = Settings.BALL_SIZE / 2;
-            int size = Settings.BALL_SIZE;
 
             float posY = ball.SnapPoint.Y;
             float posX = ball.SnapPoint.X;
@@ -71,8 +70,6 @@ namespace game_final.Utils
             Vector2 pos = GetPosFromIndex(posY, posX);
             Vector2 left = GetPosFromIndex(roundY, roundX - 1);
             Vector2 right = GetPosFromIndex(roundY, roundX + 1);
-            Vector2 right2 = GetPosFromIndex(roundY, roundX + 2);
-            Vector2 left2 = GetPosFromIndex(roundY, roundX - 1);
             Vector2 topLeft = GetPosFromIndex(roundY - 1, roundX - 1);
             Vector2 top = GetPosFromIndex(roundY - 1, roundX);
             Vector2 topRight = GetPosFromIndex(roundY - 1, roundX + 1);
@@ -80,15 +77,6 @@ namespace game_final.Utils
             Types.Snap result = new Types.Snap();
             result.SnapRow = roundY;
             result.SnapCol = roundX;
-
-            //if (template[roundY, roundX] > 0)
-            //{
-            //    if (ball.Unit.X > 0 || ball.Unit.X < 0)
-            //    {
-            //        if (Math.Ceiling(pos.X) - pos.X <= pos.X - Math.Floor(pos.X) && roundX + 2 < Settings.TEMPLATE_COL_BALLS) roundX += 2;
-            //        else if (roundX - 2 >= 0) roundX -= 2;
-            //    }
-            //}
 
             if (roundY <= Environments.GameData.PushCount)
             {
@@ -112,14 +100,6 @@ namespace game_final.Utils
                 result.ShouldSnap = true;
             }
             else if (roundX < Settings.TEMPLATE_COL_BALLS - 1 && template[roundY, roundX + 1] > 0 && pos.X + half >= right.X - half)
-            {
-                result.ShouldSnap = true;
-            }
-            else if (ball.Unit.X < 0 && roundX - 2 >= 0 && template[roundY, roundX - 2] > 0 && pos.X - size <= left2.X + half)
-            {
-                result.ShouldSnap = true;
-            }
-            else if (ball.Unit.X > 0 && roundX + 2 < Settings.TEMPLATE_COL_BALLS && template[roundY, roundX + 2] > 0 && pos.X + size >= right2.X - half)
             {
                 result.ShouldSnap = true;
             }
