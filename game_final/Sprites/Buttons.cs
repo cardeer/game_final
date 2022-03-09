@@ -27,6 +27,8 @@ namespace game_final.Sprites
 
         private bool _playedSound = false;
 
+        private bool _justEntered = false;
+
         public Buttons(Texture2D texture, SpriteFont font, string text, int width, int height)
         {
             _texture = texture;
@@ -61,7 +63,11 @@ namespace game_final.Sprites
         {
             if (IsHovering)
             {
-                Environments.Global.HoveringButton = true;
+                if (!_justEntered)
+                {
+                    Environments.Global.HoveringButton = true;
+                    _justEntered = true;
+                }
 
                 if (!_playedSound)
                 {
@@ -98,7 +104,11 @@ namespace game_final.Sprites
                 _effectDirection = 1;
                 _effectScale = _maxEffectScale;
 
-                Environments.Global.HoveringButton = false;
+                if (_justEntered)
+                {
+                    Environments.Global.HoveringButton = false;
+                    _justEntered = false;
+                }
             }
 
             if (IsClicked)
