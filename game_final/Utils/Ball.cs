@@ -10,10 +10,10 @@ namespace game_final.Utils
 {
     static class Ball
     {
-        public static Vector2 GetSnappedPosition(Sprites.Ball ball)
+        public static Vector2 GetSnappedPosition(Sprites.Ball ball, float distX, float distY)
         {
-            float relativeX = ball.X - Settings.PLAYING_UI_LEFT_WIDTH - Settings.BALL_SIZE / 4;
-            float relativeY = ball.Y - Settings.PLAYING_UI_TOP_HEIGHT - Settings.PLAY_AREA_TOP_PADDING - Settings.BALL_SIZE / 2;
+            float relativeX = (ball.X + distX) - Settings.PLAYING_UI_LEFT_WIDTH - Settings.BALL_SIZE / 4;
+            float relativeY = (ball.Y + distY) - Settings.PLAYING_UI_TOP_HEIGHT - Settings.PLAY_AREA_TOP_PADDING - Settings.BALL_SIZE / 2;
 
             float x = relativeX / Constants.PLAY_WIDTH_LEFT;
             x = (float)(x * (Settings.TEMPLATE_COL_BALLS - 1));
@@ -33,8 +33,8 @@ namespace game_final.Utils
             int half = Settings.BALL_SIZE / 2;
             int size = Settings.BALL_SIZE;
 
-            float posY = ball.SnapPoint.Y;
-            float posX = ball.SnapPoint.X;
+            float posY = ball.NextPoint.Y;
+            float posX = ball.NextPoint.X;
 
             int roundY = (int)Math.Round(posY);
             int roundX = (int)Math.Round(posX);
@@ -93,6 +93,11 @@ namespace game_final.Utils
             if (roundY <= Environments.GameData.PushCount)
             {
                 result.SnapRow = Environments.GameData.PushCount;
+                result.ShouldSnap = true;
+            }
+
+            if (ball.PreviousSnap != null && ball.CurrentSnap != null && template[ball.PreviousSnap.Y, ball.PreviousSnap.X] > 0 || template[ball.CurrentSnap.Y, ball.CurrentSnap.X] > 0)
+            {
                 result.ShouldSnap = true;
             }
             else if (roundY > 0 && roundX > 0 && template[roundY - 1, roundX - 1] > 0 && pos.Y - half <= topLeft.Y + half && pos.X - half <= topLeft.X + half)

@@ -8,7 +8,8 @@ namespace game_final.Sprites
     class Ball : Base.Sprite
     {
         public Types.BallType Type;
-        public Vector2 SnapPoint;
+        public Vector2 CurrentPoint;
+        public Vector2 NextPoint;
         public Types.Vector2Int CurrentSnap;
         public Types.Vector2Int PreviousSnap;
         public Vector2 Unit;
@@ -52,7 +53,10 @@ namespace game_final.Sprites
                 return;
             }
 
-            SnapPoint = Utils.Ball.GetSnappedPosition(this);
+            float distX = Unit.X * Settings.BALL_SPEED * Environments.Global.Elapsed;
+            float distY = Unit.Y * Settings.BALL_SPEED * Environments.Global.Elapsed;
+
+            NextPoint = Utils.Ball.GetSnappedPosition(this, distX, distY);
 
             Types.Snap snap = Utils.Ball.ShouldSnap(this);
 
@@ -63,13 +67,8 @@ namespace game_final.Sprites
                 return;
             }
 
-
-            float distX = Unit.X * Settings.BALL_SPEED * Environments.Global.Elapsed;
-            float distY = Unit.Y * Settings.BALL_SPEED * Environments.Global.Elapsed;
-
             SetPosition(X + distX, Y + distY);
-
-            SnapPoint = Utils.Ball.GetSnappedPosition(this);
+            CurrentPoint = NextPoint;
 
             if (X <= Constants.REFLECT_LEFT || X >= Constants.REFLECT_RIGHT)
             {

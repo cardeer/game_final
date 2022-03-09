@@ -40,7 +40,31 @@ namespace game_final.Types
 
             Types.Vector2Int current = ball.CurrentSnap;
             Types.Vector2Int prev = ball.PreviousSnap;
-            
+
+            if (SnapCol - 1 >= 0 && SnapCol + 1 < Settings.TEMPLATE_COL_BALLS && template[SnapRow, SnapCol - 1] > 0 && template[SnapRow, SnapCol + 1] > 0)
+            {
+                SnapRow++;
+            }
+            else if (current.Y < prev.Y && current.X == prev.X && template[current.Y, current.X] > 0)
+            {
+                SnapRow++;
+            }
+
+            if (!correctPosition(SnapRow, SnapCol))
+            {
+                if (current.X == prev.X && current.Y == prev.Y && template[current.Y, current.X] > 0)
+                {
+                    if (ball.Unit.X > 0 && SnapCol - 2 >= 0) SnapCol -= 2;
+                    else if (ball.Unit.X < 0 && SnapCol + 2 < Settings.TEMPLATE_COL_BALLS) SnapCol += 2;
+                }
+                else if (template[prev.Y, prev.X] > 0)
+                {
+                    if (current.Y < prev.Y && current.X == prev.X) SnapRow = prev.Y + 1;
+                    else if (current.Y == prev.Y && current.X < prev.X && prev.X + 2 < Settings.TEMPLATE_COL_BALLS) SnapCol = prev.X + 2;
+                    else if (current.Y == prev.Y && current.X > prev.X && prev.X - 2 >= 0) SnapCol = prev.X - 2;
+                }
+            }
+
             if (!correctPosition(SnapRow, SnapCol))
             {
                 if (ball.Unit.X > 0)
@@ -70,6 +94,7 @@ namespace game_final.Types
                     else SnapRow++;
                 }
             }
+                //if (current.Y < prev.Y && current.X == prev.X && !correctPosition(SnapRow, SnapCol)) SnapRow++;
 
             //Vector2 pos = Utils.Ball.GetPosFromIndex(ball.SnapPoint.Y, ball.SnapPoint.X);
             //Vector2 right = Utils.Ball.GetPosFromIndex(SnapRow, SnapCol + 1);
