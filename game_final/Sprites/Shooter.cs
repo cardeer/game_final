@@ -26,6 +26,13 @@ namespace game_final.Sprites
         private Sprites.Ball _currentBall;
         private Sprites.Ball _nextBall;
 
+        private int _nextBallPosX = 0;
+        private int _nextBallPosY = 0;
+        private float _originNextBallScale = 0;
+
+        private float _magicCircleScale = 2f;
+        private float _magicCircleRotation = 0;
+
         public Sprites.Ball NextBall
         {
             get { return _nextBall; }
@@ -44,11 +51,19 @@ namespace game_final.Sprites
 
             _unitVector = new Vector2((float)Math.Cos(_rotation), (float)Math.Sin(_rotation));
 
+            //_nextBallPosX = (int)(X + Width + Settings.BALL_SIZE);
+            //_nextBallPosY = (int)(Y + Height / 2);
+
+            _nextBallPosX = Constants.REFLECT_RIGHT - Settings.BALL_SIZE / 2 - 10;
+            _nextBallPosY = Settings.WINDOW_HEIGHT - Settings.PLAYING_UI_BOTTOM_HEIGHT - Settings.BALL_SIZE - 40;
+
             int code = Utils.Ball.RandomBallCode();
             _currentBall = new Sprites.Ball(Types.Ball.BallTypeFromCode(code), (int)(X + Width / 2), (int)(Y + Height / 2), false);
 
             int nextCode = Utils.Ball.RandomBallCode();
-            _nextBall = new Sprites.Ball(Types.Ball.BallTypeFromCode(nextCode), (int)(X + Width + Settings.BALL_SIZE), (int)(Y + Height / 2), false);
+            _nextBall = new Sprites.Ball(Types.Ball.BallTypeFromCode(nextCode), _nextBallPosX, _nextBallPosY, false);
+
+            _originNextBallScale = _nextBall.Scale;
         }
 
         private void updateUnitVector()
@@ -59,6 +74,8 @@ namespace game_final.Sprites
 
         public void Update()
         {
+            _magicCircleRotation += Utils.Converter.DegressToRadians(360 / 4 * Environments.Global.GameTime.ElapsedGameTime.TotalSeconds);
+
             MouseState mouseState = Environments.Global.CurrentMouseState;
             MouseState previousMouseState = Environments.Global.PreviousMouseState;
 
@@ -73,7 +90,7 @@ namespace game_final.Sprites
             {
                 _rotation = Converter.DegressToRadians(Settings.MIN_SHOOTER_ANGLE);
             }
-            else if (mouseX > Constants.REFLECT_CENTER_X && rotationDegrees > 180 - Settings. MIN_SHOOTER_ANGLE)
+            else if (mouseX > Constants.REFLECT_CENTER_X && rotationDegrees > 180 - Settings.MIN_SHOOTER_ANGLE)
             {
                 _rotation = Converter.DegressToRadians(180 - Settings.MIN_SHOOTER_ANGLE);
             }
@@ -86,24 +103,27 @@ namespace game_final.Sprites
             {
                 _currentBall.Rotation = Rotation - (float)Math.PI / 2;
 
-                _nextBall.Rotation += Converter.DegressToRadians(3);
+                //_nextBall.Rotation += Converter.DegressToRadians(3);
             }
             else
             {
-                if (Math.Abs(_nextBall.X - (X + Width / 2)) > 1)
+                if (_nextBall.Scale >= 0)
                 {
-                    _nextBall.X -= (float)Environments.Global.GameTime.ElapsedGameTime.TotalSeconds * Settings.BALL_SIZE * 3;
+                    _nextBall.Scale -= (float)Environments.Global.GameTime.ElapsedGameTime.TotalSeconds * 1;
                 }
-                
-                if (_shotBall == null)
+                else
                 {
-                    _currentBall = _nextBall;
-                    _currentBall.SetPosition((int)(X + Width / 2), (int)(Y + Height / 2));
+                    if (_shotBall == null)
+                    {
+                        _currentBall = _nextBall;
+                        _currentBall.Scale = _originNextBallScale;
+                        _currentBall.SetPosition((int)(X + Width / 2), (int)(Y + Height / 2));
 
-                    int nextCode = Utils.Ball.RandomBallCode();
-                    _nextBall = new Sprites.Ball(Types.Ball.BallTypeFromCode(nextCode), (int)(X + Width + Settings.BALL_SIZE), (int)(Y + Height / 2), false);
+                        int nextCode = Utils.Ball.RandomBallCode();
+                        _nextBall = new Sprites.Ball(Types.Ball.BallTypeFromCode(nextCode), _nextBallPosX, _nextBallPosY, false);
 
-                    Environments.GameData.CanShoot = true;
+                        Environments.GameData.CanShoot = true;
+                    }
                 }
             }
 
@@ -217,6 +237,17 @@ namespace game_final.Sprites
             {
                 Environments.Global.SpriteBatch.Draw(_currentBall.Instance, _currentBall.Position, null, _currentBall.DrawColor, _currentBall.Rotation, _currentBall.Origin, _currentBall.Scale, SpriteEffects.None, 0f);
             }
+
+            Environments.Global.SpriteBatch.Draw(
+                AssetTypes.Texture.MagicCircle,
+                new Rectangle(_nextBallPosX, _nextBallPosY, (int)(Settings.BALL_SIZE * _magicCircleScale), (int)(Settings.BALL_SIZE * _magicCircleScale)),
+                null,
+                Color.Black,
+                _magicCircleRotation,
+                new Vector2(AssetTypes.Texture.MagicCircle.Width / 2, AssetTypes.Texture.MagicCircle.Height / 2),
+                SpriteEffects.None,
+                0f
+            );
 
             Environments.Global.SpriteBatch.Draw(_nextBall.Instance, _nextBall.Position, null, _nextBall.DrawColor, _nextBall.Rotation, _nextBall.Origin, _nextBall.Scale, SpriteEffects.None, 0f);
         }
