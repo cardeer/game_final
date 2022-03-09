@@ -52,17 +52,7 @@ namespace game_final.Sprites
                 return;
             }
 
-            float distX = Unit.X * Settings.BALL_SPEED * Environments.Global.Elapsed;
-            float distY = Unit.Y * Settings.BALL_SPEED * Environments.Global.Elapsed;
-
-            SetPosition(X + distX, Y + distY);
-
             SnapPoint = Utils.Ball.GetSnappedPosition(this);
-
-            if (X <= Constants.REFLECT_LEFT || X >= Constants.REFLECT_RIGHT)
-            {
-                Unit.X = -Unit.X;
-            }
 
             Types.Snap snap = Utils.Ball.ShouldSnap(this);
 
@@ -70,6 +60,17 @@ namespace game_final.Sprites
             {
                 _snapped = true;
                 Environments.GameData.SetBallTemplate(snap.SnapRow, snap.SnapCol, Types.Ball.BallCode(Type));
+                return;
+            }
+
+            float distX = Unit.X * Settings.BALL_SPEED * Environments.Global.Elapsed;
+            float distY = Unit.Y * Settings.BALL_SPEED * Environments.Global.Elapsed;
+
+            SetPosition(X + distX, Y + distY);
+
+            if (X <= Constants.REFLECT_LEFT || X >= Constants.REFLECT_RIGHT)
+            {
+                Unit.X = -Unit.X;
             }
         }
     }
