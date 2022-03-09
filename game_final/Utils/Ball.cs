@@ -20,7 +20,7 @@ namespace game_final.Utils
             x = Math.Clamp(x, 0, Settings.TEMPLATE_COL_BALLS - 1);
 
             float y = relativeY / Constants.MAX_SNAP_Y;
-            y = (float)(y * (Settings.TEMPLATE_ROW_BALLS - 1));
+            y = (float)(y * (Settings.TEMPLATE_ROW_BALLS));
             y = Math.Clamp(y, 0, Settings.TEMPLATE_ROW_BALLS - 1);
 
             return new Vector2(x, y);

@@ -24,33 +24,19 @@ namespace game_final.Types
             SnapCol = snapCol;
         }
 
-        private bool correctPosition()
-        {
-            if (Environments.GameData.BallsTemplate[SnapRow, SnapCol] > 0) return false;
-            return (Environments.GameData.PushCount % 2 == 0 && SnapRow % 2 == SnapCol % 2) || (Environments.GameData.PushCount % 2 == 1 && SnapRow % 2 != SnapCol % 2);
-        }
-
         private bool correctPosition(int row, int col)
         {
-            if (row < 0 || col < 0 || row > Settings.TEMPLATE_ROW_BALLS - 1 && col > Settings.TEMPLATE_COL_BALLS - 1) return false;
+            if (row < 0 || col < 0 || row > Settings.TEMPLATE_ROW_BALLS - 1 || col > Settings.TEMPLATE_COL_BALLS - 1) return false;
             if (Environments.GameData.BallsTemplate[row, col] > 0) return false;
             return (Environments.GameData.PushCount % 2 == 0 && row % 2 == col % 2) || (Environments.GameData.PushCount % 2 == 1 && row % 2 != col % 2);
         }
 
-        //private bool correctIndex(int row, int col)
-        //{
-        //    if (row < 0 || col < 0 || row > Settings.TEMPLATE_ROW_BALLS - 1 && col > Settings.TEMPLATE_COL_BALLS - 1) return false;
-        //    return (Environments.GameData.PushCount % 2 == 0 && row % 2 == col % 2) || (Environments.GameData.PushCount % 2 == 1 && row % 2 != col % 2);
-        //}
-
         public void FitPoints(Sprites.Ball ball)
         {
-            //int[,] template = Environments.GameData.BallsTemplate;
+            int[,] template = Environments.GameData.BallsTemplate;
 
             Debug.WriteLine($"snap from: {SnapRow}, {SnapCol} {ball.Unit.X}, previous snap: {ball.PreviousSnap.Y}, {ball.PreviousSnap.X}");
             Environments.GameData.PrintTemplate();
-
-            int[,] template = Environments.GameData.BallsTemplate;
 
             Types.Vector2Int current = ball.CurrentSnap;
             Types.Vector2Int prev = ball.PreviousSnap;
