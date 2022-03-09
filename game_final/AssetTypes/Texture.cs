@@ -34,6 +34,7 @@ namespace game_final.AssetTypes
         public static Texture2D PlayBackground;
 
         public static Texture2D InfoBoard;
+        public static Texture2D CharacterWindow;
         public static Texture2D Megumin;
     }
 }
