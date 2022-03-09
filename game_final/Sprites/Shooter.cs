@@ -40,7 +40,7 @@ namespace game_final.Sprites
             _body = new Base.Sprite(AssetTypes.Texture.Wand, 400);
             _body.SetOrigin(_body.Instance.Width / 2, _body.Instance.Height / 2);
             _body.SetPosition(X + _width / 2, Y + _height / 2);
-            _body.Rotation = -(float)Math.PI / 2;
+            _body.Rotation = Utils.Converter.DegressToRadians(-90 + 10);
 
             _unitVector = new Vector2((float)Math.Cos(_rotation), (float)Math.Sin(_rotation));
 
@@ -165,7 +165,7 @@ namespace game_final.Sprites
                 int pointX = (int)(reflectX + unitX * int.MaxValue);
                 int pointY = (int)(reflectY + unitY * int.MaxValue);
 
-                _reflectGuide = new Shapes.Line(reflectX, reflectY, pointX, pointY, 2, 100);
+                _reflectGuide = new Shapes.Line(reflectX, reflectY, pointX, pointY, Settings.REFLECT_GUIDE_WIDTH, 100);
                 _reflectGuide.SetColor(Settings.REFLEFCT_GUIDE_COLOR);
                 _reflectGuide.SetOrigin(2, 0);
                 _reflectGuide.SetPosition(ReflectPoint.X, ReflectPoint.Y);
@@ -174,7 +174,7 @@ namespace game_final.Sprites
                 int heightFromShooter = (int)(reflectY - (Y + Height / 2.0f));
                 int extendLength = (int)Math.Sqrt(heightFromShooter * heightFromShooter + Constants.PLAY_HALF_WIDTH * Constants.PLAY_HALF_WIDTH) - 200;
 
-                _extendGuide = new Shapes.Line((int)(X + Width / 2), (int)(Y + Height / 2), reflectX, reflectY, 2, extendLength);
+                _extendGuide = new Shapes.Line((int)(X + Width / 2), (int)(Y + Height / 2), reflectX, reflectY, Settings.REFLECT_GUIDE_WIDTH, extendLength);
                 _extendGuide.SetColor(Settings.REFLEFCT_GUIDE_COLOR);
                 _extendGuide.SetOrigin(2, 0);
                 _extendGuide.SetPosition(ReflectPoint.X, ReflectPoint.Y);
@@ -195,7 +195,7 @@ namespace game_final.Sprites
                 AssetTypes.Texture.ShooterArrow,
                 new Vector2(X + _width / 2, Y + _height / 2) - new Vector2((float)Math.Cos(Rotation) * 115, (float)Math.Sin(Rotation) * 115),
                 null,
-                Color.White,
+                Settings.GUIDE_COLOR,
                 Rotation - (float)Math.PI / 2,
                 new Vector2(AssetTypes.Texture.ShooterArrow.Width / 2, AssetTypes.Texture.ShooterArrow.Height),
                 0.5f,

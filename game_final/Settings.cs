@@ -29,8 +29,9 @@ namespace game_final
         public const int TEMPLATE_ROW_BALLS = 13;
 
         public const int MAX_GUIDE_LENGTH = 500;
-        public static Color GUIDE_COLOR = Color.White;
+        public static Color GUIDE_COLOR = Color.Red;
         public static Color REFLEFCT_GUIDE_COLOR = Color.Red;
+        public static int REFLECT_GUIDE_WIDTH = 3;
 
         public static float MIN_SHOOTER_ANGLE = 25;
     }

@@ -40,42 +40,34 @@ namespace game_final.Types
 
             Types.Vector2Int current = ball.CurrentSnap;
             Types.Vector2Int prev = ball.PreviousSnap;
-
-            while (!correctPosition(SnapRow, SnapCol))
+            
+            if (!correctPosition(SnapRow, SnapCol))
             {
-                if (current.Y < prev.Y)
+                if (ball.Unit.X > 0)
                 {
-                    SnapRow++;
+                    if (correctPosition(SnapRow, SnapCol - 1)) SnapCol -= 1;
+                    else if (correctPosition(SnapRow, SnapCol + 1)) SnapCol += 1;
+
+                    else if (correctPosition(SnapRow, SnapCol - 2)) SnapCol -= 2;
+                    else if (correctPosition(SnapRow, SnapCol + 2)) SnapCol += 2;
+
+                    else if (correctPosition(SnapRow, SnapCol - 3)) SnapCol -= 3;
+                    else if (correctPosition(SnapRow, SnapCol + 3)) SnapCol += 3;
+
+                    else SnapRow++;
                 }
-
-                if (!correctPosition(SnapRow, SnapCol))
+                else if (ball.Unit.X < 0)
                 {
-                    if (ball.Unit.X > 0)
-                    {
-                        if (correctPosition(SnapRow, SnapCol - 1)) SnapCol -= 1;
-                        else if (correctPosition(SnapRow, SnapCol + 1)) SnapCol += 1;
+                    if (correctPosition(SnapRow, SnapCol + 1)) SnapCol += 1;
+                    else if (correctPosition(SnapRow, SnapCol - 1)) SnapCol -= 1;
 
-                        else if (correctPosition(SnapRow, SnapCol - 2)) SnapCol -= 2;
-                        else if (correctPosition(SnapRow, SnapCol + 2)) SnapCol += 2;
+                    else if (correctPosition(SnapRow, SnapCol + 2)) SnapCol += 2;
+                    else if (correctPosition(SnapRow, SnapCol - 2)) SnapCol -= 2;
 
-                        else if (correctPosition(SnapRow, SnapCol - 3)) SnapCol -= 3;
-                        else if (correctPosition(SnapRow, SnapCol + 3)) SnapCol += 3;
+                    else if (correctPosition(SnapRow, SnapCol + 3)) SnapCol += 3;
+                    else if (correctPosition(SnapRow, SnapCol - 3)) SnapCol -= 3;
 
-                        else SnapRow++;
-                    }
-                    else if (ball.Unit.X < 0)
-                    {
-                        if (correctPosition(SnapRow, SnapCol + 1)) SnapCol += 1;
-                        else if (correctPosition(SnapRow, SnapCol - 1)) SnapCol -= 1;
-
-                        else if (correctPosition(SnapRow, SnapCol + 2)) SnapCol += 2;
-                        else if (correctPosition(SnapRow, SnapCol - 2)) SnapCol -= 2;
-
-                        else if (correctPosition(SnapRow, SnapCol + 3)) SnapCol += 3;
-                        else if (correctPosition(SnapRow, SnapCol - 3)) SnapCol -= 3;
-
-                        else SnapRow++;
-                    }
+                    else SnapRow++;
                 }
             }
 
