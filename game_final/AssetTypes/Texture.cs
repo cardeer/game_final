@@ -14,13 +14,11 @@ namespace game_final.AssetTypes
         public static Texture2D MainMenuBG;
 
         public static Texture2D BlueBall;
-        public static Texture2D BrownBall;
         public static Texture2D GreenBall;
         public static Texture2D GreyBall;
         public static Texture2D LightBlueBall;
         public static Texture2D PurpleBall;
         public static Texture2D RedBall;
-        public static Texture2D YellowBall;
 
         public static Texture2D LeftWall;
         public static Texture2D WallPaper;

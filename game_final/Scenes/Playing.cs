@@ -37,18 +37,18 @@ namespace game_final.Scenes
 
         public override void LoadContent()
         {   
-            //Texture
+            //ObjectTexture
             AssetTypes.Texture.Wand = Environments.Global.Content.Load<Texture2D>("Shooter/wand");
             
-            AssetTypes.Texture.BlueBall = Environments.Global.Content.Load<Texture2D>("Balls/blue");
-            AssetTypes.Texture.BrownBall = Environments.Global.Content.Load<Texture2D>("Balls/brown");
-            AssetTypes.Texture.GreenBall = Environments.Global.Content.Load<Texture2D>("Balls/green");
-            AssetTypes.Texture.GreyBall = Environments.Global.Content.Load<Texture2D>("Balls/grey");
-            AssetTypes.Texture.LightBlueBall = Environments.Global.Content.Load<Texture2D>("Balls/light_blue");
-            AssetTypes.Texture.PurpleBall = Environments.Global.Content.Load<Texture2D>("Balls/purple");
-            AssetTypes.Texture.RedBall = Environments.Global.Content.Load<Texture2D>("Balls/red");
-            AssetTypes.Texture.YellowBall = Environments.Global.Content.Load<Texture2D>("Balls/yellow");
+            //BallTexture
+            AssetTypes.Texture.BlueBall = Environments.Global.Content.Load<Texture2D>("Balls/blue_slime");
+            AssetTypes.Texture.LightBlueBall = Environments.Global.Content.Load<Texture2D>("Balls/lightBlue_slime");
+            AssetTypes.Texture.GreenBall = Environments.Global.Content.Load<Texture2D>("Balls/green_slime");
+            AssetTypes.Texture.GreyBall = Environments.Global.Content.Load<Texture2D>("Balls/grey_slime");
+            AssetTypes.Texture.PurpleBall = Environments.Global.Content.Load<Texture2D>("Balls/purple_slime");
+            AssetTypes.Texture.RedBall = Environments.Global.Content.Load<Texture2D>("Balls/red_slime");
             
+            //
             AssetTypes.Texture.LeftWall = Environments.Global.Content.Load<Texture2D>("Scenes/Playing/left_wall");
             AssetTypes.Texture.WallPaper = Environments.Global.Content.Load<Texture2D>("Scenes/Playing/wallPaper");
             AssetTypes.Texture.Scoreboard = Environments.Global.Content.Load<Texture2D>("Scenes/Playing/scoreboard");
