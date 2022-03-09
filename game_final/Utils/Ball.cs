@@ -163,7 +163,7 @@ namespace game_final.Utils
                 return ballCodesInTemplate[randomIndex];
             }
 
-            return new Random().Next(1, 8);
+            return new Random().Next(1, 7);
         }
 
         public static Vector2 GetRenderPosition(int row, int col)
