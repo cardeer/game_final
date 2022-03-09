@@ -121,6 +121,18 @@
 /processorParam:TextureFormat=Color
 /build:Buttons/icon_audio_mute.png
 
+#begin Buttons/icon_home.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Buttons/icon_home.png
+
 #begin Buttons/icon_replay.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -338,18 +350,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Scenes/Playing/wall_border.png
-
-#begin Scenes/Playing/wallPaper.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Scenes/Playing/wallPaper.png
 
 #begin Scenes/Playing/wallPaper.png
 /importer:TextureImporter

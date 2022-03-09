@@ -136,19 +136,17 @@ namespace game_final.Scenes
             _shooter = new Sprites.Shooter();
 
             //Button
-            _homeButton = new Sprites.Buttons(AssetTypes.Texture.Button, AssetTypes.Font.PlayingButton, "HOME", 220, 40);
-            _homeButton.SetPosition((Settings.PLAYING_UI_LEFT_WIDTH - 100) / 2 - 10, Settings.WINDOW_HEIGHT - 100);
+            _homeButton = new Sprites.Buttons(AssetTypes.Texture.IconHome, AssetTypes.Font.PlayingButton, 50, 50);
+            _homeButton.SetPosition((_leftWall.Width / 2) + 60, 350);
             _homeButton.Effect = false;
 
             _replayButton = new Sprites.Buttons(AssetTypes.Texture.IconReplay, AssetTypes.Font.PlayingButton, 50, 50);
-            _replayButton.SetPosition((Settings.PLAYING_UI_LEFT_WIDTH - 100) / 2 - 10, Settings.WINDOW_HEIGHT - 200);
-            _replayButton.TextColor = Color.Black;
+            _replayButton.SetPosition((_leftWall.Width / 2), 350);
             _replayButton.Effect = false;
             _replayButton.MultipleClicks = true;
 
             _muteButton = new Sprites.Buttons(AssetTypes.Texture.IconMute, AssetTypes.Font.PlayingButton, 50, 50);
-            _muteButton.SetPosition((Settings.PLAYING_UI_LEFT_WIDTH - 100) / 2 - 10, Settings.WINDOW_HEIGHT - 300);
-            _muteButton.TextColor = Color.Black;
+            _muteButton.SetPosition((_leftWall.Width / 2) - 60, 350);
             _muteButton.Effect = false;
             _muteButton.MultipleClicks = true;
 
@@ -182,11 +180,13 @@ namespace game_final.Scenes
             {
                 MediaPlayer.Volume = 0f;
                 _isPlayingBGM = false;
+                _muteButton.SetTexture(AssetTypes.Texture.IconUnmute);
             }
             else
             {
                 MediaPlayer.Volume = Settings.PLAYING_BGM_VOLUME;
                 _isPlayingBGM = true;
+                _muteButton.SetTexture(AssetTypes.Texture.IconMute);
             }
         }
 

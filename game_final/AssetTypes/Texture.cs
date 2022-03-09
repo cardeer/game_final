@@ -14,6 +14,7 @@ namespace game_final.AssetTypes
         public static Texture2D IconMute;
         public static Texture2D IconUnmute;
         public static Texture2D IconReplay;
+        public static Texture2D IconHome;
 
         public static Texture2D MainMenuBG;
 
