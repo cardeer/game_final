@@ -130,8 +130,7 @@ namespace game_final.Sprites
             if (_shotBall != null && _shotBall.isDestroyed) _shotBall = null;
             if (_shotBall != null) _shotBall.Update();
 
-            bool isClicked = mouseState.LeftButton != previousMouseState.LeftButton && mouseState.LeftButton == ButtonState.Pressed;
-            if (Environments.Global.WindowActive && isClicked && Environments.GameData.CanShoot && Environments.GameData.DataReady && !Environments.Global.HoveringButton)
+            if (Environments.Global.IsLeftClicked() && Environments.GameData.CanShoot && Environments.GameData.DataReady)
             {
                 Environments.GameData.CanShoot = false;
 
@@ -141,6 +140,17 @@ namespace game_final.Sprites
 
                 _currentBall = null;
             }
+            else if (Environments.Global.IsRightClicked() && Environments.GameData.CanShoot && Environments.GameData.DataReady)
+            {
+                Sprites.Ball tmp = _currentBall;
+                _currentBall = _nextBall;
+                _currentBall.SetPosition((int)(X + Width / 2), (int)(Y + Height / 2));
+
+                _nextBall = tmp;
+                _nextBall.SetPosition(_nextBallPosX, _nextBallPosY);
+                _nextBall.Rotation = 0f;
+            }
+            
 
             //bool isRightClicked = mouseState.RightButton != previousMouseState.RightButton && mouseState.RightButton == ButtonState.Pressed;
             //if (Environments.Global.WindowActive && isRightClicked)
