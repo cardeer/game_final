@@ -120,11 +120,11 @@ namespace game_final.Utils
             {
                 result.ShouldSnap = true;
             }
-            else if (ball.Unit.X < 0 && roundX - 2 >= 0 && template[roundY, roundX - 2] > 0 && pos.X - size <= left2.X + half)
+            else if (roundX - 2 >= 0 && template[roundY, roundX - 2] > 0 && pos.X - half <= left2.X + half + size)
             {
                 result.ShouldSnap = true;
             }
-            else if (ball.Unit.X > 0 && roundX + 2 < Settings.TEMPLATE_COL_BALLS && template[roundY, roundX + 2] > 0 && pos.X + size >= right2.X - half)
+            else if ( roundX + 2 < Settings.TEMPLATE_COL_BALLS && template[roundY, roundX + 2] > 0 && pos.X + half >= right2.X - half - size)
             {
                 result.ShouldSnap = true;
             }
