@@ -78,7 +78,7 @@ namespace game_final.Base
                 Origin,
                 Scale,
                 SpriteEffects.None,
-                0f
+                LayerDepth
             );
         }
     }
