@@ -16,10 +16,10 @@ namespace game_final.AssetTypes
 		public static SoundEffect BallShoot;
 		public static SoundEffect BallSnap;
 		public static SoundEffect BallPop;
+		public static SoundEffect BallSwap;
 
 		public static SoundEffect Play1;
 		public static SoundEffect Play2;
-		public static SoundEffect Play3;
 
 		public static SoundEffect Win1;
 		public static SoundEffect Win2;
@@ -27,6 +27,5 @@ namespace game_final.AssetTypes
 		public static SoundEffect Lose1;
 		public static SoundEffect Lose2;
 		public static SoundEffect Lose3;
-
 	}
 }
