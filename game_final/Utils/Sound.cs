@@ -18,6 +18,9 @@ namespace game_final.Utils
                 case 2:
                     AssetTypes.Sound.Play2.Play(1f, 0, 0);
                     break;
+                default:
+                    AssetTypes.Sound.Play1.Play();
+                    break;
             }
         }
 
@@ -32,6 +35,9 @@ namespace game_final.Utils
                     break;
                 case 2:
                     AssetTypes.Sound.Win2.Play(1f, 0, 0);
+                    break;
+                default:
+                    AssetTypes.Sound.Win1.Play();
                     break;
             }
         }
@@ -50,6 +56,9 @@ namespace game_final.Utils
                     break;
                 case 3:
                     AssetTypes.Sound.Lose3.Play(1f, 0, 0);
+                    break;
+                default:
+                    AssetTypes.Sound.Lose1.Play();
                     break;
             }
         }
