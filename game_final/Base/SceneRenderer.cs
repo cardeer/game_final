@@ -48,6 +48,7 @@ namespace game_final.Base
         public void Ready()
         {
             _ready = true;
+            Environments.Global.HoveringButton = false;
         }
 
         public abstract void LoadContent();
