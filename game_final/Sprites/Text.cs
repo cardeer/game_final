@@ -21,6 +21,17 @@ namespace game_final.Sprites
             _font = font;
             _text = text;
 
+            measureString();
+        }
+
+        public void SetText(string text)
+        {
+            _text = text;
+            measureString();
+        }
+
+        private void measureString()
+        {
             _measure = _font.MeasureString(text);
 
             _width = (int)_measure.X;
