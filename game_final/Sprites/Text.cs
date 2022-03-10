@@ -37,5 +37,20 @@ namespace game_final.Sprites
             _width = (int)_measure.X;
             _height = (int)_measure.Y;
         }
+
+        public void Draw()
+        {
+            Environments.Global.SpriteBatch.DrawString(
+                _font,
+                _text,
+                Position,
+                Color,
+                Rotation,
+                Origin,
+                Scale,
+                SpriteEffects.None,
+                LayerDepth
+            );
+        }
     }
 }

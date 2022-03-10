@@ -12,6 +12,7 @@ namespace game_final.Base
         public Vector2 Origin = new Vector2(0, 0);
         public Texture2D Instance;
         public float Scale = 1f;
+        public float LayerDepth = 0f;
 
         public float Rotation = 0f;
 
