@@ -51,6 +51,7 @@ namespace game_final.Scenes
             {
                 MediaPlayer.Volume = Settings.MAIN_MENU_BGM_VOLUME;
                 MediaPlayer.Play(AssetTypes.Sound.MusicSound);
+                MediaPlayer.IsRepeating = true;
             }
 
             //Buttons

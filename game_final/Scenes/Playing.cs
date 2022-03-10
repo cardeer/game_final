@@ -178,6 +178,7 @@ namespace game_final.Scenes
             _playBGM = AssetTypes.Sound.MusicSound;
             MediaPlayer.Volume = Settings.PLAYING_BGM_VOLUME;
             MediaPlayer.Play(_playBGM);
+            MediaPlayer.IsRepeating = true;
             _isPlayingBGM = true;
 
             base.Setup();
