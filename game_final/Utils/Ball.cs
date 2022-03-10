@@ -120,11 +120,11 @@ namespace game_final.Utils
             {
                 result.ShouldSnap = true;
             }
-            else if (roundX - 2 >= 0 && template[roundY, roundX - 2] > 0 && pos.X - half <= left2.X + half + size)
+            else if (roundX - 2 >= 0 && template[roundY, roundX - 2] > 0 && pos.X - half < left2.X + half + size)
             {
                 result.ShouldSnap = true;
             }
-            else if ( roundX + 2 < Settings.TEMPLATE_COL_BALLS && template[roundY, roundX + 2] > 0 && pos.X + half >= right2.X - half - size)
+            else if ( roundX + 2 < Settings.TEMPLATE_COL_BALLS && template[roundY, roundX + 2] > 0 && pos.X + half > right2.X - half - size)
             {
                 result.ShouldSnap = true;
             }
@@ -165,7 +165,7 @@ namespace game_final.Utils
                         }
                     }
                 }
-                int randomIndex = new Random().Next(0, ballCodesInTemplate.Count - 1);
+                int randomIndex = new Random().Next(0, ballCodesInTemplate.Count);
                 return ballCodesInTemplate[randomIndex];
             }
 
