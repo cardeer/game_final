@@ -30,10 +30,14 @@ namespace game_final.Scenes
         private Base.Sprite _megumin;
         private Base.Sprite _heart;
         private Base.Sprite _mana;
+        private Base.Sprite _hourglass;
+        private Base.Sprite _timeBoard;
 
-        private Sprites.Buttons _homeButton;
-        private Sprites.Buttons _replayButton;
-        private Sprites.Buttons _muteButton;
+        private Sprites.IconButton _homeButton;
+        private Sprites.IconButton _replayButton;
+        private Sprites.IconButton _muteButton;
+
+        private Sprites.Text _timeTex;
 
         private int _shake = 0;
         private double _shakeWait = 0;
@@ -56,6 +60,7 @@ namespace game_final.Scenes
             AssetTypes.Texture.PurpleBall = Environments.Global.Content.Load<Texture2D>("Balls/purple_slime");
             AssetTypes.Texture.RedBall = Environments.Global.Content.Load<Texture2D>("Balls/red_slime");
 
+            //Left Wall
             AssetTypes.Texture.LeftWall = Environments.Global.Content.Load<Texture2D>("Scenes/Playing/left_wall");
             AssetTypes.Texture.WallPaper = Environments.Global.Content.Load<Texture2D>("Scenes/Playing/wallPaper");
             AssetTypes.Texture.Scoreboard = Environments.Global.Content.Load<Texture2D>("Scenes/Playing/scoreboard");
@@ -64,6 +69,8 @@ namespace game_final.Scenes
             AssetTypes.Texture.MagicCircle = Environments.Global.Content.Load<Texture2D>("Effects/magic_circle");
             AssetTypes.Texture.PlayBackground = Environments.Global.Content.Load<Texture2D>("Scenes/Playing/background");
             AssetTypes.Texture.Ceiling = Environments.Global.Content.Load<Texture2D>("Scenes/Playing/ceiling");
+            AssetTypes.Texture.Hourglass = Environments.Global.Content.Load<Texture2D>("Scenes/Playing/hourglass");
+            AssetTypes.Texture.TimeBoard = Environments.Global.Content.Load<Texture2D>("Scenes/Playing/timeBoard");
 
             //CharacterInfoBoard
             AssetTypes.Texture.InfoBoard = Environments.Global.Content.Load<Texture2D>("Scenes/Playing/board_clean");
@@ -133,19 +140,32 @@ namespace game_final.Scenes
             _bottomWallBorder.SetOrigin(0, _bottomWallBorder.Instance.Height);
             _bottomWallBorder.SetPosition(minX, Settings.WINDOW_HEIGHT);
 
+            _hourglass = new Base.Sprite(AssetTypes.Texture.Hourglass, 80);
+            _hourglass.SetOrigin(_hourglass.Width / 2, _hourglass.Height / 2);
+            _hourglass.SetPosition((_wallpaper.Width / 2) - 35, (_wallpaper.Height / 2) + 50);
+
+            _timeBoard = new Base.Sprite(AssetTypes.Texture.TimeBoard, 150);
+            _timeBoard.SetOrigin(_hourglass.Width / 2, _hourglass.Height / 2);
+            _timeBoard.SetPosition(_hourglass.Position.X - 5, _hourglass.Position.Y + 200);
+
             _shooter = new Sprites.Shooter();
 
+            //Text
+            _timeTex = new Sprites.Text(AssetTypes.Font.PlayingButton, "00:00");
+            _timeTex.Color = Color.White;
+            _timeTex.Position = new Vector2(_timeBoard.Position.X + 15, _timeBoard.Position.Y -50);
+
             //Button
-            _homeButton = new Sprites.Buttons(AssetTypes.Texture.IconHome, AssetTypes.Font.PlayingButton, 50, 50);
+            _homeButton = new Sprites.IconButton(AssetTypes.Texture.IconHome, AssetTypes.Font.PlayingButton, 50, 50);
             _homeButton.SetPosition((_leftWall.Width / 2) + 60, 350);
             _homeButton.Effect = false;
 
-            _replayButton = new Sprites.Buttons(AssetTypes.Texture.IconReplay, AssetTypes.Font.PlayingButton, 50, 50);
+            _replayButton = new Sprites.IconButton(AssetTypes.Texture.IconReplay, AssetTypes.Font.PlayingButton, 50, 50);
             _replayButton.SetPosition((_leftWall.Width / 2), 350);
             _replayButton.Effect = false;
             _replayButton.MultipleClicks = true;
 
-            _muteButton = new Sprites.Buttons(AssetTypes.Texture.IconMute, AssetTypes.Font.PlayingButton, 50, 50);
+            _muteButton = new Sprites.IconButton(AssetTypes.Texture.IconMute, AssetTypes.Font.PlayingButton, 50, 50);
             _muteButton.SetPosition((_leftWall.Width / 2) - 60, 350);
             _muteButton.Effect = false;
             _muteButton.MultipleClicks = true;
@@ -249,6 +269,9 @@ namespace game_final.Scenes
             DrawSprite(_rightWallBorder);
             DrawSprite(_topWallBorder);
             DrawSprite(_bottomWallBorder);
+            DrawSprite(_hourglass);
+            DrawSprite(_timeBoard);
+            _timeTex.Draw();
 
             // render balls from template
             int[,] template = Environments.GameData.BallsTemplate;
