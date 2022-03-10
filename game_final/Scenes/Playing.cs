@@ -200,17 +200,17 @@ namespace game_final.Scenes
 
             string currentTex = "";
             Color c = Color.Black;
-            if (Environments.Global.Level == 1)
+            if (Environments.GameData.Level == 1)
             {
                 currentTex = "  EASY";
                 c = Color.LightGreen;
             }
-            else if (Environments.Global.Level == 2) 
+            else if (Environments.GameData.Level == 2)
             {
                 currentTex = "NORMAL";
                 c = Color.Yellow;
             }
-            else if (Environments.Global.Level == 3) 
+            else if (Environments.GameData.Level == 3)
             {
                 currentTex = "  HARD";
                 c = Color.OrangeRed;
@@ -300,7 +300,24 @@ namespace game_final.Scenes
         {
             if (!Environments.GameData.Failed && !Environments.GameData.Won)
             {
-                if (Environments.GameData.ShootCount >= 8)
+                if (Environments.GameData.ChallengeMode)
+                {
+                    Environments.GameData.TimeLeft -= 1 * (float)Environments.Global.GameTime.ElapsedGameTime.TotalSeconds;
+                    int timeLeftInInt = (int)Environments.GameData.TimeLeft;
+                    int minutes = timeLeftInInt / 60;
+                    int seconds = timeLeftInInt % 60;
+
+                    _timeTex.SetText($"{minutes.ToString("D2")} : {seconds.ToString("D2")}");
+
+                    if (Math.Ceiling(Environments.GameData.TimeLeft) <= 0)
+                    {
+                        _timeTex.Color = Color.Red;
+                        Utils.Sound.PlayLoseSound();
+                        Environments.GameData.Failed = true;
+                    }
+                }
+
+                if (Environments.GameData.ShootCount >= Environments.GameData.MaxShoot - 2)
                 {
                     _shakeWait += Environments.Global.GameTime.ElapsedGameTime.TotalSeconds;
 
@@ -309,7 +326,7 @@ namespace game_final.Scenes
                         _shake = 2;
                     }
 
-                    if (_shakeWait >= (Environments.GameData.ShootCount == 8 ? .1f : .05f))
+                    if (_shakeWait >= (Environments.GameData.ShootCount == Environments.GameData.MaxShoot - 2 ? .1f : .05f))
                     {
                         _shakeWait = 0;
                         _shake = -_shake;

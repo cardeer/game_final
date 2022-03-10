@@ -17,9 +17,16 @@ namespace game_final.Environments
         public static int ShootCount = 0;
         public static bool DataReady = true;
 
+        public static int Level = 1;
+
         public static int[,] BallsTemplate;
         public static List<Sprites.MagicCircle> MagicCircles;
         public static List<Sprites.Ball> BallsToDrop;
+
+        public static bool ChallengeMode = false;
+
+        // time in seconds
+        public static float TimeLeft = 5 * 60;
 
         public static void Initialize()
         {
@@ -42,6 +49,8 @@ namespace game_final.Environments
             PushCount = 0;
             ShootCount = 0;
             DataReady = true;
+
+            TimeLeft = Level == 1 ? 5 * 60 : Level == 2 * 60 ? 4 : 3 * 60;
         }
 
         public static void SetBallTemplate(int row, int col, int ballTypeCode)
@@ -162,7 +171,7 @@ namespace game_final.Environments
 
             ShootCount++;
 
-            if (ShootCount >= 10)
+            if (ShootCount >= MaxShoot)
             {
                 double total = 0;
                 while (total <= 1) total += Environments.Global.GameTime.ElapsedGameTime.TotalSeconds;
@@ -174,6 +183,11 @@ namespace game_final.Environments
             DataReady = true;
         }
 
+        public static int MaxShoot
+        {
+            get { return Level == 1 ? 10 : Level == 2 ? 6 : 4; }
+        }
+
         private static bool contains(List<Types.Vector2Int> list, Types.Vector2Int point)
         {
             return list.Exists(p => p.X == point.X && p.Y == point.Y);
@@ -181,7 +195,7 @@ namespace game_final.Environments
 
         public static void GenerateLevel()
         {
-            for (int i = 0; i < 1; i++)
+            for (int i = 0; i < (Level != 3 ? 5 : 4); i++)
             {
                 for (int j = 0; j < Settings.TEMPLATE_COL_BALLS; j++)
                 {

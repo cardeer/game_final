@@ -86,23 +86,23 @@ namespace game_final.Scenes
 
         private void EasyButton_Click(object sender, System.EventArgs e)
         {
-            Environments.Global.Level = 1;
+            Environments.GameData.Level = 1;
             MainMenu._isPlaying = true;
-            Environments.Scene.SetScene(Types.SceneType.MAIN_MENU);
+            Environments.Scene.SetScene(Types.SceneType.IN_GAME, true);
         }
 
         private void NormalButton_Click(object sender, System.EventArgs e)
         {
-            Environments.Global.Level = 2;
+            Environments.GameData.Level = 2;
             MainMenu._isPlaying = true;
-            Environments.Scene.SetScene(Types.SceneType.MAIN_MENU);
+            Environments.Scene.SetScene(Types.SceneType.IN_GAME, true);
         }
 
         private void HardButton_Click(object sender, System.EventArgs e)
         {
-            Environments.Global.Level = 3;
+            Environments.GameData.Level = 3;
             MainMenu._isPlaying = true;
-            Environments.Scene.SetScene(Types.SceneType.MAIN_MENU);
+            Environments.Scene.SetScene(Types.SceneType.IN_GAME, true);
         }
 
         private void BackButton_Click(object sender, System.EventArgs e)

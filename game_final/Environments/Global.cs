@@ -13,8 +13,6 @@ namespace game_final.Environments
     {
         public static GameTime GameTime;
 
-        public static int Level = 2;
-
         public static MouseState CurrentMouseState;
         public static MouseState PreviousMouseState;
 

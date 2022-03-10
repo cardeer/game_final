@@ -102,6 +102,7 @@ namespace game_final.Scenes
         private void PlayButton_Click(object sender, System.EventArgs e)
         {
             Utils.Sound.PlayStartSound();
+            Environments.GameData.Level = 1;
             Environments.Scene.SetScene(Types.SceneType.IN_GAME, true);
             MediaPlayer.Stop();
         }
@@ -113,13 +114,15 @@ namespace game_final.Scenes
 
         private void ChallengeButton_Click(object sender, System.EventArgs e)
         {
-            if (_challengeButton.TextColor == Color.White)
+            if (!Environments.GameData.ChallengeMode)
             {
+                Environments.GameData.ChallengeMode = true;
                 _challengeButton.TextColor = Color.OrangeRed;
                 //Todo change mode
             }
             else
             {
+                Environments.GameData.ChallengeMode = false;
                 _challengeButton.TextColor = Color.White;
                 //Todo change mode
             }
