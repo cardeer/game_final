@@ -143,6 +143,7 @@ namespace game_final.Sprites
             }
             else if (Environments.Global.IsRightClicked() && Environments.GameData.CanShoot && Environments.GameData.DataReady)
             {
+                AssetTypes.Sound.BallSwap.Play();
                 Sprites.Ball tmp = _currentBall;
                 _currentBall = _nextBall;
                 _currentBall.SetPosition((int)(X + Width / 2), (int)(Y + Height / 2));

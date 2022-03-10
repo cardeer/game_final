@@ -43,6 +43,7 @@ namespace game_final
             AssetTypes.Sound.BallShoot = s_content.Load<SoundEffect>("Sounds/SoundEffects/ball_shoot");
             AssetTypes.Sound.BallSnap = s_content.Load<SoundEffect>("Sounds/SoundEffects/ball_snap");
             AssetTypes.Sound.BallPop = s_content.Load<SoundEffect>("Sounds/SoundEffects/ball_pop");
+            AssetTypes.Sound.BallSwap = s_content.Load<SoundEffect>("Sounds/SoundEffects/ball_swap");
 
             AssetTypes.Sound.Play1 = s_content.Load<SoundEffect>("Sounds/SoundEffects/play_1");
             AssetTypes.Sound.Play2 = s_content.Load<SoundEffect>("Sounds/SoundEffects/play_2");
