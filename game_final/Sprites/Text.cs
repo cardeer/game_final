@@ -32,7 +32,7 @@ namespace game_final.Sprites
 
         private void measureString()
         {
-            _measure = _font.MeasureString(text);
+            _measure = _font.MeasureString(_text);
 
             _width = (int)_measure.X;
             _height = (int)_measure.Y;
