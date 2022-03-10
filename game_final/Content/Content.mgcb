@@ -171,6 +171,13 @@
 /processorParam:TextureFormat=Compressed
 /build:Fonts/PlayingButton.spritefont
 
+#begin Fonts/UIFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Fonts/UIFont.spritefont
+
 #begin logo.png
 /importer:TextureImporter
 /processor:TextureProcessor
