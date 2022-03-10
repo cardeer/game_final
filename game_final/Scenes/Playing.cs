@@ -24,6 +24,7 @@ namespace game_final.Scenes
         private Base.Sprite _rightWallBorder;
         private Base.Sprite _topWallBorder;
         private Base.Sprite _bottomWallBorder;
+        private Base.Sprite _blurBG;
 
         private Base.Sprite _infoBoard;
         private Base.Sprite _characterWindow;
@@ -154,6 +155,10 @@ namespace game_final.Scenes
             _bottomWallBorder = new Base.Sprite(AssetTypes.Texture.TopWallBorder);
             _bottomWallBorder.SetOrigin(0, _bottomWallBorder.Instance.Height);
             _bottomWallBorder.SetPosition(minX, Settings.WINDOW_HEIGHT);
+
+            _blurBG = new Base.Sprite(Settings.WINDOW_WIDTH, Settings.WINDOW_HEIGHT);
+            _blurBG.SetColor(Color.Black);
+            _blurBG.Opacity = 0.7f;
 
             _hourglass = new Base.Sprite(AssetTypes.Texture.Hourglass, 80);
             _hourglass.SetOrigin(_hourglass.Width / 2, _hourglass.Height / 2);
@@ -460,12 +465,14 @@ namespace game_final.Scenes
 
             if (Environments.GameData.Won)
             {
+                _blurBG.Draw();
                 _winBoard.Draw();
                 _UI_replay.Draw();
                 _UI_home.Draw();
             }
             else if (Environments.GameData.Failed)
             {
+                _blurBG.Draw();
                 _loseBoard.Draw();
                 _UI_replay.Draw();
                 _UI_home.Draw();
