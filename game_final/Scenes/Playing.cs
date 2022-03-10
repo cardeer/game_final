@@ -48,7 +48,7 @@ namespace game_final.Scenes
         private Sprites.Text _mp;
 
         private Base.Sprite _winBoard;
-        private Base.Sprite _lostBoard;
+        private Base.Sprite _loseBoard;
 
         private int _shake = 0;
         private double _shakeWait = 0;
@@ -63,7 +63,7 @@ namespace game_final.Scenes
             AssetTypes.Texture.Wand = Environments.Global.Content.Load<Texture2D>("Shooter/wand");
             AssetTypes.Texture.ShooterArrow = Environments.Global.Content.Load<Texture2D>("Shooter/arrow");
             AssetTypes.Texture.WinBoard = Environments.Global.Content.Load<Texture2D>("Dialogs/Board_Win");
-            AssetTypes.Texture.LostBoard = Environments.Global.Content.Load<Texture2D>("Dialogs/Board_Lost");
+            AssetTypes.Texture.LoseBoard = Environments.Global.Content.Load<Texture2D>("Dialogs/Board_Lose");
 
             //BallTexture
             AssetTypes.Texture.BlueBall = Environments.Global.Content.Load<Texture2D>("Balls/blue_slime");
@@ -244,9 +244,9 @@ namespace game_final.Scenes
             _winBoard.SetOrigin(_winBoard.Instance.Width / 2, _winBoard.Instance.Height / 2);
             _winBoard.SetPosition(Settings.WINDOW_WIDTH / 2, Settings.WINDOW_HEIGHT / 2);
 
-            _lostBoard = new Base.Sprite(AssetTypes.Texture.LostBoard, 700);
-            _lostBoard.SetOrigin(_lostBoard.Instance.Width / 2, _lostBoard.Instance.Height / 2);
-            _lostBoard.SetPosition(Settings.WINDOW_WIDTH / 2, Settings.WINDOW_HEIGHT / 2);
+            _loseBoard = new Base.Sprite(AssetTypes.Texture.LoseBoard, 700);
+            _loseBoard.SetOrigin(_loseBoard.Instance.Width / 2, _loseBoard.Instance.Height / 2);
+            _loseBoard.SetPosition(Settings.WINDOW_WIDTH / 2, Settings.WINDOW_HEIGHT / 2);
 
             //BGM
             _playBGM = AssetTypes.Sound.MusicSound;
@@ -429,9 +429,15 @@ namespace game_final.Scenes
             _replayButton.Draw();
             _muteButton.Draw();
 
-            if (Environments.GameData.Won || Environments.GameData.Failed)
+            if (Environments.GameData.Won)
             {
                 _winBoard.Draw();
+                _UI_replay.Draw();
+                _UI_home.Draw();
+            }
+            else if (Environments.GameData.Failed)
+            {
+                _loseBoard.Draw();
                 _UI_replay.Draw();
                 _UI_home.Draw();
             }

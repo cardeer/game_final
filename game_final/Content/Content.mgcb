@@ -145,7 +145,7 @@
 /processorParam:TextureFormat=Color
 /build:Buttons/icon_replay.png
 
-#begin Dialogs/Board_Lost.png
+#begin Dialogs/Board_Lose.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -155,7 +155,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Dialogs/Board_Lost.png
+/build:Dialogs/Board_Lose.png
 
 #begin Dialogs/Board_Win.png
 /importer:TextureImporter
