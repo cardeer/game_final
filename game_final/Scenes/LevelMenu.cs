@@ -86,6 +86,7 @@ namespace game_final.Scenes
 
         private void EasyButton_Click(object sender, System.EventArgs e)
         {
+            Utils.Sound.PlayStartSound();
             Environments.GameData.Level = 1;
             MainMenu._isPlaying = true;
             Environments.Scene.SetScene(Types.SceneType.IN_GAME, true);
@@ -93,6 +94,7 @@ namespace game_final.Scenes
 
         private void NormalButton_Click(object sender, System.EventArgs e)
         {
+            Utils.Sound.PlayStartSound();
             Environments.GameData.Level = 2;
             MainMenu._isPlaying = true;
             Environments.Scene.SetScene(Types.SceneType.IN_GAME, true);
@@ -100,6 +102,7 @@ namespace game_final.Scenes
 
         private void HardButton_Click(object sender, System.EventArgs e)
         {
+            Utils.Sound.PlayStartSound();
             Environments.GameData.Level = 3;
             MainMenu._isPlaying = true;
             Environments.Scene.SetScene(Types.SceneType.IN_GAME, true);
