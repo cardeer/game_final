@@ -33,6 +33,8 @@ namespace game_final.Scenes
         private Base.Sprite _hourglass;
         private Base.Sprite _timeBoard;
 
+        private Sprites.Buttons _UI_replay;
+        private Sprites.Buttons _UI_home;
         private Sprites.IconButton _homeButton;
         private Sprites.IconButton _replayButton;
         private Sprites.IconButton _muteButton;
@@ -44,6 +46,9 @@ namespace game_final.Scenes
         private Sprites.Text _currentLevel;
         private Sprites.Text _hp;
         private Sprites.Text _mp;
+
+        private Base.Sprite _winBoard;
+        private Base.Sprite _lostBoard;
 
         private int _shake = 0;
         private double _shakeWait = 0;
@@ -57,6 +62,8 @@ namespace game_final.Scenes
             //ObjectTexture
             AssetTypes.Texture.Wand = Environments.Global.Content.Load<Texture2D>("Shooter/wand");
             AssetTypes.Texture.ShooterArrow = Environments.Global.Content.Load<Texture2D>("Shooter/arrow");
+            AssetTypes.Texture.WinBoard = Environments.Global.Content.Load<Texture2D>("Dialogs/Board_Win");
+            AssetTypes.Texture.LostBoard = Environments.Global.Content.Load<Texture2D>("Dialogs/Board_Lost");
 
             //BallTexture
             AssetTypes.Texture.BlueBall = Environments.Global.Content.Load<Texture2D>("Balls/blue_slime");
@@ -157,9 +164,9 @@ namespace game_final.Scenes
             _shooter = new Sprites.Shooter();
 
             //Text
-            _timeTex = new Sprites.Text(AssetTypes.Font.PlayingButton, "00:00");
+            _timeTex = new Sprites.Text(AssetTypes.Font.PlayingButton, "00 : 00");
             _timeTex.Color = Color.White;
-            _timeTex.Position = new Vector2(_timeBoard.Position.X + 15, _timeBoard.Position.Y - 50);
+            _timeTex.Position = new Vector2(_timeBoard.Position.X + 5, _timeBoard.Position.Y - 50);
 
             _scoreTex = new Sprites.Text(AssetTypes.Font.UIFont, "SCORE");
             _scoreTex.Color = Color.Brown;
@@ -216,9 +223,30 @@ namespace game_final.Scenes
             _muteButton.Effect = false;
             _muteButton.MultipleClicks = true;
 
+            _UI_replay = new Sprites.Buttons(AssetTypes.Texture.Button, AssetTypes.Font.SpriteFont, "REPLAY", 200, 50);
+            _UI_replay.SetPosition(Settings.WINDOW_WIDTH / 2 - 100, 500);
+            _UI_replay.TextColor = Color.White;
+            _UI_replay.Effect = false;
+
+            _UI_home = new Sprites.Buttons(AssetTypes.Texture.Button, AssetTypes.Font.SpriteFont, "HOME", 200, 50);
+            _UI_home.SetPosition(Settings.WINDOW_WIDTH / 2 + 100, 500);
+            _UI_home.TextColor = Color.White;
+            _UI_home.Effect = false;
+
             _homeButton.Click += _homeButton_Click;
             _replayButton.Click += _replayButton_Click;
             _muteButton.Click += _muteButton_Click;
+            _UI_replay.Click += _replayButton_Click;
+            _UI_home.Click += _homeButton_Click;
+
+            //Dialog
+            _winBoard = new Base.Sprite(AssetTypes.Texture.WinBoard, 700);
+            _winBoard.SetOrigin(_winBoard.Instance.Width / 2, _winBoard.Instance.Height / 2);
+            _winBoard.SetPosition(Settings.WINDOW_WIDTH / 2, Settings.WINDOW_HEIGHT / 2);
+
+            _lostBoard = new Base.Sprite(AssetTypes.Texture.LostBoard, 700);
+            _lostBoard.SetOrigin(_lostBoard.Instance.Width / 2, _lostBoard.Instance.Height / 2);
+            _lostBoard.SetPosition(Settings.WINDOW_WIDTH / 2, Settings.WINDOW_HEIGHT / 2);
 
             //BGM
             _playBGM = AssetTypes.Sound.MusicSound;
@@ -297,6 +325,11 @@ namespace game_final.Scenes
             _replayButton.Update();
             _muteButton.Update();
 
+            _UI_home.CanClick = Environments.GameData.Won || Environments.GameData.Failed;
+            _UI_home.Update();
+            _UI_replay.CanClick = Environments.GameData.Won || Environments.GameData.Failed;
+            _UI_replay.Update();
+
             base.Update();
         }
 
@@ -324,6 +357,8 @@ namespace game_final.Scenes
             DrawSprite(_bottomWallBorder);
             DrawSprite(_hourglass);
             DrawSprite(_timeBoard);
+
+            //Text
             _timeTex.Draw();
             _scoreTex.Draw();
             _ScorePointTex.Draw();
@@ -389,10 +424,22 @@ namespace game_final.Scenes
                 magicCirle.Draw();
             }
 
-
             _homeButton.Draw();
             _replayButton.Draw();
             _muteButton.Draw();
+
+            if (Environments.GameData.Won)
+            {
+                _winBoard.Draw();
+                _UI_replay.Draw();
+                _UI_home.Draw();
+            }
+            else if (Environments.GameData.Failed)
+            {
+                _lostBoard.Draw();
+                _UI_replay.Draw();
+                _UI_home.Draw();
+            }
 
             base.Draw();
         }

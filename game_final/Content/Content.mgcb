@@ -145,6 +145,30 @@
 /processorParam:TextureFormat=Color
 /build:Buttons/icon_replay.png
 
+#begin Dialogs/Board_Lost.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Dialogs/Board_Lost.png
+
+#begin Dialogs/Board_Win.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Dialogs/Board_Win.png
+
 #begin Effects/magic_circle.png
 /importer:TextureImporter
 /processor:TextureProcessor
