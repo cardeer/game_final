@@ -152,13 +152,6 @@ namespace game_final.Sprites
                 _nextBall.SetPosition(_nextBallPosX, _nextBallPosY);
                 _nextBall.Rotation = 0f;
             }
-            
-
-            //bool isRightClicked = mouseState.RightButton != previousMouseState.RightButton && mouseState.RightButton == ButtonState.Pressed;
-            //if (Environments.Global.WindowActive && isRightClicked)
-            //{
-            //    Environments.GameData.PrintTemplate();
-            //}
 
             int reflectX = _rotation < Math.PI / 2 ? Constants.REFLECT_LEFT : _rotation > Math.PI / 2 ? Constants.REFLECT_RIGHT : Constants.REFLECT_CENTER_X;
 
