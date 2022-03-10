@@ -260,9 +260,8 @@ namespace game_final.Scenes
             _loseBoard.SetPosition(Settings.WINDOW_WIDTH / 2, Settings.WINDOW_HEIGHT / 2 - 100);
 
             //BGM
-            _playBGM = AssetTypes.Sound.MusicSound;
             MediaPlayer.Volume = Settings.PLAYING_BGM_VOLUME;
-            MediaPlayer.Play(_playBGM);
+            MediaPlayer.Play(AssetTypes.Sound.MusicSound);
             MediaPlayer.IsRepeating = true;
             _isPlayingBGM = true;
 
@@ -276,6 +275,8 @@ namespace game_final.Scenes
 
         private void _replayButton_Click(object sender, EventArgs e)
         {
+            MediaPlayer.Play(AssetTypes.Sound.MusicSound);
+
             Environments.GameData.Initialize();
             Environments.GameData.GenerateLevel();
             _timeTex.Color = Color.White;

@@ -44,7 +44,7 @@ namespace game_final.Utils
 
         public static void PlayLoseSound()
         {
-            int code = new Random().Next(1, 4);
+            int code = new Random().Next(1, 5);
 
             switch (code)
             {
@@ -57,8 +57,11 @@ namespace game_final.Utils
                 case 3:
                     AssetTypes.Sound.Lose3.Play(1f, 0, 0);
                     break;
+                case 4:
+                    AssetTypes.Sound.Lose4.Play(1f, 0, 0);
+                    break;
                 default:
-                    AssetTypes.Sound.Lose1.Play();
+                    AssetTypes.Sound.Lose4.Play();
                     break;
             }
         }

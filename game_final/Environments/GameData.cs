@@ -4,6 +4,7 @@ using System.Text;
 
 using System.Diagnostics;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Media;
 
 namespace game_final.Environments
 {
@@ -149,11 +150,7 @@ namespace game_final.Environments
                 dropBalls();
 
                 checkWin();
-                if (Won)
-                {
-                    Utils.Sound.PlayWinSound();
-                    return;
-                }
+                if (Won) return;
             }
             else
             {
@@ -163,11 +160,7 @@ namespace game_final.Environments
 
             checkFailed();
 
-            if (Failed)
-            {
-                Utils.Sound.PlayLoseSound();
-                return;
-            }
+            if (Failed) return;
 
             ShootCount++;
 
@@ -215,27 +208,6 @@ namespace game_final.Environments
 
             PushCount++;
 
-            //for (int i = 0; i < Settings.TEMPLATE_ROW_BALLS; i++)
-            //{
-            //    if (i == 0)
-            //    {
-            //        for (int j = 0; j < Settings.TEMPLATE_COL_BALLS; j++)
-            //        {
-            //            if (j % 2 == PushCount % 2)
-            //            {
-            //                newTemplate[i, j] = Utils.Ball.RandomBallCode();
-            //            }
-            //        }
-            //    }
-            //    else
-            //    {
-            //        for (int j = 0; j < Settings.TEMPLATE_COL_BALLS; j++)
-            //        {
-            //            newTemplate[i, j] = BallsTemplate[i - 1, j];
-            //        }
-            //    }
-            //}
-
             for (int i = PushCount; i < Settings.TEMPLATE_ROW_BALLS; i++)
             {
                 for (int j = 0; j < Settings.TEMPLATE_COL_BALLS; j++)
@@ -264,15 +236,9 @@ namespace game_final.Environments
 
             if (failed)
             {
+                MediaPlayer.Stop();
+                Utils.Sound.PlayLoseSound();
                 Failed = failed;
-
-                //for (int i = 0; i < Settings.TEMPLATE_ROW_BALLS; i++)
-                //{
-                //    for (int j = 0; j < Settings.TEMPLATE_COL_BALLS; j++)
-                //    {
-                //        BallsTemplate[i, j] = 0;
-                //    }
-                //}
             }
         }
 
@@ -292,7 +258,12 @@ namespace game_final.Environments
                 }
             }
 
-            if (!hasBall) Won = true;
+            if (!hasBall)
+            {
+                MediaPlayer.Stop();
+                Utils.Sound.PlayWinSound();
+                Won = true;
+            }
         }
 
         public static void PrintTemplate()
