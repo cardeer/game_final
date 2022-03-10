@@ -327,6 +327,7 @@ namespace game_final.Scenes
 
             _UI_home.CanClick = Environments.GameData.Won || Environments.GameData.Failed;
             _UI_home.Update();
+
             _UI_replay.CanClick = Environments.GameData.Won || Environments.GameData.Failed;
             _UI_replay.Update();
 
@@ -428,15 +429,9 @@ namespace game_final.Scenes
             _replayButton.Draw();
             _muteButton.Draw();
 
-            if (Environments.GameData.Won)
+            if (Environments.GameData.Won || Environments.GameData.Failed)
             {
                 _winBoard.Draw();
-                _UI_replay.Draw();
-                _UI_home.Draw();
-            }
-            else if (Environments.GameData.Failed)
-            {
-                _lostBoard.Draw();
                 _UI_replay.Draw();
                 _UI_home.Draw();
             }
