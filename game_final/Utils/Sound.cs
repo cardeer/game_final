@@ -6,56 +6,50 @@ namespace game_final.Utils
 {
     static class Sound
     {
-        static void PlayStartSound()
+        public static void PlayStartSound()
         {
-            int code = new Random().Next(1, 4);
+            int code = new Random().Next(1, 3);
 
             switch (code)
             {
                 case 1:
-                    AssetTypes.Sound.Play1.Play();
+                    AssetTypes.Sound.Play1.Play(1f, 0, 0);
                     break;
                 case 2:
-                    AssetTypes.Sound.Play2.Play();
-                    break;
-                case 3:
-                    AssetTypes.Sound.Play2.Play();
+                    AssetTypes.Sound.Play2.Play(1f, 0, 0);
                     break;
             }
         }
 
-        static void PlayWinSound()
+        public static void PlayWinSound()
         {
-            int code = new Random().Next(1, 4);
+            int code = new Random().Next(1, 3);
 
             switch (code)
             {
                 case 1:
-                    AssetTypes.Sound.Win1.Play();
+                    AssetTypes.Sound.Win1.Play(1f, 0, 0);
                     break;
                 case 2:
-                    AssetTypes.Sound.Win2.Play();
-                    break;
-                case 3:
-                    AssetTypes.Sound.Win3.Play();
+                    AssetTypes.Sound.Win2.Play(1f, 0, 0);
                     break;
             }
         }
 
-        static void PlayLoseSound()
+        public static void PlayLoseSound()
         {
             int code = new Random().Next(1, 4);
 
             switch (code)
             {
                 case 1:
-                    AssetTypes.Sound.Lose1.Play();
+                    AssetTypes.Sound.Lose1.Play(1f, 0, 0);
                     break;
                 case 2:
-                    AssetTypes.Sound.Lose2.Play();
+                    AssetTypes.Sound.Lose2.Play(1f, 0, 0);
                     break;
                 case 3:
-                    AssetTypes.Sound.Lose3.Play();
+                    AssetTypes.Sound.Lose3.Play(1f, 0, 0);
                     break;
             }
         }

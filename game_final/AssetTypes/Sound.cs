@@ -23,7 +23,6 @@ namespace game_final.AssetTypes
 
 		public static SoundEffect Win1;
 		public static SoundEffect Win2;
-		public static SoundEffect Win3;
 
 		public static SoundEffect Lose1;
 		public static SoundEffect Lose2;

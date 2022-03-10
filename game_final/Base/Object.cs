@@ -13,6 +13,7 @@ namespace game_final.Base
         public Texture2D Instance;
         public float Scale = 1f;
         public float LayerDepth = 0f;
+        public float Opacity = 1f;
         public bool CanClick = true;
 
         public float Rotation = 0f;
