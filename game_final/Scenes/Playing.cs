@@ -32,6 +32,7 @@ namespace game_final.Scenes
         private Base.Sprite _mana;
         private Base.Sprite _hourglass;
         private Base.Sprite _timeBoard;
+        private Base.Sprite _levelBoard;
 
         private Sprites.Buttons _UI_replay;
         private Sprites.Buttons _UI_home;
@@ -84,6 +85,7 @@ namespace game_final.Scenes
             AssetTypes.Texture.Ceiling = Environments.Global.Content.Load<Texture2D>("Scenes/Playing/ceiling");
             AssetTypes.Texture.Hourglass = Environments.Global.Content.Load<Texture2D>("Scenes/Playing/hourglass");
             AssetTypes.Texture.TimeBoard = Environments.Global.Content.Load<Texture2D>("Scenes/Playing/timeBoard");
+            AssetTypes.Texture.LevelBoard = Environments.Global.Content.Load<Texture2D>("Scenes/Playing/levelboard_fix");
 
             //CharacterInfoBoard
             AssetTypes.Texture.InfoBoard = Environments.Global.Content.Load<Texture2D>("Scenes/Playing/board_clean");
@@ -161,6 +163,10 @@ namespace game_final.Scenes
             _timeBoard.SetOrigin(_hourglass.Width / 2, _hourglass.Height / 2);
             _timeBoard.SetPosition(_hourglass.Position.X - 5, _hourglass.Position.Y + 200);
 
+            _levelBoard = new Base.Sprite(AssetTypes.Texture.LevelBoard, 185);
+            _levelBoard.SetOrigin(_levelBoard.Width / 2, _levelBoard.Height / 2);
+            _levelBoard.SetPosition(_wallpaper.Width / 2 - 75, _wallpaper.Height / 2 - 170);
+
             _shooter = new Sprites.Shooter();
 
             //Text
@@ -191,7 +197,7 @@ namespace game_final.Scenes
             Color c = Color.Black;
             if (Environments.Global.Level == 1)
             {
-                currentTex = "EASY";
+                currentTex = "  EASY";
                 c = Color.LightGreen;
             }
             else if (Environments.Global.Level == 2) 
@@ -201,12 +207,12 @@ namespace game_final.Scenes
             }
             else if (Environments.Global.Level == 3) 
             {
-                currentTex = "HARD";
+                currentTex = "  HARD";
                 c = Color.OrangeRed;
             }
             _currentLevel = new Sprites.Text(AssetTypes.Font.UIFont, currentTex);
             _currentLevel.Color = c;
-            _currentLevel.Position = new Vector2(_wallpaper.Width / 2 - 50, 290);
+            _currentLevel.Position = new Vector2(_wallpaper.Width / 2 - 60, 280);
 
             //Button
             _homeButton = new Sprites.IconButton(AssetTypes.Texture.IconHome, AssetTypes.Font.PlayingButton, 50, 50);
@@ -223,13 +229,13 @@ namespace game_final.Scenes
             _muteButton.Effect = false;
             _muteButton.MultipleClicks = true;
 
-            _UI_replay = new Sprites.Buttons(AssetTypes.Texture.Button, AssetTypes.Font.SpriteFont, "REPLAY", 200, 50);
-            _UI_replay.SetPosition(Settings.WINDOW_WIDTH / 2 - 100, 500);
+            _UI_replay = new Sprites.Buttons(AssetTypes.Texture.Button, AssetTypes.Font.PlayingButton, "REPLAY", 250, 70);
+            _UI_replay.SetPosition(Settings.WINDOW_WIDTH / 2 - 140, 600);
             _UI_replay.TextColor = Color.White;
             _UI_replay.Effect = false;
 
-            _UI_home = new Sprites.Buttons(AssetTypes.Texture.Button, AssetTypes.Font.SpriteFont, "HOME", 200, 50);
-            _UI_home.SetPosition(Settings.WINDOW_WIDTH / 2 + 100, 500);
+            _UI_home = new Sprites.Buttons(AssetTypes.Texture.Button, AssetTypes.Font.PlayingButton, "HOME", 250, 70);
+            _UI_home.SetPosition(Settings.WINDOW_WIDTH / 2 + 140, 600);
             _UI_home.TextColor = Color.White;
             _UI_home.Effect = false;
 
@@ -358,6 +364,7 @@ namespace game_final.Scenes
             DrawSprite(_bottomWallBorder);
             DrawSprite(_hourglass);
             DrawSprite(_timeBoard);
+            DrawSprite(_levelBoard);
 
             //Text
             _timeTex.Draw();
