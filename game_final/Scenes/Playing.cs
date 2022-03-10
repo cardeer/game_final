@@ -270,7 +270,7 @@ namespace game_final.Scenes
                         _shake = 2;
                     }
 
-                    if (_shakeWait >= .1)
+                    if (_shakeWait >= (Environments.GameData.ShootCount == 8 ? .1f : .05f))
                     {
                         _shakeWait = 0;
                         _shake = -_shake;
@@ -375,7 +375,7 @@ namespace game_final.Scenes
                     ball.Instance,
                     ball.Position,
                     null,
-                    ball.DrawColor,
+                    ball.DrawColor * (1 - (float)((ball.Position.Y - ball.StartY) / 500)),
                     0f,
                     ball.Origin,
                     ball.Scale,

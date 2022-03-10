@@ -14,6 +14,8 @@ namespace game_final.Sprites
         public Types.Vector2Int PreviousSnap;
         public Vector2 Unit;
 
+        public int StartY;
+
         private bool _snapped = false;
 
         public Ball(Types.BallType type, int x, int y, Vector2 unit) : base(Types.Ball.GetBallTexture(type), Settings.BALL_SIZE)

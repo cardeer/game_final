@@ -407,7 +407,9 @@ namespace game_final.Environments
                     if (!stick)
                     {
                         Vector2 pos = Utils.Ball.GetRenderPosition(i, j);
-                        BallsToDrop.Add(new Sprites.Ball(Types.Ball.BallTypeFromCode(BallsTemplate[i, j]), (int)pos.X, (int)pos.Y, true));
+                        Sprites.Ball ball = new Sprites.Ball(Types.Ball.BallTypeFromCode(BallsTemplate[i, j]), (int)pos.X, (int)pos.Y, true);
+                        ball.StartY = (int)pos.Y;
+                        BallsToDrop.Add(ball);
 
                         BallsTemplate[i, j] = 0;
                     }
