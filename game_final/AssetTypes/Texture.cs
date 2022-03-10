@@ -45,6 +45,6 @@ namespace game_final.AssetTypes
         public static Texture2D Mana;
 
         public static Texture2D WinBoard;
-        public static Texture2D LostBoard;
+        public static Texture2D LoseBoard;
     }
 }
