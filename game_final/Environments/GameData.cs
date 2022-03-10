@@ -137,6 +137,8 @@ namespace game_final.Environments
                     MagicCircles.Add(magicCircle);
                 }
 
+                dropBalls();
+
                 checkWin();
                 if (Won) return;
             }
@@ -149,8 +151,6 @@ namespace game_final.Environments
             checkFailed();
 
             if (Failed) return;
-
-            dropBalls();
 
             ShootCount++;
 
