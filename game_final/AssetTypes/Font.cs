@@ -10,5 +10,6 @@ namespace game_final.AssetTypes
 	{
 		public static SpriteFont SpriteFont;
 		public static SpriteFont PlayingButton;
+		public static SpriteFont UIFont;
 	}
 }

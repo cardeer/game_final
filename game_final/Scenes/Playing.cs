@@ -38,6 +38,12 @@ namespace game_final.Scenes
         private Sprites.IconButton _muteButton;
 
         private Sprites.Text _timeTex;
+        private Sprites.Text _scoreTex;
+        private Sprites.Text _ScorePointTex;
+        private Sprites.Text _levelTex;
+        private Sprites.Text _currentLevel;
+        private Sprites.Text _hp;
+        private Sprites.Text _mp;
 
         private int _shake = 0;
         private double _shakeWait = 0;
@@ -60,7 +66,7 @@ namespace game_final.Scenes
             AssetTypes.Texture.PurpleBall = Environments.Global.Content.Load<Texture2D>("Balls/purple_slime");
             AssetTypes.Texture.RedBall = Environments.Global.Content.Load<Texture2D>("Balls/red_slime");
 
-            //Left Wall
+            //Left Wall Texture
             AssetTypes.Texture.LeftWall = Environments.Global.Content.Load<Texture2D>("Scenes/Playing/left_wall");
             AssetTypes.Texture.WallPaper = Environments.Global.Content.Load<Texture2D>("Scenes/Playing/wallPaper");
             AssetTypes.Texture.Scoreboard = Environments.Global.Content.Load<Texture2D>("Scenes/Playing/scoreboard");
@@ -125,7 +131,7 @@ namespace game_final.Scenes
             _wallpaper.SetPosition(0, 0);
 
             _scoreboard = new Base.Sprite(AssetTypes.Texture.Scoreboard, 180);
-            _scoreboard.SetPosition(35, 120);
+            _scoreboard.SetPosition(35, 150);
 
             _leftWallBorder = new Base.Sprite(AssetTypes.Texture.WallBorder);
             _leftWallBorder.SetPosition(_leftWall.Width, 0);
@@ -155,18 +161,58 @@ namespace game_final.Scenes
             _timeTex.Color = Color.White;
             _timeTex.Position = new Vector2(_timeBoard.Position.X + 15, _timeBoard.Position.Y - 50);
 
+            _scoreTex = new Sprites.Text(AssetTypes.Font.UIFont, "SCORE");
+            _scoreTex.Color = Color.Brown;
+            _scoreTex.Position = new Vector2(_wallpaper.Width / 2 - 45, 120);
+
+            _ScorePointTex = new Sprites.Text(AssetTypes.Font.UIFont, "999999999");
+            _ScorePointTex.Position = new Vector2(70, 170);
+
+            _levelTex = new Sprites.Text(AssetTypes.Font.UIFont, "LEVEL");
+            _levelTex.Color = Color.Brown;
+            _levelTex.Position = new Vector2(_wallpaper.Width / 2 - 45, 240);
+
+            _hp = new Sprites.Text(AssetTypes.Font.PlayingButton, "HP");
+            _hp.Color = Color.White;
+            _hp.Position = new Vector2(Settings.WINDOW_WIDTH - 290, Settings.WINDOW_HEIGHT - AssetTypes.Texture.InfoBoard.Height + 5);
+
+            _mp = new Sprites.Text(AssetTypes.Font.PlayingButton, "MP");
+            _mp.Color = Color.White;
+            _mp.Position = new Vector2(Settings.WINDOW_WIDTH - 290, Settings.WINDOW_HEIGHT - AssetTypes.Texture.InfoBoard.Height + 40);
+
+            string currentTex = "";
+            Color c = Color.Black;
+            if (Environments.Global.Level == 1)
+            {
+                currentTex = "EASY";
+                c = Color.LightGreen;
+            }
+            else if (Environments.Global.Level == 2) 
+            {
+                currentTex = "NORMAL";
+                c = Color.Yellow;
+            }
+            else if (Environments.Global.Level == 3) 
+            {
+                currentTex = "HARD";
+                c = Color.OrangeRed;
+            }
+            _currentLevel = new Sprites.Text(AssetTypes.Font.UIFont, currentTex);
+            _currentLevel.Color = c;
+            _currentLevel.Position = new Vector2(_wallpaper.Width / 2 - 50, 290);
+
             //Button
             _homeButton = new Sprites.IconButton(AssetTypes.Texture.IconHome, AssetTypes.Font.PlayingButton, 50, 50);
-            _homeButton.SetPosition((_leftWall.Width / 2) + 60, 350);
+            _homeButton.SetPosition((_leftWall.Width / 2) + 60, 370);
             _homeButton.Effect = false;
 
             _replayButton = new Sprites.IconButton(AssetTypes.Texture.IconReplay, AssetTypes.Font.PlayingButton, 50, 50);
-            _replayButton.SetPosition((_leftWall.Width / 2), 350);
+            _replayButton.SetPosition((_leftWall.Width / 2), 370);
             _replayButton.Effect = false;
             _replayButton.MultipleClicks = true;
 
             _muteButton = new Sprites.IconButton(AssetTypes.Texture.IconMute, AssetTypes.Font.PlayingButton, 50, 50);
-            _muteButton.SetPosition((_leftWall.Width / 2) - 60, 350);
+            _muteButton.SetPosition((_leftWall.Width / 2) - 60, 370);
             _muteButton.Effect = false;
             _muteButton.MultipleClicks = true;
 
@@ -279,6 +325,12 @@ namespace game_final.Scenes
             DrawSprite(_hourglass);
             DrawSprite(_timeBoard);
             _timeTex.Draw();
+            _scoreTex.Draw();
+            _ScorePointTex.Draw();
+            _levelTex.Draw();
+            _currentLevel.Draw();
+            _hp.Draw();
+            _mp.Draw();
 
             // render balls from template
             int[,] template = Environments.GameData.BallsTemplate;
