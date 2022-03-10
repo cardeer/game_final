@@ -41,6 +41,13 @@ namespace game_final.Types
             Types.Vector2Int current = ball.CurrentSnap;
             Types.Vector2Int prev = ball.PreviousSnap;
 
+            if (template[SnapRow, SnapCol] > 0 && correctPosition(prev.Y, prev.X))
+            {
+                SnapRow = prev.Y;
+                SnapCol = prev.X;
+                return;
+            }
+
             // between two balls
             if (SnapCol - 1 >= 0 && SnapCol + 1 < Settings.TEMPLATE_COL_BALLS && template[SnapRow, SnapCol - 1] > 0 && template[SnapRow, SnapCol + 1] > 0)
             {
