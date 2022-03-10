@@ -101,6 +101,7 @@ namespace game_final.Scenes
 
         private void PlayButton_Click(object sender, System.EventArgs e)
         {
+            Utils.Sound.PlayStartSound();
             Environments.Scene.SetScene(Types.SceneType.IN_GAME, true);
             MediaPlayer.Stop();
         }

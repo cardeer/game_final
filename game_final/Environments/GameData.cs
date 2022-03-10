@@ -140,7 +140,11 @@ namespace game_final.Environments
                 dropBalls();
 
                 checkWin();
-                if (Won) return;
+                if (Won)
+                {
+                    Utils.Sound.PlayWinSound();
+                    return;
+                }
             }
             else
             {
@@ -150,7 +154,11 @@ namespace game_final.Environments
 
             checkFailed();
 
-            if (Failed) return;
+            if (Failed)
+            {
+                Utils.Sound.PlayLoseSound();
+                return;
+            }
 
             ShootCount++;
 

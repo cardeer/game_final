@@ -73,7 +73,7 @@ namespace game_final.Base
                 Instance,
                 Position,
                 null,
-                DrawColor,
+                DrawColor * Opacity,
                 Rotation,
                 Origin,
                 Scale,
