@@ -133,6 +133,7 @@ namespace game_final.Sprites
             if (Environments.Global.IsLeftClicked() && Environments.GameData.CanShoot && Environments.GameData.DataReady)
             {
                 Environments.GameData.CanShoot = false;
+                AssetTypes.Sound.BallShoot.Play(0.5f, 0, 0);
 
                 _currentBall.Unit = -_unitVector;
                 _currentBall.SetPosition((int)(X + Width / 2), (int)(Y + Height / 2));

@@ -351,18 +351,6 @@
 /processorParam:TextureFormat=Color
 /build:Scenes/Playing/timeBoard.png
 
-#begin Scenes/Playing/timeBoard.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Scenes/Playing/timeBoard.png
-
 #begin Scenes/Playing/top_wall_border.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -440,6 +428,18 @@
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:Sounds/SoundEffects/ball_pop.mp3
+
+#begin Sounds/SoundEffects/ball_shoot.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/SoundEffects/ball_shoot.mp3
+
+#begin Sounds/SoundEffects/ball_snap.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/SoundEffects/ball_snap.mp3
 
 #begin Sounds/SoundEffects/button_click.mp3
 /importer:Mp3Importer

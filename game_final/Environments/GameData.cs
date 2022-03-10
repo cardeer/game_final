@@ -140,6 +140,10 @@ namespace game_final.Environments
                 checkWin();
                 if (Won) return;
             }
+            else
+            {
+                AssetTypes.Sound.BallSnap.Play(0.5f, 0, 0);
+            }
 
 
             checkFailed();

@@ -39,6 +39,8 @@ namespace game_final
             // load sound effects
             AssetTypes.Sound.ButtonHover = s_content.Load<SoundEffect>("Sounds/SoundEffects/button_hover");
             AssetTypes.Sound.ButtonClick = s_content.Load<SoundEffect>("Sounds/SoundEffects/button_click");
+            AssetTypes.Sound.BallShoot = s_content.Load<SoundEffect>("Sounds/SoundEffects/ball_shoot");
+            AssetTypes.Sound.BallSnap = s_content.Load<SoundEffect>("Sounds/SoundEffects/ball_snap");
             AssetTypes.Sound.BallPop = s_content.Load<SoundEffect>("Sounds/SoundEffects/ball_pop");
         }
     }
