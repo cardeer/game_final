@@ -66,5 +66,20 @@ namespace game_final.Base
                 Instance.SetData(_colorArray);
             }
         }
+
+        public void Draw()
+        {
+            Environments.Global.SpriteBatch.Draw(
+                Instance,
+                Position,
+                null,
+                DrawColor,
+                Rotation,
+                Origin,
+                Scale,
+                SpriteEffects.None,
+                0f
+            );
+        }
     }
 }
