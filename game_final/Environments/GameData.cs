@@ -50,7 +50,7 @@ namespace game_final.Environments
             ShootCount = 0;
             DataReady = true;
 
-            TimeLeft = Level == 1 ? 5 * 60 : Level == 2 * 60 ? 4 : 3 * 60;
+            TimeLeft = Level == 1 ? 120 : Level == 2 ? 90 : 60;
         }
 
         public static void SetBallTemplate(int row, int col, int ballTypeCode)

@@ -278,6 +278,7 @@ namespace game_final.Scenes
         {
             Environments.GameData.Initialize();
             Environments.GameData.GenerateLevel();
+            _timeTex.Color = Color.White;
         }
 
         private void _muteButton_Click(object sender, EventArgs e)
