@@ -22,6 +22,9 @@ namespace game_final.Sprites
             _text = text;
 
             _measure = _font.MeasureString(text);
+
+            _width = (int)_measure.X;
+            _height = (int)_measure.Y;
         }
     }
 }
