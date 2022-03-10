@@ -19,6 +19,7 @@ namespace game_final.Environments
 
         public static int[,] BallsTemplate;
         public static List<Sprites.MagicCircle> MagicCircles;
+        public static List<Sprites.Ball> BallsToDrop;
 
         public static void Initialize()
         {
@@ -32,6 +33,7 @@ namespace game_final.Environments
             }
 
             MagicCircles = new List<Sprites.MagicCircle>();
+            BallsToDrop = new List<Sprites.Ball>();
 
             CanShoot = true;
             Score = 0;
@@ -143,6 +145,8 @@ namespace game_final.Environments
             checkFailed();
 
             if (Failed) return;
+
+            dropBalls();
 
             ShootCount++;
 
@@ -291,6 +295,124 @@ namespace game_final.Environments
                 result += "\n";
             }
             Debug.WriteLine(result);
+        }
+
+        private static void dropBalls()
+        {
+            int[,] stickBalls = new int[Settings.TEMPLATE_ROW_BALLS, Settings.TEMPLATE_COL_BALLS];
+
+            Queue<Types.Vector2Int> toCheck = new Queue<Types.Vector2Int>();
+
+            for (int i = 0; i < Settings.TEMPLATE_COL_BALLS; i++)
+            {
+                if (BallsTemplate[PushCount, i] > 0) toCheck.Enqueue(new Types.Vector2Int(i, PushCount));
+            }
+
+            while (toCheck.Count > 0)
+            {
+                Types.Vector2Int point = toCheck.Dequeue();
+
+                int row = point.Y;
+                int col = point.X;
+
+                if (stickBalls[row, col] != 1)
+                {
+                    stickBalls[row, col] = 1;
+
+                    //Debug.WriteLine($"({point.Y}, {point.X})");
+
+                    // top left
+                    if (row > 0 && col > 0 && BallsTemplate[row - 1, col - 1] > 0)
+                    {
+                        toCheck.Enqueue(new Types.Vector2Int(col - 1, row - 1));
+                    }
+
+                    // top right
+                    if (row > 0 && col + 1 < Settings.TEMPLATE_COL_BALLS && BallsTemplate[row - 1, col + 1] > 0)
+                    {
+                        toCheck.Enqueue(new Types.Vector2Int(col + 1, row - 1));
+                    }
+
+                    // left
+                    if (col - 2 >= 0 && BallsTemplate[row, col - 2] > 0)
+                    {
+                        toCheck.Enqueue(new Types.Vector2Int(col - 2, row));
+                    }
+
+                    // right
+                    if (col + 2 < Settings.TEMPLATE_COL_BALLS && BallsTemplate[row, col + 2] > 0)
+                    {
+                        toCheck.Enqueue(new Types.Vector2Int(col + 2, row));
+                    }
+
+                    // bottom left
+                    if (row + 1 < Settings.TEMPLATE_ROW_BALLS && col > 0 && BallsTemplate[row + 1, col - 1] > 0)
+                    {
+                        toCheck.Enqueue(new Types.Vector2Int(col - 1, row + 1));
+                    }
+
+                    // bottom right
+                    if (row + 1 < Settings.TEMPLATE_ROW_BALLS && col + 1 < Settings.TEMPLATE_COL_BALLS && BallsTemplate[row + 1, col + 1] > 0)
+                    {
+                        toCheck.Enqueue(new Types.Vector2Int(col + 1, row + 1));
+                    }
+                }
+            }
+
+            for (int i = PushCount; i < Settings.TEMPLATE_ROW_BALLS; i++)
+            {
+                for (int j = 0; j < Settings.TEMPLATE_COL_BALLS; j++)
+                {
+                    // if (i, j) is a stick ball
+                    if (stickBalls[i, j] == 1 || BallsTemplate[i, j] == 0) continue;
+
+                    bool stick = false;
+
+                    // top left
+                    if (i > 0 && j > 0 && stickBalls[i - 1, j - 1] == 1)
+                    {
+                        stick = true;
+                    }
+
+                    // top right
+                    if (i > 0 && j + 1 < Settings.TEMPLATE_COL_BALLS && stickBalls[i - 1, j + 1] == 1)
+                    {
+                        stick = true;
+                    }
+
+                    // left
+                    if (j - 2 >= 0 && stickBalls[i, j - 2] == 1)
+                    {
+                        stick = true;
+                    }
+
+                    // right
+                    if (j + 2 < Settings.TEMPLATE_COL_BALLS && stickBalls[i, j + 2] == 1)
+                    {
+                        stick = true;
+                    }
+
+                    // bottom left
+                    if (i + 1 < Settings.TEMPLATE_ROW_BALLS && j > 0 && stickBalls[i + 1, j - 1] == 1)
+                    {
+                        stick = true;
+                    }
+
+                    // bottom right
+                    if (i + 1 < Settings.TEMPLATE_ROW_BALLS && j + 1 < Settings.TEMPLATE_COL_BALLS && stickBalls[i + 1, j + 1] == 1)
+                    {
+                        stick = true;
+                    }
+
+                    if (!stick)
+                    {
+                        Vector2 pos = Utils.Ball.GetRenderPosition(i, j);
+                        BallsToDrop.Add(new Sprites.Ball(Types.Ball.BallTypeFromCode(BallsTemplate[i, j]), (int)pos.X, (int)pos.Y, true));
+
+                        BallsTemplate[i, j] = 0;
+                    }
+                }
+            }
         }
     }
 }

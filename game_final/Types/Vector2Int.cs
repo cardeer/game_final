@@ -14,5 +14,10 @@ namespace game_final.Types
             X = x;
             Y = y;
         }
+
+        public override string ToString()
+        {
+            return $"Vector2Int{{X: {X}, Y: {Y}}}";
+        }
     }
 }

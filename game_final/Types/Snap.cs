@@ -35,7 +35,7 @@ namespace game_final.Types
         {
             int[,] template = Environments.GameData.BallsTemplate;
 
-            Debug.WriteLine($"snap from: {SnapRow}, {SnapCol}, previous snap: {ball.PreviousSnap.Y}, {ball.PreviousSnap.X}, unit: {ball.Unit.X}, {ball.Unit.Y}");
+            Debug.WriteLine($"\nsnap from: {SnapRow}, {SnapCol}, previous snap: {ball.PreviousSnap.Y}, {ball.PreviousSnap.X}, unit: {ball.Unit.X}, {ball.Unit.Y}\n");
             Environments.GameData.PrintTemplate();
 
             Types.Vector2Int current = ball.CurrentSnap;

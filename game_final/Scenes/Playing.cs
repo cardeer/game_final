@@ -153,7 +153,7 @@ namespace game_final.Scenes
             //Text
             _timeTex = new Sprites.Text(AssetTypes.Font.PlayingButton, "00:00");
             _timeTex.Color = Color.White;
-            _timeTex.Position = new Vector2(_timeBoard.Position.X + 15, _timeBoard.Position.Y -50);
+            _timeTex.Position = new Vector2(_timeBoard.Position.X + 15, _timeBoard.Position.Y - 50);
 
             //Button
             _homeButton = new Sprites.IconButton(AssetTypes.Texture.IconHome, AssetTypes.Font.PlayingButton, 50, 50);
@@ -234,10 +234,16 @@ namespace game_final.Scenes
             }
 
             Environments.GameData.MagicCircles.RemoveAll(m => m.ShouldDestroy);
+            Environments.GameData.BallsToDrop.RemoveAll(b => b.Y >= Settings.WINDOW_HEIGHT + Settings.BALL_SIZE / 2);
 
             foreach (Sprites.MagicCircle magicCirle in Environments.GameData.MagicCircles)
             {
                 magicCirle.Update();
+            }
+
+            foreach (Sprites.Ball ball in Environments.GameData.BallsToDrop)
+            {
+                ball.SetPosition(ball.X, (int)(ball.Y + Environments.Global.GameTime.ElapsedGameTime.TotalSeconds * Settings.BALL_SPEED));
             }
 
             _homeButton.Update();
@@ -308,12 +314,28 @@ namespace game_final.Scenes
                 }
             }
 
+            _shooter.Draw();
+
+            foreach (Sprites.Ball ball in Environments.GameData.BallsToDrop)
+            {
+                Environments.Global.SpriteBatch.Draw(
+                    ball.Instance,
+                    ball.Position,
+                    null,
+                    ball.DrawColor,
+                    0f,
+                    ball.Origin,
+                    ball.Scale,
+                    SpriteEffects.None,
+                    0f
+                );
+            }
+
             foreach (Sprites.MagicCircle magicCirle in Environments.GameData.MagicCircles)
             {
                 magicCirle.Draw();
             }
 
-            _shooter.Draw();
 
             _homeButton.Draw();
             _replayButton.Draw();
