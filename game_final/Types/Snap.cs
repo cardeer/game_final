@@ -35,12 +35,13 @@ namespace game_final.Types
         {
             int[,] template = Environments.GameData.BallsTemplate;
 
-            Debug.WriteLine($"snap from: {SnapRow}, {SnapCol} {ball.Unit.X}, previous snap: {ball.PreviousSnap.Y}, {ball.PreviousSnap.X}");
+            Debug.WriteLine($"snap from: {SnapRow}, {SnapCol}, previous snap: {ball.PreviousSnap.Y}, {ball.PreviousSnap.X}, unit: {ball.Unit.X}, {ball.Unit.Y}");
             Environments.GameData.PrintTemplate();
 
             Types.Vector2Int current = ball.CurrentSnap;
             Types.Vector2Int prev = ball.PreviousSnap;
 
+            // between two balls
             if (SnapCol - 1 >= 0 && SnapCol + 1 < Settings.TEMPLATE_COL_BALLS && template[SnapRow, SnapCol - 1] > 0 && template[SnapRow, SnapCol + 1] > 0)
             {
                 SnapRow++;
@@ -277,8 +278,6 @@ namespace game_final.Types
             //        }
             //    }
             //}
-
-            Debug.WriteLine($"snap to: {SnapRow}, {SnapCol}");
         }
     }
 }

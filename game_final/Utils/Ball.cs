@@ -15,7 +15,7 @@ namespace game_final.Utils
             float relativeX = (ball.X + distX) - Settings.PLAYING_UI_LEFT_WIDTH - Settings.BALL_SIZE / 4;
             float relativeY = (ball.Y + distY) - Settings.PLAYING_UI_TOP_HEIGHT - Settings.PLAY_AREA_TOP_PADDING - Settings.BALL_SIZE / 2;
 
-            float x = relativeX / Constants.PLAY_WIDTH_LEFT;
+            float x = relativeX / (Constants.PLAY_WIDTH_LEFT - Settings.BALL_SIZE / 4);
             x = (float)(x * (Settings.TEMPLATE_COL_BALLS - 1));
             x = Math.Clamp(x, 0, Settings.TEMPLATE_COL_BALLS - 1);
 
@@ -133,6 +133,7 @@ namespace game_final.Utils
             {
                 ball.Destroy();
                 result.FitPoints(ball);
+                Debug.WriteLine($"snap to: {result.SnapRow}, {result.SnapCol}");
             }
 
             return result;
