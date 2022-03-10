@@ -54,7 +54,7 @@ namespace game_final.Base
         {
             get {
                 Rectangle mouseBox = new Rectangle(Environments.Global.CurrentMouseState.X, Environments.Global.CurrentMouseState.Y, 1, 1);
-                return CanClick && !Environments.Global.WindowActive ? false : HitBox.Intersects(mouseBox);
+                return CanClick && (!Environments.Global.WindowActive ? false : HitBox.Intersects(mouseBox));
             }
         }
 

@@ -327,6 +327,7 @@ namespace game_final.Scenes
 
             _UI_home.CanClick = Environments.GameData.Won || Environments.GameData.Failed;
             _UI_home.Update();
+
             _UI_replay.CanClick = Environments.GameData.Won || Environments.GameData.Failed;
             _UI_replay.Update();
 
