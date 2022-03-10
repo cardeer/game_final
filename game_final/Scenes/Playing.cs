@@ -229,13 +229,13 @@ namespace game_final.Scenes
             _muteButton.Effect = false;
             _muteButton.MultipleClicks = true;
 
-            _UI_replay = new Sprites.Buttons(AssetTypes.Texture.Button, AssetTypes.Font.PlayingButton, "REPLAY", 250, 70);
-            _UI_replay.SetPosition(Settings.WINDOW_WIDTH / 2 - 140, 600);
+            _UI_replay = new Sprites.Buttons(AssetTypes.Texture.Button, AssetTypes.Font.PlayingButton, "REPLAY", 250, 60);
+            _UI_replay.SetPosition(Settings.WINDOW_WIDTH / 2 - 140, 500);
             _UI_replay.TextColor = Color.White;
             _UI_replay.Effect = false;
 
-            _UI_home = new Sprites.Buttons(AssetTypes.Texture.Button, AssetTypes.Font.PlayingButton, "HOME", 250, 70);
-            _UI_home.SetPosition(Settings.WINDOW_WIDTH / 2 + 140, 600);
+            _UI_home = new Sprites.Buttons(AssetTypes.Texture.Button, AssetTypes.Font.PlayingButton, "HOME", 250, 60);
+            _UI_home.SetPosition(Settings.WINDOW_WIDTH / 2 + 140, 500);
             _UI_home.TextColor = Color.White;
             _UI_home.Effect = false;
 
@@ -248,11 +248,11 @@ namespace game_final.Scenes
             //Dialog
             _winBoard = new Base.Sprite(AssetTypes.Texture.WinBoard, 700);
             _winBoard.SetOrigin(_winBoard.Instance.Width / 2, _winBoard.Instance.Height / 2);
-            _winBoard.SetPosition(Settings.WINDOW_WIDTH / 2, Settings.WINDOW_HEIGHT / 2);
+            _winBoard.SetPosition(Settings.WINDOW_WIDTH / 2, Settings.WINDOW_HEIGHT / 2 - 100);
 
             _loseBoard = new Base.Sprite(AssetTypes.Texture.LoseBoard, 700);
             _loseBoard.SetOrigin(_loseBoard.Instance.Width / 2, _loseBoard.Instance.Height / 2);
-            _loseBoard.SetPosition(Settings.WINDOW_WIDTH / 2, Settings.WINDOW_HEIGHT / 2);
+            _loseBoard.SetPosition(Settings.WINDOW_WIDTH / 2, Settings.WINDOW_HEIGHT / 2 - 100);
 
             //BGM
             _playBGM = AssetTypes.Sound.MusicSound;
@@ -267,12 +267,20 @@ namespace game_final.Scenes
         private void _homeButton_Click(object sender, EventArgs e)
         {
             Environments.Scene.SetScene(Types.SceneType.MAIN_MENU, true);
+
+            _homeButton.CanClick = true;
+            _replayButton.CanClick = true;
+            _muteButton.CanClick = true;
         }
 
         private void _replayButton_Click(object sender, EventArgs e)
         {
             Environments.GameData.Initialize();
             Environments.GameData.GenerateLevel();
+
+            _homeButton.CanClick = true;
+            _replayButton.CanClick = true;
+            _muteButton.CanClick = true;
         }
 
         private void _muteButton_Click(object sender, EventArgs e)
@@ -327,15 +335,29 @@ namespace game_final.Scenes
                 ball.SetPosition(ball.X, (int)(ball.Y + Environments.Global.GameTime.ElapsedGameTime.TotalSeconds * Settings.BALL_SPEED));
             }
 
+
+
+            if (Environments.GameData.Won || Environments.GameData.Failed)
+            {
+                _homeButton.CanClick = false;
+                _replayButton.CanClick = false;
+                _muteButton.CanClick = false;
+
+                _UI_home.CanClick = true;
+                _UI_home.Update();
+
+                _UI_replay.CanClick = true;
+                _UI_replay.Update();
+            }
+            else
+            {
+                _UI_home.CanClick = false;
+                _UI_replay.CanClick = false;
+            }
+
             _homeButton.Update();
             _replayButton.Update();
             _muteButton.Update();
-
-            _UI_home.CanClick = Environments.GameData.Won || Environments.GameData.Failed;
-            _UI_home.Update();
-
-            _UI_replay.CanClick = Environments.GameData.Won || Environments.GameData.Failed;
-            _UI_replay.Update();
 
             base.Update();
         }
