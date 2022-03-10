@@ -13,6 +13,7 @@ namespace game_final.Base
         public Texture2D Instance;
         public float Scale = 1f;
         public float LayerDepth = 0f;
+        public bool CanClick = true;
 
         public float Rotation = 0f;
 
@@ -53,7 +54,7 @@ namespace game_final.Base
         {
             get {
                 Rectangle mouseBox = new Rectangle(Environments.Global.CurrentMouseState.X, Environments.Global.CurrentMouseState.Y, 1, 1);
-                return !Environments.Global.WindowActive ? false : HitBox.Intersects(mouseBox);
+                return CanClick && !Environments.Global.WindowActive ? false : HitBox.Intersects(mouseBox);
             }
         }
 
