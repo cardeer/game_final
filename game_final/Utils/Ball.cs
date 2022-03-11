@@ -68,6 +68,10 @@ namespace game_final.Utils
 
             ball.CurrentSnap = new Types.Vector2Int(roundX, roundY);
 
+            Types.Snap result = new Types.Snap();
+
+            //if (ball.PreviousSnap != null && ball.CurrentSnap.X == ball.PreviousSnap.X && ball.CurrentSnap.Y == ball.PreviousSnap.Y) return result;
+
             Vector2 pos = GetPosFromIndex(posY, posX);
             Vector2 left = GetPosFromIndex(roundY, roundX - 1);
             Vector2 right = GetPosFromIndex(roundY, roundX + 1);
@@ -77,7 +81,6 @@ namespace game_final.Utils
             Vector2 top = GetPosFromIndex(roundY - 1, roundX);
             Vector2 topRight = GetPosFromIndex(roundY - 1, roundX + 1);
 
-            Types.Snap result = new Types.Snap();
             result.SnapRow = roundY;
             result.SnapCol = roundX;
 

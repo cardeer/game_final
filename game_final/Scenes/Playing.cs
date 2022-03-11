@@ -355,6 +355,8 @@ namespace game_final.Scenes
 
                     if (Math.Ceiling(Environments.GameData.TimeLeft) <= 0)
                     {
+                        if (MediaPlayer.State == MediaState.Playing) MediaPlayer.Stop();
+
                         _timeText.Color = Color.Red;
                         Utils.Sound.PlayLoseSound();
                         Environments.GameData.Failed = true;

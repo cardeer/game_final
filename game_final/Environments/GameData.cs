@@ -48,6 +48,7 @@ namespace game_final.Environments
 
             CanShoot = true;
             Score = 0;
+            Combo = 0;
             Failed = false;
             Won = false;
             PushCount = 0;
@@ -273,6 +274,11 @@ namespace game_final.Environments
                 MediaPlayer.Stop();
                 Utils.Sound.PlayWinSound();
                 Won = true;
+
+                if (ChallengeMode)
+                {
+                    Score *= (int)Math.Ceiling(TimeLeft);
+                }
             }
         }
 
