@@ -41,10 +41,10 @@ namespace game_final.Scenes
         private Sprites.IconButton _replayButton;
         private Sprites.IconButton _muteButton;
 
-        private Sprites.Text _timeTex;
-        private Sprites.Text _scoreTex;
-        private Sprites.Text _ScorePointTex;
-        private Sprites.Text _levelTex;
+        private Sprites.Text _timeText;
+        private Sprites.Text _scoreText;
+        private Sprites.Text _scorePointText;
+        private Sprites.Text _levelText;
         private Sprites.Text _currentLevel;
         private Sprites.Text _hp;
         private Sprites.Text _mp;
@@ -175,20 +175,22 @@ namespace game_final.Scenes
             _shooter = new Sprites.Shooter();
 
             //Text
-            _timeTex = new Sprites.Text(AssetTypes.Font.PlayingButton, "00 : 00");
-            _timeTex.Color = Color.White;
-            _timeTex.Position = new Vector2(_timeBoard.Position.X + 5, _timeBoard.Position.Y - 50);
+            _timeText = new Sprites.Text(AssetTypes.Font.PlayingButton, "00 : 00");
+            _timeText.Color = Color.White;
+            _timeText.Position = new Vector2(_timeBoard.Position.X + 5, _timeBoard.Position.Y - 50);
 
-            _scoreTex = new Sprites.Text(AssetTypes.Font.UIFont, "SCORE");
-            _scoreTex.Color = Color.Brown;
-            _scoreTex.Position = new Vector2(_wallpaper.Width / 2 - 45, 120);
+            _scoreText = new Sprites.Text(AssetTypes.Font.UIFont, "SCORE");
+            _scoreText.Color = Color.Brown;
+            _scoreText.Position = new Vector2(_wallpaper.Width / 2 - 45, 120);
 
-            _ScorePointTex = new Sprites.Text(AssetTypes.Font.UIFont, "999999999");
-            _ScorePointTex.Position = new Vector2(70, 170);
+            _scorePointText = new Sprites.Text(AssetTypes.Font.UIFont, "0");
+            _scorePointText.Position = new Vector2(125, 183);
+            _scorePointText.OriginScaleX = _scorePointText.OriginScaleY = .5f;
+            _scorePointText.SetOrigin();
 
-            _levelTex = new Sprites.Text(AssetTypes.Font.UIFont, "LEVEL");
-            _levelTex.Color = Color.Brown;
-            _levelTex.Position = new Vector2(_wallpaper.Width / 2 - 45, 240);
+            _levelText = new Sprites.Text(AssetTypes.Font.UIFont, "LEVEL");
+            _levelText.Color = Color.Brown;
+            _levelText.Position = new Vector2(_wallpaper.Width / 2 - 45, 240);
 
             _hp = new Sprites.Text(AssetTypes.Font.PlayingButton, "HP");
             _hp.Color = Color.White;
@@ -279,7 +281,7 @@ namespace game_final.Scenes
 
             Environments.GameData.Initialize();
             Environments.GameData.GenerateLevel();
-            _timeTex.Color = Color.White;
+            _timeText.Color = Color.White;
         }
 
         private void _muteButton_Click(object sender, EventArgs e)
@@ -309,11 +311,11 @@ namespace game_final.Scenes
                     int minutes = timeLeftInInt / 60;
                     int seconds = timeLeftInInt % 60;
 
-                    _timeTex.SetText($"{minutes.ToString("D2")} : {seconds.ToString("D2")}");
+                    _timeText.SetText($"{minutes.ToString("D2")} : {seconds.ToString("D2")}");
 
                     if (Math.Ceiling(Environments.GameData.TimeLeft) <= 0)
                     {
-                        _timeTex.Color = Color.Red;
+                        _timeText.Color = Color.Red;
                         Utils.Sound.PlayLoseSound();
                         Environments.GameData.Failed = true;
                     }
@@ -395,10 +397,10 @@ namespace game_final.Scenes
             DrawSprite(_levelBoard);
 
             //Text
-            _timeTex.Draw();
-            _scoreTex.Draw();
-            _ScorePointTex.Draw();
-            _levelTex.Draw();
+            _timeText.Draw();
+            _scoreText.Draw();
+            _scorePointText.Draw();
+            _levelText.Draw();
             _currentLevel.Draw();
             _hp.Draw();
             _mp.Draw();

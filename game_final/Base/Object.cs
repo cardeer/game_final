@@ -16,6 +16,9 @@ namespace game_final.Base
         public float Opacity = 1f;
         public bool CanClick = true;
 
+        public float OriginScaleX = 0f;
+        public float OriginScaleY = 0f;
+
         public float Rotation = 0f;
 
         protected int _width, _height;
@@ -79,6 +82,12 @@ namespace game_final.Base
         {
             Origin.X = x;
             Origin.Y = y;
+        }
+
+        public void SetOrigin()
+        {
+            Origin.X = _width * OriginScaleX;
+            Origin.Y = _height * OriginScaleY;
         }
 
         public void Destroy()

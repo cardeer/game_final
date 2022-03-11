@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 
+using System.Diagnostics;
+
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -36,6 +38,8 @@ namespace game_final.Sprites
 
             _width = (int)_measure.X;
             _height = (int)_measure.Y;
+
+            SetOrigin();
         }
 
         public void Draw()
