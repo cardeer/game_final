@@ -57,6 +57,10 @@ namespace game_final.Scenes
 
         public static bool _isPlayingBGM;
 
+        private int _previousScore = 0;
+        private bool _animateScore = false;
+        private float _scoreScale = 1f;
+
         public Playing() : base(true) { }
 
         public override void LoadContent()
@@ -183,10 +187,9 @@ namespace game_final.Scenes
             _scoreText.Color = Color.Brown;
             _scoreText.Position = new Vector2(_wallpaper.Width / 2 - 45, 120);
 
-            _scorePointText = new Sprites.Text(AssetTypes.Font.UIFont, "0");
+            _scorePointText = new Sprites.Text(AssetTypes.Font.UIFont, "0", .5f, .5f);
             _scorePointText.Position = new Vector2(125, 183);
             _scorePointText.OriginScaleX = _scorePointText.OriginScaleY = .5f;
-            _scorePointText.SetOrigin();
 
             _levelText = new Sprites.Text(AssetTypes.Font.UIFont, "LEVEL");
             _levelText.Color = Color.Brown;
@@ -236,12 +239,12 @@ namespace game_final.Scenes
             _muteButton.Effect = false;
             _muteButton.MultipleClicks = true;
 
-            _UI_replay = new Sprites.Buttons(AssetTypes.Texture.Button, AssetTypes.Font.PlayingButton, "REPLAY", 250, 60);
+            _UI_replay = new Sprites.Buttons(AssetTypes.Texture.Button, AssetTypes.Font.PlayingButton, "REPLAY", 250, 50);
             _UI_replay.SetPosition(Settings.WINDOW_WIDTH / 2 - 140, 500);
             _UI_replay.TextColor = Color.White;
             _UI_replay.Effect = false;
 
-            _UI_home = new Sprites.Buttons(AssetTypes.Texture.Button, AssetTypes.Font.PlayingButton, "HOME", 250, 60);
+            _UI_home = new Sprites.Buttons(AssetTypes.Texture.Button, AssetTypes.Font.PlayingButton, "HOME", 250, 50);
             _UI_home.SetPosition(Settings.WINDOW_WIDTH / 2 + 140, 500);
             _UI_home.TextColor = Color.White;
             _UI_home.Effect = false;
@@ -302,6 +305,35 @@ namespace game_final.Scenes
 
         public override void Update()
         {
+            _scorePointText.Scale = _scoreScale;
+
+            if (_previousScore != Environments.GameData.Score)
+            {
+                _previousScore = Environments.GameData.Score;
+                _scorePointText.SetText(Environments.GameData.Score.ToString());
+                _animateScore = true;
+            }
+
+            if (_animateScore)
+            {
+                _scoreScale += 7 * (float)Environments.Global.GameTime.ElapsedGameTime.TotalSeconds;
+
+                if (_scoreScale >= 2)
+                {
+                    _scoreScale = 2;
+                    _animateScore = false;
+                }
+            }
+            else
+            {
+                _scoreScale -= 7 * (float)Environments.Global.GameTime.ElapsedGameTime.TotalSeconds;
+
+                if (_scoreScale <= 1)
+                {
+                    _scoreScale = 1;
+                }
+            }
+
             if (!Environments.GameData.Failed && !Environments.GameData.Won)
             {
                 if (Environments.GameData.ChallengeMode)
@@ -338,6 +370,10 @@ namespace game_final.Scenes
                 }
 
                 _shooter.Update();
+            }
+            else
+            {
+                _shooter.DestroyShotBall();
             }
 
             Environments.GameData.MagicCircles.RemoveAll(m => m.ShouldDestroy);
@@ -466,17 +502,13 @@ namespace game_final.Scenes
             _replayButton.Draw();
             _muteButton.Draw();
 
-            if (Environments.GameData.Won)
+            if (Environments.GameData.Won || Environments.GameData.Failed)
             {
                 _blurBG.Draw();
-                _winBoard.Draw();
-                _UI_replay.Draw();
-                _UI_home.Draw();
-            }
-            else if (Environments.GameData.Failed)
-            {
-                _blurBG.Draw();
-                _loseBoard.Draw();
+
+                if (Environments.GameData.Won) _winBoard.Draw();
+                else _loseBoard.Draw();
+
                 _UI_replay.Draw();
                 _UI_home.Draw();
             }

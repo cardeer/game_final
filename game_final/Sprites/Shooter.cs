@@ -262,5 +262,15 @@ namespace game_final.Sprites
             ReflectPoint.X = x;
             ReflectPoint.Y = y;
         }
+
+        public void DestroyShotBall()
+        {
+            if (_shotBall != null)
+            {
+                _shotBall.Destroy();
+            }
+
+            _shotBall = null;
+        }
     }
 }
