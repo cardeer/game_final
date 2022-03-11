@@ -147,6 +147,8 @@ namespace game_final.Environments
                     MagicCircles.Add(magicCircle);
                 }
 
+                Score += removePoints.Count * 100;
+
                 dropBalls();
 
                 checkWin();

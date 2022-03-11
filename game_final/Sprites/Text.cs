@@ -26,6 +26,17 @@ namespace game_final.Sprites
             measureString();
         }
 
+        public Text(SpriteFont font, string text, float originScaleX, float originScaleY)
+        {
+            _font = font;
+            _text = text;
+
+            OriginScaleX = originScaleX;
+            OriginScaleY = originScaleY;
+
+            measureString();
+        }
+
         public void SetText(string text)
         {
             _text = text;
