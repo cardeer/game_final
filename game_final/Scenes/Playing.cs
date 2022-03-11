@@ -237,12 +237,12 @@ namespace game_final.Scenes
             _muteButton.MultipleClicks = true;
 
             _UI_replay = new Sprites.Buttons(AssetTypes.Texture.Button, AssetTypes.Font.PlayingButton, "REPLAY", 250, 60);
-            _UI_replay.SetPosition(Settings.WINDOW_WIDTH / 2 - 140, 500);
+            _UI_replay.SetPosition(Settings.WINDOW_WIDTH / 2 - 140, 480);
             _UI_replay.TextColor = Color.White;
             _UI_replay.Effect = false;
 
             _UI_home = new Sprites.Buttons(AssetTypes.Texture.Button, AssetTypes.Font.PlayingButton, "HOME", 250, 60);
-            _UI_home.SetPosition(Settings.WINDOW_WIDTH / 2 + 140, 500);
+            _UI_home.SetPosition(Settings.WINDOW_WIDTH / 2 + 140, 480);
             _UI_home.TextColor = Color.White;
             _UI_home.Effect = false;
 
@@ -253,11 +253,11 @@ namespace game_final.Scenes
             _UI_home.Click += _homeButton_Click;
 
             //Dialog
-            _winBoard = new Base.Sprite(AssetTypes.Texture.WinBoard, 700);
+            _winBoard = new Base.Sprite(AssetTypes.Texture.WinBoard, 1000);
             _winBoard.SetOrigin(_winBoard.Instance.Width / 2, _winBoard.Instance.Height / 2);
             _winBoard.SetPosition(Settings.WINDOW_WIDTH / 2, Settings.WINDOW_HEIGHT / 2 - 100);
 
-            _loseBoard = new Base.Sprite(AssetTypes.Texture.LoseBoard, 700);
+            _loseBoard = new Base.Sprite(AssetTypes.Texture.LoseBoard, 1000);
             _loseBoard.SetOrigin(_loseBoard.Instance.Width / 2, _loseBoard.Instance.Height / 2);
             _loseBoard.SetPosition(Settings.WINDOW_WIDTH / 2, Settings.WINDOW_HEIGHT / 2 - 100);
 
