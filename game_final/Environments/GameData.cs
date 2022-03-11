@@ -12,6 +12,7 @@ namespace game_final.Environments
     {
         public static bool CanShoot = true;
         public static int Score = 0;
+        public static int Combo = 0;
         public static bool Failed = false;
         public static bool Won = false;
         public static int PushCount = 0;
@@ -28,6 +29,8 @@ namespace game_final.Environments
 
         // time in seconds
         public static float TimeLeft = 5 * 60;
+
+        private static int _scoreMultiply = 0;
 
         public static void Initialize()
         {
@@ -52,6 +55,7 @@ namespace game_final.Environments
             DataReady = true;
 
             TimeLeft = Level == 1 ? 120 : Level == 2 ? 90 : 60;
+            _scoreMultiply = (Level == 1 ? 100 : Level == 2 ? 200 : 300) * (ChallengeMode ? 2 : 1);
         }
 
         public static void SetBallTemplate(int row, int col, int ballTypeCode)
@@ -147,7 +151,8 @@ namespace game_final.Environments
                     MagicCircles.Add(magicCircle);
                 }
 
-                Score += removePoints.Count * 100;
+                Combo++;
+                Score += removePoints.Count * _scoreMultiply * Combo;
 
                 dropBalls();
 
@@ -157,6 +162,7 @@ namespace game_final.Environments
             else
             {
                 AssetTypes.Sound.BallSnap.Play(0.5f, 0, 0);
+                Combo = 0;
             }
 
 
@@ -358,6 +364,8 @@ namespace game_final.Environments
                 }
             }
 
+            int dropCount = 0;
+
             for (int i = PushCount; i < Settings.TEMPLATE_ROW_BALLS; i++)
             {
                 for (int j = 0; j < Settings.TEMPLATE_COL_BALLS; j++)
@@ -411,9 +419,12 @@ namespace game_final.Environments
                         BallsToDrop.Add(ball);
 
                         BallsTemplate[i, j] = 0;
+                        dropCount++;
                     }
                 }
             }
+
+            Score += dropCount * _scoreMultiply * Combo;
         }
 
         public static bool IsEndGame()
