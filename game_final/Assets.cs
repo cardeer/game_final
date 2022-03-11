@@ -53,6 +53,8 @@ namespace game_final
             AssetTypes.Sound.Lose2 = s_content.Load<SoundEffect>("Sounds/SoundEffects/lose_2");
             AssetTypes.Sound.Lose3 = s_content.Load<SoundEffect>("Sounds/SoundEffects/lose_3");
             AssetTypes.Sound.Lose4 = s_content.Load<SoundEffect>("Sounds/SoundEffects/lose_4");
+
+            AssetTypes.Sound.CeilingDown = s_content.Load<SoundEffect>("Sounds/SoundEffects/ceiling_down");
         }
     }
 }

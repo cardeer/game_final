@@ -502,6 +502,12 @@
 /processorParam:Quality=Best
 /build:Sounds/SoundEffects/button_hover.mp3
 
+#begin Sounds/SoundEffects/ceiling_down.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/SoundEffects/ceiling_down.mp3
+
 #begin Sounds/SoundEffects/lose_1.mp3
 /importer:Mp3Importer
 /processor:SoundEffectProcessor

@@ -28,5 +28,7 @@ namespace game_final.AssetTypes
 		public static SoundEffect Lose2;
 		public static SoundEffect Lose3;
 		public static SoundEffect Lose4;
+
+		public static SoundEffect CeilingDown;
 	}
 }
