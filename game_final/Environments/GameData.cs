@@ -415,5 +415,10 @@ namespace game_final.Environments
                 }
             }
         }
+
+        public static bool IsEndGame()
+        {
+            return Won || Failed;
+        }
     }
 }

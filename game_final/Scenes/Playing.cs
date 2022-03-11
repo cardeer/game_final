@@ -46,6 +46,7 @@ namespace game_final.Scenes
         private Sprites.Text _scorePointText;
         private Sprites.Text _levelText;
         private Sprites.Text _currentLevel;
+        private Sprites.Text _yourScoreText;
         private Sprites.Text _hp;
         private Sprites.Text _mp;
 
@@ -60,6 +61,8 @@ namespace game_final.Scenes
         private int _previousScore = 0;
         private bool _animateScore = false;
         private float _scoreScale = 1f;
+
+        private float _endWaitTime = 0;
 
         public Playing() : base(true) { }
 
@@ -239,15 +242,18 @@ namespace game_final.Scenes
             _muteButton.Effect = false;
             _muteButton.MultipleClicks = true;
 
-            _UI_replay = new Sprites.Buttons(AssetTypes.Texture.Button, AssetTypes.Font.PlayingButton, "REPLAY", 250, 60);
+            _UI_replay = new Sprites.Buttons(AssetTypes.Texture.Button, AssetTypes.Font.PlayingButton, "REPLAY", 250, 50);
             _UI_replay.SetPosition(Settings.WINDOW_WIDTH / 2 - 140, 480);
             _UI_replay.TextColor = Color.White;
             _UI_replay.Effect = false;
 
-            _UI_home = new Sprites.Buttons(AssetTypes.Texture.Button, AssetTypes.Font.PlayingButton, "HOME", 250, 60);
+            _UI_home = new Sprites.Buttons(AssetTypes.Texture.Button, AssetTypes.Font.PlayingButton, "HOME", 250, 50);
             _UI_home.SetPosition(Settings.WINDOW_WIDTH / 2 + 140, 480);
             _UI_home.TextColor = Color.White;
             _UI_home.Effect = false;
+
+            _yourScoreText = new Sprites.Text(AssetTypes.Font.SpriteFont, $"Score: 0", .5f, .5f);
+            _yourScoreText.SetPosition(Settings.WINDOW_WIDTH / 2, 400);
 
             _homeButton.Click += _homeButton_Click;
             _replayButton.Click += _replayButton_Click;
@@ -312,6 +318,8 @@ namespace game_final.Scenes
                 _previousScore = Environments.GameData.Score;
                 _scorePointText.SetText(Environments.GameData.Score.ToString());
                 _animateScore = true;
+
+                _yourScoreText.SetText($"Score: {Environments.GameData.Score}");
             }
 
             if (_animateScore)
@@ -388,13 +396,28 @@ namespace game_final.Scenes
             {
                 ball.SetPosition(ball.X, (int)(ball.Y + Environments.Global.GameTime.ElapsedGameTime.TotalSeconds * Settings.BALL_SPEED));
             }
+            
+            if (Environments.GameData.IsEndGame())
+            {
+                _endWaitTime += 1 * (float)Environments.Global.GameTime.ElapsedGameTime.TotalSeconds;
 
-            _homeButton.CanClick = !Environments.GameData.Won && !Environments.GameData.Failed;
-            _replayButton.CanClick = !Environments.GameData.Won && !Environments.GameData.Failed;
-            _muteButton.CanClick = !Environments.GameData.Won && !Environments.GameData.Failed;
+                if (_endWaitTime >= 1)
+                {
+                    _UI_home.CanClick = true;
+                    _UI_replay.CanClick = true;
+                }
+            }
+            else
+            {
+                _endWaitTime = 0;
 
-            _UI_home.CanClick = Environments.GameData.Won || Environments.GameData.Failed;
-            _UI_replay.CanClick = Environments.GameData.Won || Environments.GameData.Failed;
+                _UI_home.CanClick = false;
+                _UI_replay.CanClick = false;
+            }
+
+            _homeButton.CanClick = !Environments.GameData.IsEndGame();
+            _replayButton.CanClick = !Environments.GameData.IsEndGame();
+            _muteButton.CanClick = !Environments.GameData.IsEndGame();
 
             _homeButton.Update();
             _replayButton.Update();
@@ -508,6 +531,8 @@ namespace game_final.Scenes
 
                 if (Environments.GameData.Won) _winBoard.Draw();
                 else _loseBoard.Draw();
+
+                _yourScoreText.Draw();
 
                 _UI_replay.Draw();
                 _UI_home.Draw();
